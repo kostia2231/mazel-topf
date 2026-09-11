@@ -31,10 +31,6 @@
   --dot-gap: 7px;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: white;
   color: var(--color-ink-900);
@@ -49,6 +45,7 @@ body {
 @utility btn-outline {
   display: inline-block;
   text-align: center;
+  font-weight: 600;
   border: 1px solid currentColor;
   padding: 0.9rem 1.75rem;
   font-size: 0.75rem;
