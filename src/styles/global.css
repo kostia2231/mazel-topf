@@ -151,6 +151,38 @@ body {
   }
 }
 
+.accordion-cross {
+  transition: rotate 350ms ease-out;
+}
+
+.accordion-bar {
+  transition: scale 200ms ease-out;
+}
+
+[aria-expanded="true"] .accordion-cross {
+  rotate: 180deg;
+}
+
+/* на наведении крутится только закрытый плюс, минус остаётся на месте */
+@media (hover: hover) {
+  [data-accordion][aria-expanded="false"]:hover .accordion-cross {
+    rotate: 180deg;
+  }
+}
+
+[aria-expanded="true"] .accordion-bar {
+  scale: 1 0;
+  /* схлопывается к концу поворота, иначе поворот симметричного плюса не виден */
+  transition: scale 200ms ease-out 150ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-cross,
+  .accordion-bar {
+    transition: none;
+  }
+}
+
 [data-reveal] {
   transition:
     opacity 600ms ease-out,
