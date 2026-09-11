@@ -112,6 +112,7 @@ export const ui: Record<Language, UiText> = {
         secondaryNavigation: [
             { route: "contact", label: "Kontakt" },
             { route: "about", label: "Über Uns" },
+            { route: "giftCard", label: "Gutschein" },
         ],
         drawerNavigation: [
             { route: "home", label: "Startseite" },
