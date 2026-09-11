@@ -137,6 +137,23 @@ body {
   }
 }
 
+@keyframes stamp-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.stamp-spin {
+  transform-origin: center;
+  animation: stamp-spin 24s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-spin {
+    animation: none;
+  }
+}
+
 [data-reveal] {
   transition:
     opacity 600ms ease-out,
@@ -163,7 +180,13 @@ body {
 
 .reveal-ready main img:not([fetchpriority="high"]) {
   opacity: 0;
-  transition: opacity 400ms ease-out;
+  /* оба перехода перечислены здесь: шорткат transition сбрасывает
+     то, что задаёт Tailwind классом transition-transform */
+  transition:
+    opacity 400ms ease-out,
+    scale 500ms ease-out,
+    translate 500ms ease-out,
+    transform 500ms ease-out;
 }
 
 .reveal-ready main img.is-loaded {
