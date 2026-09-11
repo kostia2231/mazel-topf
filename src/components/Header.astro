@@ -140,7 +140,7 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                     class="flex size-9 items-center justify-center text-brick-500 sm:hidden"
                     aria-label={t.header.reservation}
                 >
-                    <Calendar class="size-6" />
+                    <Calendar class="size-8" />
                 </a>
                 <Button
                     href={path("reservation", language)}
@@ -156,7 +156,7 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
 <div id="mobile-menu" hidden class="fixed inset-0 z-40 lg:hidden">
     <button
         type="button"
-        class="absolute inset-0 h-full w-full cursor-default bg-ink-900/30"
+        class="drawer-backdrop absolute inset-0 h-full w-full cursor-default bg-ink-900/30"
         aria-label={t.header.closeMenu}
         data-menu-close
     ></button>
@@ -229,12 +229,34 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
     if (drawer && opener) {
         const panel = drawer.querySelector<HTMLElement>(".drawer-panel");
 
+        let closing: number | undefined;
+
         const setOpen = (open: boolean) => {
-            drawer.hidden = !open;
+            clearTimeout(closing);
             opener.setAttribute("aria-expanded", String(open));
             document.body.style.overflow = open ? "hidden" : "";
-            if (open) panel?.querySelector<HTMLAnchorElement>("a")?.focus();
-            else opener.focus();
+
+            if (open) {
+                drawer.hidden = false;
+                // два кадра, чтобы браузер успел применить стартовое положение
+                requestAnimationFrame(() =>
+                    requestAnimationFrame(() => {
+                        drawer.dataset.open = "";
+                        panel?.querySelector<HTMLAnchorElement>("a")?.focus();
+                    }),
+                );
+                return;
+            }
+
+            delete drawer.dataset.open;
+            opener.focus();
+
+            const duration = matchMedia("(prefers-reduced-motion: reduce)").matches
+                ? 0
+                : 300;
+            closing = setTimeout(() => {
+                drawer.hidden = true;
+            }, duration);
         };
 
         opener.addEventListener("click", () => setOpen(true));

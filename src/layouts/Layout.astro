@@ -50,6 +50,10 @@ const canonical = absoluteUrl(language);
       <link rel="alternate" hreflang="x-default" href={absoluteUrl(defaultLanguage)} />
     )}
 
+    <script is:inline>
+      document.documentElement.classList.add("reveal-ready");
+    </script>
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <Font cssVariable="--font-cormorant-infant" preload />
     <Font cssVariable="--font-nunito" preload />
@@ -62,3 +66,39 @@ const canonical = absoluteUrl(language);
     <Footer language={language} />
   </body>
 </html>
+
+<script>
+  const items = [...document.querySelectorAll<HTMLElement>("[data-reveal]")];
+
+  if (!("IntersectionObserver" in window)) {
+    for (const item of items) item.classList.add("is-revealed");
+  } else {
+    const watcher = new IntersectionObserver(
+      (entries) => {
+        const arriving = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        arriving.forEach((entry, index) => {
+          const element = entry.target as HTMLElement;
+          // ступенька для пачки, пришедшей одновременно; дальше четвёртого не тянем
+          element.style.transitionDelay = `${Math.min(index, 4) * 90}ms`;
+          element.classList.add("is-revealed");
+          watcher.unobserve(element);
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    for (const item of items) watcher.observe(item);
+  }
+
+  for (const image of document.querySelectorAll<HTMLImageElement>("main img")) {
+    const done = () => image.classList.add("is-loaded");
+    if (image.complete) done();
+    else {
+      image.addEventListener("load", done, { once: true });
+      image.addEventListener("error", done, { once: true });
+    }
+  }
+</script>

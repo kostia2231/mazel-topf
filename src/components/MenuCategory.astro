@@ -40,7 +40,7 @@ const price = (value: number) =>
         : `€ ${priceFormat.format(value)}`;
 ---
 
-<section>
+<section data-reveal>
     <h2 class="font-display text-4xl font-semibold">{title}</h2>
     <hr class="mt-4 w-12 border-t-2 border-brick-500" />
     {note && <p class="mt-4 text-sm italic text-ink-600">{note}</p>}

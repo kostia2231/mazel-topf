@@ -59,13 +59,14 @@ const carouselDishes = carouselKeys.flatMap((key) => {
         <div
             class="flex flex-1 flex-col items-center justify-center px-6 py-10 text-center text-white sm:py-14 lg:py-24"
         >
-            <hr class="w-18 border-t-2 border-white" />
+            <hr class="w-18 border-t-2 border-white" data-reveal />
             <h1
                 class="mt-8 max-w-3xl font-display text-3xl leading-tight whitespace-pre-line font-semibold sm:text-5xl lg:text-6xl"
+                data-reveal
             >
                 {i.home.hero.title}
             </h1>
-            <p class="mt-4 font-display text-2xl text-white/95 lg:text-3xl">
+            <p class="mt-4 font-display text-2xl text-white/95 lg:text-3xl" data-reveal>
                 {i.home.hero.subline}
             </p>
             <Button
@@ -145,6 +146,8 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                         widths={[460, 920]}
                         width={920}
                         sizes="(min-width: 1024px) 34vw, 75vw"
+                        loading="eager"
+                        fetchpriority="low"
                         class="aspect-3/4 w-full object-cover object-right transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                     />
                 </div>
@@ -155,12 +158,14 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                         widths={[300, 600]}
                         width={600}
                         sizes="(min-width: 1024px) 22vw, 48vw"
+                        loading="eager"
+                        fetchpriority="low"
                         class="aspect-3/4 w-full object-cover object-[45%_center] transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                     />
                 </div>
             </div>
         </div>
-        <div class="lg:pt-12">
+        <div class="lg:pt-12" data-reveal>
             <hr class="w-12 border-t-2 border-brick-500" />
             <p class="caps mt-6 text-xs text-ink-400">
                 {i.home.about.eyebrow}
@@ -188,7 +193,7 @@ const carouselDishes = carouselKeys.flatMap((key) => {
         <div
             class="mx-auto flex max-w-380 flex-col gap-6 px-6 pb-8 md:flex-row md:items-start md:justify-between md:gap-8 lg:pb-16 lg:px-[7.5%]"
         >
-            <div class="md:max-w-1/2">
+            <div class="md:max-w-1/2" data-reveal>
                 <h2
                     class="font-display text-2xl leading-[1.15] font-semibold sm:text-4xl lg:text-[2.75rem]"
                 >
@@ -203,7 +208,7 @@ const carouselDishes = carouselKeys.flatMap((key) => {
             </Button>
         </div>
         <DishCarousel language={language} dishes={carouselDishes} />
-        <div class="mx-auto mt-10 max-w-3xl space-y-4 px-6 text-center lg:mt-16">
+        <div class="mx-auto mt-10 max-w-3xl space-y-4 px-6 text-center lg:mt-16" data-reveal>
             {
                 i.home.dishes.slogan.map((line) => (
                     <p class="font-display text-base leading-snug italic sm:text-xl lg:text-2xl">
@@ -221,6 +226,8 @@ const carouselDishes = carouselKeys.flatMap((key) => {
         widths={[960, 1520, 2280]}
         width={2280}
         sizes="100vw"
+        loading="eager"
+        fetchpriority="low"
         class="aspect-1520/606 max-h-151.5 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none sm:min-h-55"
       />
     </div>
@@ -232,6 +239,8 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                 widths={[550, 1100]}
                 width={1100}
                 sizes="(min-width: 768px) 30vw, 100vw"
+                loading="eager"
+                fetchpriority="low"
                 class="aspect-3/4 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none md:aspect-auto md:h-full md:min-h-80"
             />
         </div>

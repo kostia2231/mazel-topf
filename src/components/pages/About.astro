@@ -48,6 +48,8 @@ const page = content[language].aboutPage;
                     widths={[280, 560]}
                     width={560}
                     sizes="(min-width: 1024px) 20vw, 45vw"
+                    loading="eager"
+                    fetchpriority="low"
                     class="aspect-[273/440] w-full object-cover object-[45%_center] transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
             </div>
@@ -58,11 +60,13 @@ const page = content[language].aboutPage;
                     widths={[470, 940]}
                     width={940}
                     sizes="(min-width: 1024px) 35vw, 77vw"
+                    loading="eager"
+                    fetchpriority="low"
                     class="aspect-[466/620] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
             </div>
         </div>
-        <div>
+        <div data-reveal>
             <p class="uppercase tracking-wide text-xs text-ink-400">
                 {page.kitchen.eyebrow}
             </p>

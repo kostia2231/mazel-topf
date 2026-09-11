@@ -35,6 +35,8 @@ const columns = tiles.map((tile) => `${tile.width}fr`).join(' ');
         src={tile.image}
         alt={t.images.tiles[i]}
         sizes={`(min-width: 640px) ${Math.round((tile.width / 1520) * 100)}vw, 50vw`}
+        loading="eager"
+        fetchpriority="low"
         class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none sm:aspect-auto"
       />
     </li>

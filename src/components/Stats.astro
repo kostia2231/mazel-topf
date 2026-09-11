@@ -12,6 +12,7 @@ const { items, class: className = "" } = Astro.props;
         "grid gap-10 text-center sm:grid-cols-2 lg:grid-cols-4",
         className,
     ]}
+    data-reveal
 >
     {
         items.map((item) => (

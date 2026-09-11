@@ -11,6 +11,7 @@ const {
     type = "button",
     variant = "brick",
     class: className = "",
+    ...rest
 } = Astro.props;
 
 const variants = {
@@ -31,16 +32,17 @@ const layer =
 <Tag
     href={href}
     type={href ? undefined : type}
+    {...rest}
     class:list={[
         "btn-outline group relative overflow-hidden align-bottom",
         variants[variant],
         className,
     ]}
 >
-    <span class="invisible block" set:html={label} />
+    <span class="invisible block select-none" set:html={label} />
     <span class:list={[layer, "group-hover:-translate-y-full"]} set:html={label} />
     <span
-        class:list={[layer, "translate-y-full group-hover:translate-y-0"]}
+        class:list={[layer, "translate-y-full select-none group-hover:translate-y-0"]}
         aria-hidden="true"
         set:html={label}
     />

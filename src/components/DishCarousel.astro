@@ -39,6 +39,8 @@ const priceFormat = new Intl.NumberFormat(language === 'de' ? 'de-DE' : 'en-GB',
             src={dish.image}
             alt={dish.name}
             sizes="(min-width: 768px) 30vw, 100vw"
+            loading="eager"
+            fetchpriority="low"
             class="aspect-2/3 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none md:aspect-[420/524]"
           />
         </div>

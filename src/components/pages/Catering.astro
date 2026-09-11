@@ -40,7 +40,7 @@ const formatImages = [format1, format2, format3];
         imageAlt={t.images.cateringBanner}
         imagePosition="center top"
     />
-    <section class="mx-auto py-20 text-center">
+    <section class="mx-auto py-20 text-center" data-reveal>
         <h2
             class="font-display max-w-4xl mx-auto min-w-fit text-4xl leading-tight sm:text-[2.75rem]"
         >
@@ -62,11 +62,13 @@ const formatImages = [format1, format2, format3];
             widths={[960, 1520]}
             width={1920}
             sizes="100vw"
+            loading="eager"
+            fetchpriority="low"
             class="h-[220px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none sm:h-[300px] lg:h-[348px]"
         />
     </div>
     <section class="bg-cream-100 px-6 py-20 lg:px-[7.5%]">
-        <div class="mx-auto max-w-3xl space-y-4 text-center">
+        <div class="mx-auto max-w-3xl space-y-4 text-center" data-reveal>
             {
                 page.slogan.map((line) => (
                     <p class="font-display text-2xl leading-snug italic">
@@ -85,6 +87,8 @@ const formatImages = [format1, format2, format3];
                             widths={[420, 840]}
                             width={840}
                             sizes="(min-width: 640px) 28vw, 90vw"
+                            loading="eager"
+                            fetchpriority="low"
                             class="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                         />
                         <div class="absolute inset-0 -z-10 bg-black/25 group-hover:bg-black/70" />
