@@ -238,7 +238,6 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
 
             if (open) {
                 drawer.hidden = false;
-                // два кадра, чтобы браузер успел применить стартовое положение
                 requestAnimationFrame(() =>
                     requestAnimationFrame(() => {
                         drawer.dataset.open = "";

@@ -103,7 +103,6 @@ const canonical = absoluteUrl(language);
 
         arriving.forEach((entry, index) => {
           const element = entry.target as HTMLElement;
-          // ступенька для пачки, пришедшей одновременно; дальше четвёртого не тянем
           element.style.transitionDelay = `${Math.min(index, 4) * 90}ms`;
           element.classList.add("is-revealed");
           watcher.unobserve(element);

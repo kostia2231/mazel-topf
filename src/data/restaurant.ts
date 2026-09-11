@@ -13,8 +13,6 @@ export const restaurant = {
 export const cuisine = 'Israeli';
 export const priceRange = '€€';
 
-// машиночитаемые часы для разметки schema.org; человекочитаемые
-// подписи живут в src/i18n/content.ts
 export const openingHours = [
   {
     days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -24,7 +22,6 @@ export const openingHours = [
   { days: ['Saturday', 'Sunday'], opens: '09:00', closes: '23:59' },
 ] as const;
 
-// «(0)» — внутренний префикс, после кода страны он не набирается
 export const phoneNumber = restaurant.phone.replace('(0)', '').replace(/[^\d+]/g, '');
 
 export const phoneLink = `tel:${phoneNumber}`;

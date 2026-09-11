@@ -163,7 +163,6 @@ body {
   rotate: 180deg;
 }
 
-/* на наведении крутится только закрытый плюс, минус остаётся на месте */
 @media (hover: hover) {
   [data-accordion][aria-expanded="false"]:hover .accordion-cross {
     rotate: 180deg;
@@ -172,7 +171,6 @@ body {
 
 [aria-expanded="true"] .accordion-bar {
   scale: 1 0;
-  /* схлопывается к концу поворота, иначе поворот симметричного плюса не виден */
   transition: scale 200ms ease-out 150ms;
 }
 
@@ -209,8 +207,6 @@ body {
 
 .reveal-ready main img:not([fetchpriority="high"]) {
   opacity: 0;
-  /* оба перехода перечислены здесь: шорткат transition сбрасывает
-     то, что задаёт Tailwind классом transition-transform */
   transition:
     opacity 400ms ease-out,
     scale 500ms ease-out,

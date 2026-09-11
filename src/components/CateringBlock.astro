@@ -111,7 +111,6 @@ const t = ui[language];
             button.addEventListener("click", () => {
                 const text = button.closest("li")?.querySelector("p");
                 if (!text) return;
-                // знак перекладывается из плюса в минус по aria-expanded
                 const isOpen = !text.hidden;
                 text.hidden = isOpen;
                 button.setAttribute("aria-expanded", String(!isOpen));
