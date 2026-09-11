@@ -9,7 +9,7 @@ export const languageLabel: Record<Language, string> = {
 };
 
 export const routes = {
-  home: { de: '/', en: '/en/' },
+  home: { de: '/', en: '/en' },
   menu: { de: '/speisekarte', en: '/en/menu' },
   about: { de: '/ueber-uns', en: '/en/about' },
   catering: { de: '/catering', en: '/en/catering' },

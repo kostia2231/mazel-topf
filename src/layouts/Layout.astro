@@ -3,6 +3,7 @@ import { Font } from 'astro:assets';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import StructuredData from '../components/StructuredData.astro';
 import { restaurant } from '../data/restaurant';
 import { content } from '../i18n/content';
 import { ui } from '../i18n/ui';
@@ -42,6 +43,17 @@ const canonical = absoluteUrl(language);
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={language === 'de' ? 'de_DE' : 'en_GB'} />
+    <meta property="og:site_name" content={restaurant.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {Astro.site && (
+      <>
+        <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={ui[language].images.hero} />
+      </>
+    )}
     {canonical && <link rel="canonical" href={canonical} />}
 
     {Astro.site &&
@@ -59,6 +71,8 @@ const canonical = absoluteUrl(language);
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+
+    <StructuredData language={language} />
     <Font cssVariable="--font-cormorant-infant" preload />
     <Font cssVariable="--font-nunito" preload />
   </head>

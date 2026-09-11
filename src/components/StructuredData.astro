@@ -1,0 +1,53 @@
+---
+import {
+    cuisine,
+    openingHours,
+    phoneNumber,
+    priceRange,
+    restaurant,
+} from "../data/restaurant";
+import { path, type Language } from "../i18n/config";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+
+const absolute = (pathname: string) =>
+    Astro.site ? new URL(pathname, Astro.site).href : undefined;
+
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    name: restaurant.name,
+    servesCuisine: cuisine,
+    priceRange,
+    address: {
+        "@type": "PostalAddress",
+        streetAddress: restaurant.address.street,
+        postalCode: restaurant.address.postalCode,
+        addressLocality: restaurant.address.city,
+        addressCountry: "DE",
+    },
+    telephone: phoneNumber,
+    email: restaurant.email,
+    openingHoursSpecification: openingHours.map((slot) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: slot.days,
+        opens: slot.opens,
+        closes: slot.closes,
+    })),
+    ...(Astro.site && {
+        url: absolute(path("home", language)),
+        hasMenu: absolute(path("menu", language)),
+        image: absolute("/og.jpg"),
+    }),
+};
+---
+
+<script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+    is:inline
+/>

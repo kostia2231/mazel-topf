@@ -1,8 +1,14 @@
 import { defineConfig, fontProviders } from 'astro/config';
 
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  site: 'https://restaurant-maseltopf.de',
+  trailingSlash: 'never',
+
+  integrations: [sitemap()],
+
   i18n: {
     locales: ['de', 'en'],
     defaultLocale: 'de',
