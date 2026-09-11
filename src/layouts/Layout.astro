@@ -1,0 +1,64 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { restaurant } from '../data/restaurant';
+import { content } from '../i18n/content';
+import { ui } from '../i18n/ui';
+import {
+  path,
+  languages,
+  defaultLanguage,
+  type RouteKey,
+  type Language,
+} from '../i18n/config';
+
+interface Props {
+  language: Language;
+  page: RouteKey;
+  title: string;
+  description?: string;
+}
+
+const { language, page, title, description = content[language].description } = Astro.props;
+const t = ui[language];
+
+const documentTitle = `${title} · ${restaurant.name}`;
+
+const absoluteUrl = (s: Language) =>
+  Astro.site ? new URL(path(page, s), Astro.site).href : undefined;
+const canonical = absoluteUrl(language);
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={language === 'de' ? 'de_DE' : 'en_GB'} />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    {Astro.site &&
+      languages.map((s) => <link rel="alternate" hreflang={s} href={absoluteUrl(s)} />)}
+    {Astro.site && (
+      <link rel="alternate" hreflang="x-default" href={absoluteUrl(defaultLanguage)} />
+    )}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <Font cssVariable="--font-cormorant-infant" preload />
+    <Font cssVariable="--font-nunito" preload />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <Header language={language} page={page} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer language={language} />
+  </body>
+</html>

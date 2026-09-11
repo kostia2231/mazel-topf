@@ -1,0 +1,20 @@
+---
+import { content } from '../i18n/content';
+import { path, type Language } from '../i18n/config';
+import Button from './Button.astro';
+
+interface Props {
+  language: Language;
+}
+
+const { language } = Astro.props;
+const block = content[language].closingBlock;
+---
+
+<section class="bg-cream-100 px-6 py-14 text-center sm:py-16 lg:py-24">
+  <h2 class="mx-auto max-w-3xl font-display text-2xl leading-[1.2] whitespace-pre-line font-semibold sm:text-4xl lg:text-[2.75rem]">
+    {block.title}
+  </h2>
+  <p class="mx-auto mt-6 max-w-3xl text-sm leading-relaxed text-ink-600">{block.text}</p>
+  <Button href={path('reservation', language)} class="mt-10">{block.cta}</Button>
+</section>

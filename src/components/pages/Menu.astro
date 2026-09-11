@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ClosingBlock from '../ClosingBlock.astro';
+import ImageBand from '../ImageBand.astro';
+import MenuCategory from '../MenuCategory.astro';
+import PageBanner from '../PageBanner.astro';
+import SetMenus from '../SetMenus.astro';
+import bannerImage from '../../assets/menu-banner-pita-in-paper.jpg';
+import falafelImage from '../../assets/menu-band-1-falafel-bowl.png';
+import mezzeImage from '../../assets/menu-band-2-mezze-plate.png';
+import fattoushImage from '../../assets/menu-band-3-fattoush.png';
+import shortRibsImage from '../../assets/menu-band-4-short-ribs.png';
+import saladImage from '../../assets/menu-band-5-goat-cheese-salad.png';
+import { ui } from '../../i18n/ui';
+import { languageFromId, type Language } from '../../i18n/config';
+import { getCollection, render } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language];
+
+const categories = (await getCollection('menu'))
+  .filter((entry) => languageFromId(entry.id) === language)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const entries = await Promise.all(
+  categories.map(async (category) => ({
+    data: category.data,
+    Content: (await render(category)).Content,
+  })),
+);
+
+const lunchSpecial = entries.filter((entry) => entry.data.group === 'lunch-special');
+const setMenus = entries.filter((entry) => entry.data.group === 'set-menus');
+const carte = entries.filter((entry) => entry.data.group === 'menu');
+
+const blockLayout: { size: number; image: ImageMetadata; alt: string }[] = [
+  { size: 2, image: fattoushImage, alt: t.images.fattoush },
+  { size: 4, image: shortRibsImage, alt: t.images.shortRibs },
+  { size: 1, image: saladImage, alt: t.images.goatCheeseSalad },
+];
+
+const blocks: { categories: typeof carte; image?: ImageMetadata; alt?: string }[] = [];
+let taken = 0;
+for (const { size, image, alt } of blockLayout) {
+  const categories = carte.slice(taken, taken + size);
+  if (!categories.length) break;
+  blocks.push({ categories, image, alt });
+  taken += categories.length;
+}
+if (taken < carte.length) blocks.push({ categories: carte.slice(taken) });
+---
+
+<Layout
+  language={language}
+  page="menu"
+  title={t.menu.title}
+  description={t.menu.description}
+>
+  <PageBanner
+    language={language}
+    title={t.menu.title}
+    breadcrumb={t.menu.title}
+    image={bannerImage}
+    imageAlt={t.images.pitaInPaper}
+  />
+  <section class="px-6 py-20 lg:px-[7.5%]">
+    <div class="text-center">
+      <hr class="mx-auto w-12 border-t-2 border-brick-500" />
+      <h2 class="mt-6 text-3xl font-display uppercase font-semibold tracking-wide">{t.menu.lunchSpecial}</h2>
+      <p class="uppercase tracking-wide mt-3 flex items-center justify-center gap-2 text-xs text-ink-600">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="size-4" aria-hidden="true">
+          <circle cx="10" cy="10" r="8" />
+          <path d="M10 6v4l3 2" />
+        </svg>
+        {t.menu.lunchHours}
+      </p>
+    </div>
+    <div class="mx-auto mt-16 grid max-w-[1200px] gap-14 lg:grid-cols-2 lg:gap-x-16">
+      {lunchSpecial.map(({ data, Content }) => (
+        <MenuCategory
+          language={language}
+          title={data.title}
+          note={data.note}
+          dishes={data.dishes}
+        >
+          <div class="prose-mazel mt-4 text-sm"><Content /></div>
+        </MenuCategory>
+      ))}
+    </div>
+  </section>
+  <ImageBand image={falafelImage} alt={t.images.falafelBowl} />
+  {setMenus.map(({ data }) => (
+    <section class="px-6 py-20 lg:px-[7.5%]">
+      <div class="mx-auto max-w-[1200px]">
+        <SetMenus title={data.title} menus={data.menus} />
+      </div>
+    </section>
+  ))}
+
+  <ImageBand image={mezzeImage} alt={t.images.mezzePlate} />
+  {blocks.map((block) => (
+    <>
+      <section class="px-6 py-20 lg:px-[7.5%]">
+        <div class="mx-auto grid max-w-[1200px] gap-14 lg:grid-cols-2 lg:gap-x-16">
+          {block.categories.map(({ data, Content }) => (
+            <MenuCategory
+              language={language}
+              title={data.title}
+              note={data.note}
+              dishes={data.dishes}
+            >
+              <div class="prose-mazel mt-4 text-sm"><Content /></div>
+            </MenuCategory>
+          ))}
+        </div>
+      </section>
+      {block.image && <ImageBand image={block.image} alt={block.alt!} />}
+    </>
+  ))}
+
+  <ClosingBlock language={language} />
+</Layout>

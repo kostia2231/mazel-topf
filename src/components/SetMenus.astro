@@ -1,0 +1,59 @@
+---
+interface Course {
+    title: string;
+    description?: string;
+}
+
+interface Menu {
+    label: string;
+    name: string;
+    priceText: string;
+    courses: Course[];
+}
+
+interface Props {
+    title: string;
+    menus: Menu[];
+}
+
+const { title, menus } = Astro.props;
+---
+
+<section>
+    <h2 class="font-display text-4xl font-semibold">{title}</h2>
+    <hr class="mt-4 w-12 border-t-2 border-brick-500" />
+    <div class="mt-10 grid gap-14 lg:grid-cols-2 lg:gap-x-16">
+        {
+            menus.map((menu) => (
+                <article>
+                    <p class="uppercase tracking-wider text-xs text-ink-400">
+                        {menu.label}
+                    </p>
+                    <div class="mt-2 flex items-end gap-3">
+                        <h3 class="shrink-0 font-display text-2xl font-semibold leading-none">
+                            {menu.name}
+                        </h3>
+                        <span class="leader-dots" aria-hidden="true" />
+                        <span class="shrink-0 font-display text-2xl font-semibold leading-none">
+                            {menu.priceText}
+                        </span>
+                    </div>
+                    <ol class="mt-5 space-y-3">
+                        {menu.courses.map((course) => (
+                            <li>
+                                <p class="font-display text-base font-semibold">
+                                    {course.title}
+                                </p>
+                                {course.description && (
+                                    <p class="mt-1 max-w-md text-sm leading-relaxed text-ink-600 italic">
+                                        {course.description}
+                                    </p>
+                                )}
+                            </li>
+                        ))}
+                    </ol>
+                </article>
+            ))
+        }
+    </div>
+</section>

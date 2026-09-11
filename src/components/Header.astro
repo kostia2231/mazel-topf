@@ -1,0 +1,250 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo-masel-topf.png";
+import {
+    otherLanguage,
+    path,
+    languageLabel,
+    type RouteKey,
+    type Language,
+} from "../i18n/config";
+import { ui } from "../i18n/ui";
+import { restaurant } from "../data/restaurant";
+import Button from "./Button.astro";
+import Calendar from "./icons/Calendar.astro";
+import SocialLinks from "./SocialLinks.astro";
+
+interface Props {
+    language: Language;
+    page: RouteKey;
+}
+
+const { language, page } = Astro.props;
+const t = ui[language];
+const other = otherLanguage(language);
+
+const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.src});mask-size:contain;-webkit-mask-size:contain;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:left center;-webkit-mask-position:left center`;
+---
+
+<header class="sticky top-0 z-30 shadow-xs bg-white">
+    <div class="mx-auto grid h-16 max-w-380 grid-cols-[1fr_auto_1fr] items-stretch">
+        <div class="flex items-stretch justify-between">
+            <div class="flex shrink-0 items-center gap-5 pl-6">
+                <button
+                    type="button"
+                    class="flex size-9 cursor-pointer items-center text-ink-900 lg:hidden"
+                    aria-label={t.header.openMenu}
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                    data-menu-open
+                >
+                    <span class="flex w-6 flex-col gap-1.5" aria-hidden="true">
+                        <span class="h-0.5 w-full bg-current"></span>
+                        <span class="h-0.5 w-5 bg-current"></span>
+                        <span class="h-0.5 w-4 bg-current"></span>
+                    </span>
+                </button>
+
+                <div
+                    class="hidden shrink-0 items-center gap-2 sm:flex"
+                    aria-label={t.header.switchLanguage}
+                >
+                    <span
+                        class="uppercase tracking-wider flex size-8 items-center justify-center rounded-full bg-cream-100 text-xs text-ink-900"
+                        aria-current="true"
+                    >
+                        {languageLabel[language]}
+                    </span>
+                    <a
+                        href={path(page, other)}
+                        hreflang={other}
+                        class="uppercase tracking-wider text-xs text-ink-400 transition-colors hover:text-ink-900"
+                    >
+                        {languageLabel[other]}
+                    </a>
+                </div>
+            </div>
+
+            <nav
+                aria-label={t.header.mainNavigation}
+                class="hidden items-stretch lg:flex"
+            >
+                <ul class="flex items-center gap-6 px-6 text-sm 2xl:gap-8 2xl:px-8">
+                    {t.navigation.map((item) => (
+                        <li>
+                            <a
+                                href={path(item.route, language)}
+                                aria-current={
+                                    item.route === page ? "page" : undefined
+                                }
+                                class:list={[
+                                    "relative py-2 transition-colors hover:text-brick-500 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out motion-reduce:before:transition-none",
+                                    item.route === page
+                                        ? "text-ink-900 before:scale-y-100"
+                                        : "text-ink-600 before:scale-y-0 hover:before:scale-y-100",
+                                ]}
+                            >
+                                {item.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        </div>
+
+        <a
+            href={path("home", language)}
+            class="flex items-center bg-brick-500 px-5"
+            title={t.header.toHome}
+        >
+            <Image
+                src={logo}
+                alt={restaurant.name}
+                width={240}
+                height={43}
+                loading="eager"
+                fetchpriority="high"
+                class="h-auto w-24 lg:w-27 2xl:w-30"
+            />
+        </a>
+
+        <div class="flex items-stretch justify-between">
+            <nav
+                aria-label={t.header.extras}
+                class="hidden items-stretch lg:flex"
+            >
+                <ul class="flex items-center gap-6 px-6 text-sm 2xl:gap-8 2xl:px-8">
+                    {t.secondaryNavigation.map((item) => (
+                        <li>
+                            <a
+                                href={path(item.route, language)}
+                                aria-current={
+                                    item.route === page ? "page" : undefined
+                                }
+                                class:list={[
+                                    "relative py-2 transition-colors hover:text-brick-500 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out motion-reduce:before:transition-none",
+                                    item.route === page
+                                        ? "text-ink-900 before:scale-y-100"
+                                        : "text-ink-600 before:scale-y-0 hover:before:scale-y-100",
+                                ]}
+                            >
+                                {item.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+            <div class="ml-auto flex shrink-0 items-center pr-6">
+                <a
+                    href={path("reservation", language)}
+                    class="flex size-9 items-center justify-center text-brick-500 sm:hidden"
+                    aria-label={t.header.reservation}
+                >
+                    <Calendar class="size-6" />
+                </a>
+                <Button
+                    href={path("reservation", language)}
+                    class="hidden px-5! py-3! text-[0.625rem]! sm:inline-block 2xl:px-7! 2xl:text-[0.6875rem]!"
+                >
+                    {t.header.reservation}
+                </Button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="mobile-menu" hidden class="fixed inset-0 z-40 lg:hidden">
+    <button
+        type="button"
+        class="absolute inset-0 h-full w-full cursor-default bg-ink-900/30"
+        aria-label={t.header.closeMenu}
+        data-menu-close
+    ></button>
+
+    <nav
+        aria-label={t.header.navigation}
+        class="drawer-panel relative flex h-full w-70 flex-col bg-cream-100 px-12 pt-5 pb-9"
+    >
+        <button
+            type="button"
+            class="absolute top-4 right-5 flex size-8 cursor-pointer items-center justify-center text-brick-500"
+            aria-label={t.header.closeMenu}
+            data-menu-close
+        >
+            <svg
+                viewBox="0 0 24 24"
+                class="size-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                aria-hidden="true"
+            >
+                <path d="M5 5l14 14M19 5L5 19"></path>
+            </svg>
+        </button>
+
+        <a
+            href={path("home", language)}
+            class="mt-9 block"
+            aria-label={t.header.toHome}
+        >
+            <span
+                class="block h-8 w-full bg-brick-500"
+                style={wordmarkMask}
+                aria-hidden="true"
+            ></span>
+        </a>
+
+        <hr class="mt-7 w-17 border-t-2 border-brick-500" />
+
+        <ul class="mt-11 space-y-11 text-[0.8125rem]">
+            {t.drawerNavigation.map((item) => (
+                <li>
+                    <a
+                        href={path(item.route, language)}
+                        aria-current={item.route === page ? "page" : undefined}
+                        class:list={[
+                            "caps transition-colors hover:text-brick-500",
+                            item.route === page
+                                ? "text-brick-500"
+                                : "text-ink-900",
+                        ]}
+                    >
+                        {item.label}
+                    </a>
+                </li>
+            ))}
+        </ul>
+
+        <SocialLinks tone="solid" class="mt-auto" />
+    </nav>
+</div>
+
+<script>
+    const drawer = document.getElementById("mobile-menu");
+    const opener =
+        document.querySelector<HTMLButtonElement>("[data-menu-open]");
+
+    if (drawer && opener) {
+        const panel = drawer.querySelector<HTMLElement>(".drawer-panel");
+
+        const setOpen = (open: boolean) => {
+            drawer.hidden = !open;
+            opener.setAttribute("aria-expanded", String(open));
+            document.body.style.overflow = open ? "hidden" : "";
+            if (open) panel?.querySelector<HTMLAnchorElement>("a")?.focus();
+            else opener.focus();
+        };
+
+        opener.addEventListener("click", () => setOpen(true));
+
+        for (const button of drawer.querySelectorAll("[data-menu-close]")) {
+            button.addEventListener("click", () => setOpen(false));
+        }
+
+        addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !drawer.hidden) setOpen(false);
+        });
+    }
+</script>

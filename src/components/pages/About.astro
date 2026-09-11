@@ -1,0 +1,95 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Reviews from "../Reviews.astro";
+import Button from "../Button.astro";
+import CateringBlock from "../CateringBlock.astro";
+import Stats from "../Stats.astro";
+import { Image } from "astro:assets";
+import bannerImage from "../../assets/about-banner-table-with-matzo.png";
+import diningRoomImage from "../../assets/about-dining-room.png";
+import signatureImage from "../../assets/about-signature-aubergine.png";
+import PageBanner from "../PageBanner.astro";
+import { restaurant } from "../../data/restaurant";
+import { content } from "../../i18n/content";
+import { ui } from "../../i18n/ui";
+import { path, type Language } from "../../i18n/config";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language];
+const page = content[language].aboutPage;
+---
+
+<Layout
+    language={language}
+    page="about"
+    title={t.pageTitles.about}
+    description={t.pageTitles.aboutDescription}
+>
+    <PageBanner
+        language={language}
+        title={restaurant.name}
+        breadcrumb={t.pageTitles.about}
+        image={bannerImage}
+        imageAlt={t.images.tableWithMatzo}
+        imagePosition="center 30%"
+    />
+    <section
+        class="mx-auto grid max-w-[1520px] gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-20 lg:px-[7.5%]"
+    >
+        <div class="relative">
+            <div class="group absolute top-[12.9%] left-[-10.2%] w-[45%] overflow-hidden">
+                <Image
+                    src={diningRoomImage}
+                    alt={t.images.diningRoom}
+                    widths={[280, 560]}
+                    width={560}
+                    sizes="(min-width: 1024px) 20vw, 45vw"
+                    class="aspect-[273/440] w-full object-cover object-[45%_center] transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                />
+            </div>
+            <div class="group ml-[22.6%] w-[76.9%] overflow-hidden">
+                <Image
+                    src={signatureImage}
+                    alt={t.images.signature}
+                    widths={[470, 940]}
+                    width={940}
+                    sizes="(min-width: 1024px) 35vw, 77vw"
+                    class="aspect-[466/620] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                />
+            </div>
+        </div>
+        <div>
+            <p class="uppercase tracking-wide text-xs text-ink-400">
+                {page.kitchen.eyebrow}
+            </p>
+            <h2
+                class="mt-5 font-display text-4xl leading-[1.15] sm:text-[2.75rem] font-semibold"
+            >
+                {page.kitchen.title}
+            </h2>
+            <hr class="mt-8 w-12 border-t-2 border-brick-500" />
+            <div
+                class="mt-8 max-w-md space-y-5 text-sm leading-relaxed text-ink-600"
+            >
+                {page.kitchen.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+            <Button href={path("reservation", language)} class="mt-10"
+                >{page.kitchen.cta}</Button
+            >
+        </div>
+    </section>
+    <CateringBlock language={language} />
+    <section class="px-6 pb-20 lg:px-[7.5%]">
+        <Stats
+            items={page.stats}
+            class="mx-auto max-w-[1200px]"
+        />
+    </section>
+    <section class="bg-cream-100 py-20">
+        <Reviews language={language} />
+    </section>
+</Layout>

@@ -1,0 +1,149 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo-masel-topf.png";
+import { path, type Language } from "../i18n/config";
+import { ui } from "../i18n/ui";
+import { content } from "../i18n/content";
+import { mailLink, restaurant, phoneLink } from "../data/restaurant";
+import SocialLinks from "./SocialLinks.astro";
+import Button from "./Button.astro";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language];
+const i = content[language];
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-navy-700 text-white">
+    <div class="mx-auto max-w-[1520px] px-6 py-16 lg:px-[7.5%]">
+        <div
+            class="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-center lg:grid-cols-[auto_1fr_auto] lg:items-start lg:gap-16"
+        >
+            <Image
+                src={logo}
+                alt={restaurant.name}
+                width={430}
+                height={77}
+                class="h-auto w-40 shrink-0 sm:col-span-2 sm:w-[215px] lg:col-span-1"
+            />
+            <p class="max-w-xl text-sm leading-relaxed text-white/75">
+                {i.quote}
+            </p>
+            <SocialLinks tone="light" />
+        </div>
+        <hr class="my-12 border-line-dark" />
+        <div class="grid gap-10 sm:grid-cols-3 lg:grid-cols-4">
+            <div class="space-y-10 lg:contents">
+                <div>
+                    <h2 class="font-display text-xl font-semibold">
+                        {t.footer.openingHours}
+                    </h2>
+                    <dl class="mt-5 space-y-1 text-sm text-white/75">
+                        {
+                            i.openingHours.map((day) => (
+                                <div>
+                                    <dt class="inline">{day.days}</dt>
+                                    <dd class="inline"> {day.hours}</dd>
+                                </div>
+                            ))
+                        }
+                    </dl>
+                </div>
+                <div>
+                    <h2 class="font-display text-xl font-semibold">
+                        {t.footer.directions}
+                    </h2>
+                    <address
+                        class="mt-5 space-y-3 text-sm not-italic text-white/75"
+                    >
+                        <p>
+                            {restaurant.address.street}, {restaurant.address.postalCode}{" "}
+                            {restaurant.address.city}
+                        </p>
+                        <p>
+                            <a href={mailLink} class="hover:text-white"
+                                >{restaurant.email}</a
+                            >
+                        </p>
+                        <p class="font-display text-xl font-semibold text-white">
+                            <a href={phoneLink}>{restaurant.phone}</a>
+                        </p>
+                    </address>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="font-display text-xl font-semibold">
+                    {t.footer.links}
+                </h2>
+                <ul class="mt-5 space-y-3 text-sm text-white/75">
+                    {
+                        t.footerLinks.map((link) => (
+                            <li>
+                                <a
+                                    href={path(link.route, language)}
+                                    class="hover:text-white"
+                                >
+                                    {link.label}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+            <div>
+                <h2 class="font-display text-xl font-semibold">
+                    {t.footer.newsletter}
+                </h2>
+                <form
+                    class="mt-5 space-y-3"
+                    method="post"
+                    action={path("newsletter", language)}
+                >
+                    <label class="sr-only" for="newsletter-email"
+                        >{t.footer.emailLabel}</label
+                    >
+                    <input
+                        id="newsletter-email"
+                        type="email"
+                        name="email"
+                        required
+                        placeholder={t.footer.emailPlaceholder}
+                        class="w-full bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-2 focus:outline-offset-2 focus:outline-brick-400"
+                    />
+                    <Button
+                        type="submit"
+                        variant="none"
+                        class="w-full cursor-pointer border-none bg-brick-500 px-4 py-3 text-xs text-white transition-colors hover:bg-brick-600"
+                    >
+                        {t.footer.submit}
+                    </Button>
+                </form>
+            </div>
+        </div>
+        <hr class="my-12 border-line-dark" />
+        <div
+            class="flex flex-wrap items-center justify-between gap-4 text-sm text-white/70"
+        >
+            <span>{restaurant.name} {year}</span>
+            <ul class="flex flex-wrap gap-8">
+                {
+                    t.legalLinks.map((link) => (
+                        <li>
+                            <a
+                                href={path(link.route, language)}
+                                class="hover:text-white"
+                            >
+                                {link.label}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+</footer>

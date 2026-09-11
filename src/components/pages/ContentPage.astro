@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageBanner from '../PageBanner.astro';
+import { render, type CollectionEntry } from 'astro:content';
+import type { RouteKey, Language } from '../../i18n/config';
+
+interface Props {
+  language: Language;
+  page: RouteKey;
+  entry: CollectionEntry<'pages'>;
+}
+
+const { language, page, entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout
+  language={language}
+  page={page}
+  title={entry.data.title}
+  description={entry.data.description}
+>
+  <PageBanner language={language} title={entry.data.title} breadcrumb={entry.data.title} />
+  <article class="mx-auto max-w-3xl px-6 py-20">
+    {entry.data.intro && (
+      <p class="text-lg leading-relaxed text-ink-600">{entry.data.intro}</p>
+    )}
+    <div class="prose-mazel mt-8">
+      <Content />
+    </div>
+  </article>
+</Layout>

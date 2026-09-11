@@ -1,0 +1,115 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Reviews from "../Reviews.astro";
+import Button from "../Button.astro";
+import Stats from "../Stats.astro";
+import { Image } from "astro:assets";
+import Suitcase from "../icons/Suitcase.astro";
+import bannerImage from "../../assets/catering-banner-dessert.png";
+import bandImage from "../../assets/catering-band-chicken-risotto.png";
+import format1 from "../../assets/catering-format-1-corporate.jpg";
+import format2 from "../../assets/catering-format-2-weddings.png";
+import format3 from "../../assets/catering-format-3-birthdays.png";
+import PageBanner from "../PageBanner.astro";
+import { content } from "../../i18n/content";
+import { ui } from "../../i18n/ui";
+import { path, type Language } from "../../i18n/config";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language];
+const page = content[language].cateringPage;
+
+const formatImages = [format1, format2, format3];
+---
+
+<Layout
+    language={language}
+    page="catering"
+    title={t.pageTitles.catering}
+    description={t.pageTitles.cateringDescription}
+>
+    <PageBanner
+        language={language}
+        title={t.pageTitles.catering}
+        breadcrumb={t.pageTitles.catering}
+        image={bannerImage}
+        imageAlt={t.images.cateringBanner}
+        imagePosition="center top"
+    />
+    <section class="mx-auto py-20 text-center">
+        <h2
+            class="font-display max-w-4xl mx-auto min-w-fit text-4xl leading-tight sm:text-[2.75rem]"
+        >
+            {page.title}
+        </h2>
+        <div
+            class="mt-8 space-y-5 max-w-3xl mx-auto text-sm leading-relaxed text-ink-600"
+        >
+            {page.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <Button href={path("contact", language)} class="mt-10"
+            >{page.cta}</Button
+        >
+    </section>
+    <div class="group overflow-hidden">
+        <Image
+            src={bandImage}
+            alt={t.images.chickenRisotto}
+            widths={[960, 1520]}
+            width={1920}
+            sizes="100vw"
+            class="h-[220px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none sm:h-[300px] lg:h-[348px]"
+        />
+    </div>
+    <section class="bg-cream-100 px-6 py-20 lg:px-[7.5%]">
+        <div class="mx-auto max-w-3xl space-y-4 text-center">
+            {
+                page.slogan.map((line) => (
+                    <p class="font-display text-2xl leading-snug italic">
+                        {line}
+                    </p>
+                ))
+            }
+        </div>
+        <ul class="mx-auto mt-16 grid max-w-[1200px] gap-6 md:grid-cols-3">
+            {
+                page.formats.map((format, n) => (
+                    <li class="group relative isolate flex min-h-125 flex-col justify-end overflow-hidden p-8 text-center text-white hover:justify-center">
+                        <Image
+                            src={formatImages[n]}
+                            alt={t.images.cateringFormats[n]}
+                            widths={[420, 840]}
+                            width={840}
+                            sizes="(min-width: 640px) 28vw, 90vw"
+                            class="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                        />
+                        <div class="absolute inset-0 -z-10 bg-black/25 group-hover:bg-black/70" />
+                        <Suitcase class="mx-auto mb-4 hidden size-6 text-white group-hover:block" />
+                        <h3 class="caps text-xl leading-tight whitespace-pre-line">
+                            {format.title}
+                        </h3>
+                        <p class="mt-4 hidden text-sm leading-relaxed text-white/90 group-hover:block">
+                            {format.text}
+                        </p>
+                    </li>
+                ))
+            }
+        </ul>
+        <div class="mt-12 text-center">
+            <Button href={path("contact", language)}>{page.cta}</Button>
+        </div>
+    </section>
+    <section class="px-6 py-20 lg:px-[7.5%]">
+        <Stats
+            items={page.stats}
+            class="mx-auto max-w-[1200px]"
+        />
+    </section>
+    <section class="bg-cream-100 py-20">
+        <Reviews language={language} />
+    </section>
+</Layout>

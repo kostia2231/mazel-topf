@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import { ui } from '../i18n/ui';
+import type { Language } from '../i18n/config';
+import tile1 from '../assets/tile-1-table-with-skewer.png';
+import tile2 from '../assets/tile-2-pastrami-latkes.png';
+import tile3 from '../assets/tile-3-pita-in-paper.png';
+import tile4 from '../assets/tile-4-terrace-dessert.png';
+import tile5 from '../assets/tile-5-mezze-bowl.png';
+
+interface Props {
+  language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language];
+
+const tiles = [
+  { image: tile1, width: 256 },
+  { image: tile2, width: 336 },
+  { image: tile3, width: 336 },
+  { image: tile4, width: 336 },
+  { image: tile5, width: 256 },
+];
+const columns = tiles.map((tile) => `${tile.width}fr`).join(' ');
+---
+
+<ul
+  class="grid grid-cols-2 sm:grid-cols-[var(--tile-columns)]"
+  style={`--tile-columns: ${columns}`}
+>
+  {tiles.map((tile, i) => (
+    <li class:list={['group overflow-hidden', i > 1 && 'hidden sm:block']}>
+      <Image
+        src={tile.image}
+        alt={t.images.tiles[i]}
+        sizes={`(min-width: 640px) ${Math.round((tile.width / 1520) * 100)}vw, 50vw`}
+        class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none sm:aspect-auto"
+      />
+    </li>
+  ))}
+</ul>

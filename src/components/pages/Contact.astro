@@ -1,0 +1,137 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Button from "../Button.astro";
+import bannerImage from "../../assets/contact-banner-wine-glass.jpg";
+import PageBanner from "../PageBanner.astro";
+import SocialLinks from "../SocialLinks.astro";
+import { mailLink, restaurant, phoneLink } from "../../data/restaurant";
+import { content } from "../../i18n/content";
+import { ui } from "../../i18n/ui";
+import { path, type Language } from "../../i18n/config";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language];
+const i = content[language];
+
+const fields = [
+    { name: "name", label: t.contact.name, type: "text" },
+    { name: "email", label: t.contact.email, type: "email" },
+];
+---
+
+<Layout
+    language={language}
+    page="contact"
+    title={t.contact.title}
+    description={t.contact.description}
+>
+    <PageBanner
+        language={language}
+        title={t.contact.title}
+        breadcrumb={t.contact.title}
+        image={bannerImage}
+        imageAlt={t.images.wineGlass}
+    />
+    <section
+        class="mx-auto grid max-w-[1200px] gap-14 px-6 py-24 lg:grid-cols-2 lg:gap-20"
+    >
+        <div>
+            <h2
+                class="font-display font-semibold text-4xl leading-tight whitespace-pre-line sm:text-[2.75rem]"
+            >
+                {i.contactPage.title}
+            </h2>
+            <p class="mt-6 max-w-md text-sm leading-relaxed text-ink-600">
+                {i.contactPage.text}
+            </p>
+            <hr class="mt-8 w-12 border-t-2 border-brick-500" />
+            <div class="mt-8 grid gap-10 sm:grid-cols-2">
+                <div>
+                    <h3 class="uppercase tracking-wide font-semibold text-xs">
+                        {t.contact.address}
+                    </h3>
+                    <address
+                        class="mt-4 space-y-1 text-sm not-italic text-ink-600"
+                    >
+                        <p>{restaurant.address.street}</p>
+                        <p>
+                            {restaurant.address.postalCode}{" "}
+                            {restaurant.address.city}
+                        </p>
+                        <p>
+                            <a href={phoneLink} class="hover:text-brick-500"
+                                >{restaurant.phone}</a
+                            >
+                        </p>
+                        <p>
+                            <a href={mailLink} class="hover:text-brick-500"
+                                >{restaurant.email}</a
+                            >
+                        </p>
+                    </address>
+                </div>
+                <div>
+                    <h3 class="uppercase tracking-wide font-semibold text-xs">
+                        {t.contact.openingHours}
+                    </h3>
+                    <dl class="mt-4 space-y-1 text-sm text-ink-600">
+                        {
+                            i.openingHours.map((day) => (
+                                <div>
+                                    <dt class="inline">{day.days}</dt>
+                                    <dd class="inline"> {day.hours}</dd>
+                                </div>
+                            ))
+                        }
+                    </dl>
+                </div>
+            </div>
+            <div class="mt-10">
+                <SocialLinks tone="dark" />
+            </div>
+        </div>
+        <form
+            class="space-y-5"
+            method="post"
+            action={path("message", language)}
+        >
+            {
+                fields.map((field) => (
+                    <div>
+                        <label class="sr-only" for={field.name}>
+                            {field.label}
+                        </label>
+                        <input
+                            id={field.name}
+                            name={field.name}
+                            type={field.type}
+                            required
+                            placeholder={field.label}
+                            class="w-full border border-line px-5 py-4 text-sm placeholder:text-ink-400 focus:border-brick-500 focus:outline-none"
+                        />
+                    </div>
+                ))
+            }
+            <div>
+                <label class="sr-only" for="message"
+                    >{t.contact.message}</label
+                >
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    required
+                    placeholder={t.contact.message}
+                    class="w-full border border-line px-5 py-4 text-sm placeholder:text-ink-400 focus:border-brick-500 focus:outline-none"
+                ></textarea>
+            </div>
+            <Button type="submit" class="cursor-pointer transition-colors">
+                {t.contact.submit}
+            </Button>
+        </form>
+    </section>
+</Layout>

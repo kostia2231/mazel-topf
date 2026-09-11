@@ -1,0 +1,244 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import ClosingBlock from "../ClosingBlock.astro";
+import ImageTiles from "../ImageTiles.astro";
+import Reviews from "../Reviews.astro";
+import Button from "../Button.astro";
+import CateringBlock from "../CateringBlock.astro";
+import DishCarousel from "../DishCarousel.astro";
+import { restaurant, phoneLink, mailLink } from "../../data/restaurant";
+import { content } from "../../i18n/content";
+import { ui } from "../../i18n/ui";
+import { path, languageFromId, type Language } from "../../i18n/config";
+import heroImage from "../../assets/hero-grill.png";
+import facadeImage from "../../assets/facade-terrace.png";
+import dishesImage from "../../assets/dishes-from-above.png";
+import challahImage from "../../assets/challah.png";
+import beerImage from "../../assets/table-with-beer.png";
+import {
+    dishImages,
+    carouselKeys,
+} from "../../data/dish-images";
+import { getCollection } from "astro:content";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language];
+const i = content[language];
+
+const allDishes = (await getCollection("menu"))
+    .filter((entry) => languageFromId(entry.id) === language)
+    .flatMap((category) => category.data.dishes);
+
+const carouselDishes = carouselKeys.flatMap((key) => {
+    const dish = allDishes.find((d) => d.key === key);
+    const image = dishImages[key];
+    return dish && image ? [{ ...dish, image }] : [];
+});
+---
+
+<Layout language={language} page="home" title={t.pageTitles.home}>
+    <section
+        class="relative isolate flex min-h-100 flex-col justify-between overflow-hidden sm:min-h-130 lg:min-h-[calc(100vh-4rem)]"
+    >
+        <Image
+            src={heroImage}
+            alt={t.images.hero}
+            widths={[960, 1520, 2280]}
+            width={2280}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+            class="absolute inset-0 -z-10 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0 -z-10 bg-black/55"></div>
+        <div
+            class="flex flex-1 flex-col items-center justify-center px-6 py-10 text-center text-white sm:py-14 lg:py-24"
+        >
+            <hr class="w-18 border-t-2 border-white" />
+            <h1
+                class="mt-8 max-w-3xl font-display text-3xl leading-tight whitespace-pre-line font-semibold sm:text-5xl lg:text-6xl"
+            >
+                {i.home.hero.title}
+            </h1>
+            <p class="mt-4 font-display text-2xl text-white/95 lg:text-3xl">
+                {i.home.hero.subline}
+            </p>
+            <Button
+                href={path("menu", language)}
+                variant="red"
+                class="mt-8 w-full sm:mt-10 sm:w-auto"
+            >
+                {i.home.hero.cta}
+            </Button>
+        </div>
+        <div
+            class="hidden gap-8 px-6 pb-10 text-center text-sm text-white sm:grid sm:grid-cols-3 lg:pb-16 lg:px-[15%]"
+        >
+            <div>
+                <h2 class="caps text-xs">{t.contact.title}</h2>
+                <p class="mt-3 space-y-1 text-white/85">
+                    <a href={phoneLink} class="block hover:text-white"
+                        >{restaurant.phone}</a
+                    >
+                    <a href={mailLink} class="block hover:text-white"
+                        >{restaurant.email}</a
+                    >
+                </p>
+            </div>
+            <div>
+                <h2 class="caps text-xs">{t.footer.openingHours}</h2>
+                <dl class="mt-3 space-y-1 text-white/85">
+                    {
+                        i.openingHours.map((day) => (
+                            <div>
+                                <dt class="inline">{day.days}</dt>
+                                <dd class="inline"> {day.hours}</dd>
+                            </div>
+                        ))
+                    }
+                </dl>
+            </div>
+            <div>
+                <h2 class="caps text-xs">{t.contact.address}</h2>
+                <p class="mt-3 text-white/85">
+                    {restaurant.address.street}<br />
+                    {restaurant.address.postalCode}{" "}
+                    {restaurant.address.city}
+                </p>
+            </div>
+        </div>
+    </section>
+    <section
+        class="mx-auto grid max-w-380 gap-12 px-6 py-14 sm:py-16 md:grid-cols-2 lg:gap-20 lg:px-[7.5%] lg:py-24"
+    >
+        <div class="relative">
+            <svg
+                viewBox="0 0 120 120"
+                class="stamp-spin absolute -top-12 -left-1 z-10 size-32 fill-ink-900"
+                aria-hidden="true"
+            >
+                <defs>
+                    <path
+                        id="stamp-path"
+                        d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"
+                    ></path>
+                </defs>
+                <text
+                    class="caps"
+                    style="font-size: 10px; letter-spacing: 2px"
+                >
+                    <textPath href="#stamp-path"
+                        >{i.home.about.stamp}</textPath
+                    >
+                </text>
+            </svg>
+            <div class="relative">
+                <div class="group ml-[10%] w-[75%] overflow-hidden">
+                    <Image
+                        src={facadeImage}
+                        alt={t.images.facade}
+                        widths={[460, 920]}
+                        width={920}
+                        sizes="(min-width: 1024px) 34vw, 75vw"
+                        class="aspect-3/4 w-full object-cover object-right transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                    />
+                </div>
+                <div class="group absolute top-[33%] left-[52%] w-[48%] overflow-hidden">
+                    <Image
+                        src={dishesImage}
+                        alt={t.images.dishesFromAbove}
+                        widths={[300, 600]}
+                        width={600}
+                        sizes="(min-width: 1024px) 22vw, 48vw"
+                        class="aspect-3/4 w-full object-cover object-[45%_center] transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="lg:pt-12">
+            <hr class="w-12 border-t-2 border-brick-500" />
+            <p class="caps mt-6 text-xs text-ink-400">
+                {i.home.about.eyebrow}
+            </p>
+            <h2
+                class="mt-5 font-display text-2xl leading-[1.15] whitespace-pre-line font-semibold sm:text-4xl lg:text-[2.75rem]"
+            >
+                {i.home.about.title}
+            </h2>
+            <div
+                class="mt-8 max-w-md space-y-5 text-sm leading-relaxed text-ink-600"
+            >
+                {
+                    i.home.about.paragraphs.map((paragraph) => (
+                        <p>{paragraph}</p>
+                    ))
+                }
+            </div>
+            <Button href={path("about", language)} class="mt-8 w-full sm:mt-10 sm:w-auto">
+                {i.home.about.cta}
+            </Button>
+        </div>
+    </section>
+    <section class="bg-cream-100 pt-10 pb-10 sm:pt-16 sm:pb-12 lg:pt-24 lg:pb-16">
+        <div
+            class="mx-auto flex max-w-380 flex-col gap-6 px-6 pb-8 md:flex-row md:items-start md:justify-between md:gap-8 lg:pb-16 lg:px-[7.5%]"
+        >
+            <div class="md:max-w-1/2">
+                <h2
+                    class="font-display text-2xl leading-[1.15] font-semibold sm:text-4xl lg:text-[2.75rem]"
+                >
+                    {i.home.dishes.title}
+                </h2>
+                <p class="mt-6 text-sm leading-relaxed text-ink-600">
+                    {i.home.dishes.text}
+                </p>
+            </div>
+            <Button href={path("menu", language)} class="w-full shrink-0 sm:w-auto">
+                {i.home.dishes.cta}
+            </Button>
+        </div>
+        <DishCarousel language={language} dishes={carouselDishes} />
+        <div class="mx-auto mt-10 max-w-3xl space-y-4 px-6 text-center lg:mt-16">
+            {
+                i.home.dishes.slogan.map((line) => (
+                    <p class="font-display text-base leading-snug italic sm:text-xl lg:text-2xl">
+                        {line}
+                    </p>
+                ))
+            }
+        </div>
+    </section>
+    <CateringBlock language={language} />
+    <div class="group overflow-hidden">
+      <Image
+        src={challahImage}
+        alt={t.images.challah}
+        widths={[960, 1520, 2280]}
+        width={2280}
+        sizes="100vw"
+        class="aspect-1520/606 max-h-151.5 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none sm:min-h-55"
+      />
+    </div>
+    <section class="grid md:grid-cols-[30%_1fr]">
+        <div class="group overflow-hidden md:h-full">
+            <Image
+                src={beerImage}
+                alt={t.images.tableWithBeer}
+                widths={[550, 1100]}
+                width={1100}
+                sizes="(min-width: 768px) 30vw, 100vw"
+                class="aspect-3/4 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none md:aspect-auto md:h-full md:min-h-80"
+            />
+        </div>
+        <div class="flex min-w-0 items-center bg-white py-8 sm:py-14 lg:py-20">
+            <Reviews language={language} variant="image" />
+        </div>
+    </section>
+    <ImageTiles language={language} />
+    <ClosingBlock language={language} />
+</Layout>

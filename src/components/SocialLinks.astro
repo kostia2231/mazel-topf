@@ -1,0 +1,46 @@
+---
+import { socialLinks } from '../data/restaurant';
+
+interface Props {
+  tone?: 'light' | 'dark' | 'solid';
+  class?: string;
+}
+
+const { tone = 'light', class: className = '' } = Astro.props;
+
+const iconPaths: Record<string, string> = {
+  facebook:
+    'M13 10h2.5l.5-3H13V5.5c0-.9.3-1.5 1.6-1.5H16V1.1C15.7 1.1 14.7 1 13.6 1 11.2 1 9.5 2.4 9.5 5.1V7H7v3h2.5v8H13v-8Z',
+  tripadvisor:
+    'M12 4C8.7 4 5.7 5 3.4 6.7H0l1.7 1.9A5.1 5.1 0 0 0 5 17.6c1.4 0 2.7-.6 3.6-1.5L10 17.6l1.4-1.5c1 1 2.2 1.5 3.6 1.5a5.1 5.1 0 0 0 3.4-8.9L20 6.7h-3.4A15 15 0 0 0 12 4Zm-7 6a2.6 2.6 0 1 1 0 5.2A2.6 2.6 0 0 1 5 10Zm10 0a2.6 2.6 0 1 1 0 5.2A2.6 2.6 0 0 1 15 10Zm-10 1.6a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm10 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z',
+  instagram:
+    'M6.5 2h7A4.5 4.5 0 0 1 18 6.5v7a4.5 4.5 0 0 1-4.5 4.5h-7A4.5 4.5 0 0 1 2 13.5v-7A4.5 4.5 0 0 1 6.5 2Zm0 1.8A2.7 2.7 0 0 0 3.8 6.5v7a2.7 2.7 0 0 0 2.7 2.7h7a2.7 2.7 0 0 0 2.7-2.7v-7a2.7 2.7 0 0 0-2.7-2.7h-7ZM10 6.4a3.6 3.6 0 1 1 0 7.2 3.6 3.6 0 0 1 0-7.2Zm0 1.8a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm4.3-2.5a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Z',
+  pin: 'M10 1a6 6 0 0 0-6 6c0 4.3 6 12 6 12s6-7.7 6-12a6 6 0 0 0-6-6Zm0 8.3A2.3 2.3 0 1 1 10 4.7a2.3 2.3 0 0 1 0 4.6Z',
+};
+
+const styles = {
+  light: 'border-white/40 text-white hover:bg-white hover:text-navy-700',
+  dark: 'border-line bg-cream-100 text-brick-500 hover:bg-brick-500 hover:text-white',
+  solid: 'border-transparent bg-white text-brick-500 hover:bg-brick-500 hover:text-white',
+};
+const style = styles[tone];
+---
+
+<ul class:list={['flex items-center gap-3', className]}>
+  {socialLinks.map((link) => (
+    <li>
+      <a
+        href={link.href}
+        aria-label={link.label}
+        class:list={[
+          'flex size-9 items-center justify-center rounded-full border transition-colors',
+          style,
+        ]}
+      >
+        <svg viewBox="0 0 20 20" fill="currentColor" class="size-4" aria-hidden="true">
+          <path d={iconPaths[link.icon]} />
+        </svg>
+      </a>
+    </li>
+  ))}
+</ul>

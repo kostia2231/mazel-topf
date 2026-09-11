@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Placeholder from "./Placeholder.astro";
+import { ui } from "../i18n/ui";
+import type { Language } from "../i18n/config";
+
+interface Props {
+    language: Language;
+    title: string;
+    breadcrumb: string;
+    imageLabel?: string;
+    image?: ImageMetadata;
+    imageAlt?: string;
+    imagePosition?: string;
+}
+
+const {
+    language,
+    title,
+    breadcrumb,
+    imageLabel,
+    image,
+    imageAlt,
+    imagePosition,
+} = Astro.props;
+
+const maxWidth = Math.min(3040, image?.width ?? 3040);
+const bannerWidths = [960, 1520, 3040].filter((width) => width <= maxWidth);
+const t = ui[language];
+---
+
+<section class="relative isolate flex h-[240px] items-center justify-center overflow-hidden sm:h-[300px] lg:h-[348px]">
+    {image ? (
+        <Image
+            src={image}
+            alt={imageAlt ?? t.images.banner(title)}
+            widths={bannerWidths}
+            width={maxWidth}
+            sizes="100vw"
+            loading="eager"
+            class="absolute inset-0 -z-10 h-full w-full object-cover"
+            style={
+                imagePosition ? `object-position: ${imagePosition}` : undefined
+            }
+        />
+    ) : (
+        <Placeholder
+            label={imageLabel ?? t.images.banner(title)}
+            dark
+            class="absolute inset-0 -z-10"
+        />
+    )}
+    <div class="absolute inset-0 -z-10 bg-black/45"></div>
+    <div class="px-6 text-center text-white">
+        <h1 class="font-display font-semibold text-5xl leading-tight sm:text-6xl">
+            {title}
+        </h1>
+        <p class="caps mt-3 text-xs text-white/80">
+            {t.banner.home} / {breadcrumb}
+        </p>
+    </div>
+</section>

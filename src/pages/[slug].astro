@@ -1,0 +1,20 @@
+---
+import ContentPage from '../components/pages/ContentPage.astro';
+import { slugFromId, languageFromId } from '../i18n/config';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages
+    .filter((entry) => languageFromId(entry.id) === 'de')
+    .map((entry) => ({ params: { slug: slugFromId(entry.id) }, props: { entry } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'pages'>;
+}
+
+const { entry } = Astro.props;
+---
+
+<ContentPage language="de" page={entry.data.route} entry={entry} />
