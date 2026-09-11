@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { restaurant } from '../data/restaurant';
+import { isCanonicalHost } from '../data/seo';
 import { content } from '../i18n/content';
 import { ui } from '../i18n/ui';
 import {
@@ -27,6 +28,8 @@ const t = ui[language];
 
 const documentTitle = `${title} · ${restaurant.name}`;
 
+const indexable = isCanonicalHost(Astro.site);
+
 const absoluteUrl = (s: Language) =>
   Astro.site ? new URL(path(page, s), Astro.site).href : undefined;
 const canonical = absoluteUrl(language);
@@ -39,6 +42,7 @@ const canonical = absoluteUrl(language);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{documentTitle}</title>
     <meta name="description" content={description} />
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:title" content={documentTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
