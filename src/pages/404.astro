@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+import { path } from "../i18n/config";
+import { ui } from "../i18n/ui";
+
+const language = "de";
+const t = ui[language];
+---
+
+<Layout
+    language={language}
+    page="home"
+    title={t.notFound.title}
+    description={t.notFound.text}
+>
+    <section
+        class="flex min-h-100 flex-col items-center justify-center px-6 py-20 text-center lg:min-h-130"
+    >
+        <p class="font-display text-6xl font-semibold text-brick-500">404</p>
+        <h1 class="mt-6 font-display text-2xl font-semibold sm:text-4xl">
+            {t.notFound.title}
+        </h1>
+        <p class="mt-4 max-w-md text-sm leading-relaxed text-ink-600">
+            {t.notFound.text}
+        </p>
+        <Button href={path("home", language)} class="mt-10">
+            {t.notFound.cta}
+        </Button>
+    </section>
+</Layout>

@@ -4,3 +4,10 @@
 
 [build.environment]
   NODE_VERSION = "22.12.0"
+
+# Astro кладёт корневую 404 в 404.html, а вложенную — в /en/404/,
+# поэтому для английских адресов отдаём её правилом
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404"
+  status = 404

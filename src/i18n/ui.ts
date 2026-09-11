@@ -87,6 +87,11 @@ interface UiText {
         dish: (position: number) => string
         tiles: [string, string, string, string, string]
     }
+    notFound: {
+        title: string
+        text: string
+        cta: string
+    }
     pageTitles: {
         home: string
         about: string
@@ -220,6 +225,11 @@ export const ui: Record<Language, UiText> = {
                 "Abend auf der Terrasse mit Dessert",
                 "Mezze-Schale mit Grillgemüse bei Kerzenlicht",
             ],
+        },
+        notFound: {
+            title: "Seite nicht gefunden",
+            text: "Die Seite, die Sie suchen, gibt es nicht oder sie ist umgezogen.",
+            cta: "Zur Startseite",
         },
         pageTitles: {
             home: "Israelisches Restaurant in Berlin",
@@ -357,6 +367,11 @@ export const ui: Record<Language, UiText> = {
                 "An evening on the terrace with dessert",
                 "Mezze bowl with grilled vegetables by candlelight",
             ],
+        },
+        notFound: {
+            title: "Page not found",
+            text: "The page you are looking for does not exist or has moved.",
+            cta: "Go to homepage",
         },
         pageTitles: {
             home: "Israeli restaurant in Berlin",
