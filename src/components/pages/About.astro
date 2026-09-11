@@ -5,9 +5,9 @@ import Button from "../Button.astro";
 import CateringBlock from "../CateringBlock.astro";
 import Stats from "../Stats.astro";
 import { Image } from "astro:assets";
-import bannerImage from "../../assets/about-banner-table-with-matzo.png";
-import diningRoomImage from "../../assets/about-dining-room.png";
-import signatureImage from "../../assets/about-signature-aubergine.png";
+import bannerImage from "../../assets/about-banner-table-with-matzo.webp";
+import diningRoomImage from "../../assets/about-dining-room.webp";
+import signatureImage from "../../assets/about-signature-aubergine.webp";
 import PageBanner from "../PageBanner.astro";
 import { restaurant } from "../../data/restaurant";
 import { content } from "../../i18n/content";
@@ -41,7 +41,7 @@ const page = content[language].aboutPage;
         class="mx-auto grid max-w-[1520px] gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-20 lg:px-[7.5%]"
     >
         <div class="relative">
-            <div class="group absolute top-[12.9%] left-[-10.2%] w-[45%] overflow-hidden">
+            <div class="group absolute top-[12.9%] left-[-10.2%] z-10 w-[45%] overflow-hidden">
                 <Image
                     src={diningRoomImage}
                     alt={t.images.diningRoom}
@@ -51,7 +51,7 @@ const page = content[language].aboutPage;
                     class="aspect-[273/440] w-full object-cover object-[45%_center] transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
             </div>
-            <div class="group ml-[22.6%] w-[76.9%] overflow-hidden">
+            <div class="group relative z-0 ml-[22.6%] w-[76.9%] overflow-hidden">
                 <Image
                     src={signatureImage}
                     alt={t.images.signature}

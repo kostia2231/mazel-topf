@@ -11,11 +11,11 @@ import { restaurant, phoneLink, mailLink } from "../../data/restaurant";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
 import { path, languageFromId, type Language } from "../../i18n/config";
-import heroImage from "../../assets/hero-grill.png";
-import facadeImage from "../../assets/facade-terrace.png";
-import dishesImage from "../../assets/dishes-from-above.png";
-import challahImage from "../../assets/challah.png";
-import beerImage from "../../assets/table-with-beer.png";
+import heroImage from "../../assets/hero-grill.webp";
+import facadeImage from "../../assets/facade-terrace.webp";
+import dishesImage from "../../assets/dishes-from-above.webp";
+import challahImage from "../../assets/challah.webp";
+import beerImage from "../../assets/table-with-beer.webp";
 import {
     dishImages,
     carouselKeys,
@@ -138,7 +138,7 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                 </text>
             </svg>
             <div class="relative">
-                <div class="group ml-[10%] w-[75%] overflow-hidden">
+                <div class="group relative z-0 ml-[10%] w-[75%] overflow-hidden">
                     <Image
                         src={facadeImage}
                         alt={t.images.facade}
@@ -148,7 +148,7 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                         class="aspect-3/4 w-full object-cover object-right transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                     />
                 </div>
-                <div class="group absolute top-[33%] left-[52%] w-[48%] overflow-hidden">
+                <div class="group absolute top-[33%] left-[52%] z-10 w-[48%] overflow-hidden">
                     <Image
                         src={dishesImage}
                         alt={t.images.dishesFromAbove}
