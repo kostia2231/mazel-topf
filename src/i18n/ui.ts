@@ -30,6 +30,8 @@ interface UiText {
         emailPlaceholder: string
         emailLabel: string
         submit: string
+        successText: string
+        errorText: string
     }
     banner: { home: string }
     menu: {
@@ -50,6 +52,9 @@ interface UiText {
         message: string
         submit: string
         map: string
+        successTitle: string
+        successText: string
+        errorText: string
     }
     eventBooking: {
         title: string
@@ -162,6 +167,8 @@ export const ui: Record<Language, UiText> = {
             emailPlaceholder: "Email",
             emailLabel: "E-Mail-Adresse",
             submit: "Subscribe",
+            successText: "Danke! Bitte bestätigen Sie die Anmeldung per E-Mail.",
+            errorText: "Die Anmeldung hat nicht geklappt. Bitte versuchen Sie es erneut.",
         },
         banner: { home: "Startseite" },
         menu: {
@@ -184,6 +191,11 @@ export const ui: Record<Language, UiText> = {
             message: "Your message",
             submit: "Send a message",
             map: "Karte: Rykestraße 2, 10405 Berlin",
+            successTitle: "Vielen Dank\nfür Ihre Nachricht",
+            successText: "Wir werden uns in Kürze bei Ihnen melden.",
+            errorText:
+                "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es " +
+                "erneut oder rufen Sie uns an.",
         },
         eventBooking: {
             title: "Buchen Sie Ihre Veranstaltung",
@@ -316,6 +328,8 @@ export const ui: Record<Language, UiText> = {
             emailPlaceholder: "Email",
             emailLabel: "Email address",
             submit: "Subscribe",
+            successText: "Thanks! Please confirm your subscription by email.",
+            errorText: "The subscription did not go through. Please try again.",
         },
         banner: { home: "Home" },
         menu: {
@@ -338,6 +352,10 @@ export const ui: Record<Language, UiText> = {
             message: "Your message",
             submit: "Send a message",
             map: "Map: Rykestraße 2, 10405 Berlin",
+            successTitle: "Thank you\nfor your message",
+            successText: "We will get back to you shortly.",
+            errorText:
+                "The message could not be sent. Please try again or give us a call.",
         },
         eventBooking: {
             title: "Book your event",

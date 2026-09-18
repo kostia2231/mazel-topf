@@ -99,30 +99,55 @@ const year = new Date().getFullYear();
                 <h2 class="font-display text-xl font-semibold">
                     {t.footer.newsletter}
                 </h2>
-                <form
-                    class="mt-5 space-y-3"
-                    method="post"
-                    action={path("newsletter", language)}
-                >
-                    <label class="sr-only" for="newsletter-email"
-                        >{t.footer.emailLabel}</label
+                <div data-form>
+                    <form
+                        name="newsletter"
+                        data-form-body
+                        class="mt-5 space-y-3"
+                        method="post"
+                        data-netlify="true"
+                        data-netlify-honeypot="bot-field"
                     >
-                    <input
-                        id="newsletter-email"
-                        type="email"
-                        name="email"
-                        required
-                        placeholder={t.footer.emailPlaceholder}
-                        class="w-full bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-2 focus:outline-offset-2 focus:outline-brick-400"
-                    />
-                    <Button
-                        type="submit"
-                        variant="none"
-                        class="w-full cursor-pointer border-none bg-brick-500 px-4 py-3 text-xs text-white transition-colors hover:bg-brick-600"
+                        <input type="hidden" name="form-name" value="newsletter" />
+                        <p class="hidden">
+                            <label>
+                                Bot field
+                                <input name="bot-field" tabindex="-1" autocomplete="off" />
+                            </label>
+                        </p>
+                        <label class="sr-only" for="newsletter-email"
+                            >{t.footer.emailLabel}</label
+                        >
+                        <input
+                            id="newsletter-email"
+                            type="email"
+                            name="email"
+                            required
+                            placeholder={t.footer.emailPlaceholder}
+                            class="w-full bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-2 focus:outline-offset-2 focus:outline-brick-400"
+                        />
+                        <Button
+                            type="submit"
+                            variant="none"
+                            class="w-full cursor-pointer border-none bg-brick-500 px-4 py-3 text-xs text-white transition-colors hover:bg-brick-600"
+                        >
+                            {t.footer.submit}
+                        </Button>
+
+                        <p class="hidden text-sm text-mist" role="alert" data-form-error>
+                            {t.footer.errorText}
+                        </p>
+                    </form>
+
+                    <p
+                        class="mt-5 hidden text-sm leading-relaxed text-mist"
+                        tabindex="-1"
+                        data-form-success
+                        data-form-focus
                     >
-                        {t.footer.submit}
-                    </Button>
-                </form>
+                        {t.footer.successText}
+                    </p>
+                </div>
             </div>
         </div>
         <hr class="my-12 border-line-dark" />

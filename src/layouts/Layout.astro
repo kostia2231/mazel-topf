@@ -123,3 +123,46 @@ const canonical = absoluteUrl(language);
     }
   }
 </script>
+
+<script>
+  // Общая отправка для всех форм Netlify: сайт статический, поэтому шлём
+  // POST сами и подменяем форму блоком благодарности, не уходя со страницы.
+  for (const form of document.querySelectorAll<HTMLFormElement>("form[data-netlify]")) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const scope = form.closest<HTMLElement>("[data-form]");
+      const body = scope?.querySelector<HTMLElement>("[data-form-body]");
+      const success = scope?.querySelector<HTMLElement>("[data-form-success]");
+      const error = scope?.querySelector<HTMLElement>("[data-form-error]");
+      const submit = form.querySelector<HTMLButtonElement>("button[type=submit]");
+
+      error?.classList.add("hidden");
+      if (submit) submit.disabled = true;
+
+      try {
+        const response = await fetch(location.pathname, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(
+            new FormData(form) as unknown as Record<string, string>,
+          ).toString(),
+        });
+
+        if (!response.ok) throw new Error(String(response.status));
+
+        form.reset();
+        body?.classList.add("hidden");
+        success?.classList.remove("hidden");
+        const focusTarget = success?.matches("[data-form-focus]")
+          ? success
+          : success?.querySelector<HTMLElement>("[data-form-focus]");
+        focusTarget?.focus();
+      } catch {
+        error?.classList.remove("hidden");
+      } finally {
+        if (submit) submit.disabled = false;
+      }
+    });
+  }
+</script>

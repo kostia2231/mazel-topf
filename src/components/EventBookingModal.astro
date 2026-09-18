@@ -26,7 +26,7 @@ const inputs = [
     aria-labelledby="event-booking-title"
     class="w-[calc(100%-2rem)] max-w-3xl bg-white p-0 backdrop:bg-ink-600/50 sm:w-[calc(100%-4rem)]"
 >
-    <div class="relative px-6 py-9 sm:px-12 sm:py-11">
+    <div class="relative px-6 py-9 sm:px-12 sm:py-11" data-form>
         <button
             type="button"
             class="absolute top-6 right-5 flex size-8 cursor-pointer items-center justify-center text-brick-500 sm:top-9 sm:right-10"
@@ -46,7 +46,7 @@ const inputs = [
             </svg>
         </button>
 
-        <div data-booking-form>
+        <div data-form-body>
             <h2
                 id="event-booking-title"
                 class="font-display max-w-md pr-10 text-3xl leading-tight sm:text-[2.125rem]"
@@ -104,7 +104,7 @@ const inputs = [
                 <p
                     class="hidden text-sm text-brick-500"
                     role="alert"
-                    data-booking-error
+                    data-form-error
                 >
                     {t.errorText}
                 </p>
@@ -115,11 +115,11 @@ const inputs = [
             </form>
         </div>
 
-        <div class="hidden" data-booking-success>
+        <div class="hidden" data-form-success>
             <h2
                 class="font-display max-w-md pr-10 text-3xl leading-tight whitespace-pre-line sm:text-[2.125rem]"
                 tabindex="-1"
-                data-booking-success-title
+                data-form-focus
             >
                 {t.successTitle}
             </h2>
@@ -135,25 +135,16 @@ const inputs = [
     const dialog = document.querySelector<HTMLDialogElement>("#event-booking");
 
     if (dialog) {
-        const form = dialog.querySelector<HTMLFormElement>("form");
-        const formPanel = dialog.querySelector<HTMLElement>("[data-booking-form]");
-        const successPanel = dialog.querySelector<HTMLElement>(
-            "[data-booking-success]",
-        );
-        const successTitle = dialog.querySelector<HTMLElement>(
-            "[data-booking-success-title]",
-        );
-        const error = dialog.querySelector<HTMLElement>("[data-booking-error]");
-
-        const reset = () => {
-            formPanel?.classList.remove("hidden");
-            successPanel?.classList.add("hidden");
-            error?.classList.add("hidden");
-        };
+        const body = dialog.querySelector<HTMLElement>("[data-form-body]");
+        const success = dialog.querySelector<HTMLElement>("[data-form-success]");
+        const error = dialog.querySelector<HTMLElement>("[data-form-error]");
 
         for (const opener of document.querySelectorAll("[data-booking-open]")) {
             opener.addEventListener("click", () => {
-                reset();
+                // каждый раз открываем с чистой формой, а не с прошлой благодарностью
+                body?.classList.remove("hidden");
+                success?.classList.add("hidden");
+                error?.classList.add("hidden");
                 dialog.showModal();
             });
         }
@@ -165,39 +156,6 @@ const inputs = [
         // клик по подложке за пределами панели закрывает окно
         dialog.addEventListener("click", (event) => {
             if (event.target === dialog) dialog.close();
-        });
-
-        form?.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            error?.classList.add("hidden");
-
-            const submit = form.querySelector<HTMLButtonElement>(
-                "button[type=submit]",
-            );
-            if (submit) submit.disabled = true;
-
-            try {
-                const response = await fetch(location.pathname, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: new URLSearchParams(
-                        new FormData(form) as unknown as Record<string, string>,
-                    ).toString(),
-                });
-
-                if (!response.ok) throw new Error(String(response.status));
-
-                form.reset();
-                formPanel?.classList.add("hidden");
-                successPanel?.classList.remove("hidden");
-                successTitle?.focus();
-            } catch {
-                error?.classList.remove("hidden");
-            } finally {
-                if (submit) submit.disabled = false;
-            }
         });
     }
 </script>
