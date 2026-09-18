@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageBanner from '../PageBanner.astro';
+import { pageBanners } from '../../data/page-banners';
 import { render, type CollectionEntry } from 'astro:content';
 import type { RouteKey, Language } from '../../i18n/config';
 
@@ -20,7 +21,12 @@ const { Content } = await render(entry);
   title={entry.data.title}
   description={entry.data.description}
 >
-  <PageBanner language={language} title={entry.data.title} breadcrumb={entry.data.title} />
+  <PageBanner
+    language={language}
+    title={entry.data.title}
+    breadcrumb={entry.data.title}
+    image={pageBanners[entry.data.route]}
+  />
   <article class="mx-auto max-w-3xl px-6 py-20">
     {entry.data.intro && (
       <p class="text-lg leading-relaxed text-ink-600">{entry.data.intro}</p>
