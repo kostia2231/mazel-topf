@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { restaurant } from '../data/restaurant';
 import { isCanonicalHost } from '../data/seo';
+import { formEndpoint, honeypot } from '../data/forms';
 import { content } from '../i18n/content';
 import { ui } from '../i18n/ui';
 import {
@@ -124,10 +125,17 @@ const canonical = absoluteUrl(language);
   }
 </script>
 
+<script define:vars={{ endpoint: formEndpoint, honeypot }}>
+  window.__mazelForms = { endpoint, honeypot };
+</script>
+
 <script>
-  // Общая отправка для всех форм Netlify: сайт статический, поэтому шлём
-  // POST сами и подменяем форму блоком благодарности, не уходя со страницы.
-  for (const form of document.querySelectorAll<HTMLFormElement>("form[data-netlify]")) {
+  // Общая отправка для всех форм сайта. Сайт статический и может стоять где
+  // угодно, поэтому шлём JSON на внешний обработчик из PUBLIC_FORM_ENDPOINT,
+  // а форму на месте подменяем блоком благодарности.
+  const { endpoint, honeypot } = window.__mazelForms ?? {};
+
+  for (const form of document.querySelectorAll<HTMLFormElement>("[data-form] form")) {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
@@ -137,20 +145,7 @@ const canonical = absoluteUrl(language);
       const error = scope?.querySelector<HTMLElement>("[data-form-error]");
       const submit = form.querySelector<HTMLButtonElement>("button[type=submit]");
 
-      error?.classList.add("hidden");
-      if (submit) submit.disabled = true;
-
-      try {
-        const response = await fetch(location.pathname, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(
-            new FormData(form) as unknown as Record<string, string>,
-          ).toString(),
-        });
-
-        if (!response.ok) throw new Error(String(response.status));
-
+      const showSuccess = () => {
         form.reset();
         body?.classList.add("hidden");
         success?.classList.remove("hidden");
@@ -158,6 +153,41 @@ const canonical = absoluteUrl(language);
           ? success
           : success?.querySelector<HTMLElement>("[data-form-focus]");
         focusTarget?.focus();
+      };
+
+      const fields = Object.fromEntries(new FormData(form)) as Record<string, string>;
+
+      // Ловушку заполняют только боты. Показываем им благодарность и молчим.
+      if (honeypot && fields[honeypot]) return showSuccess();
+      if (honeypot) delete fields[honeypot];
+
+      if (!endpoint) {
+        console.error(
+          "PUBLIC_FORM_ENDPOINT не задан — форму отправлять некуда.",
+        );
+        error?.classList.remove("hidden");
+        return;
+      }
+
+      error?.classList.add("hidden");
+      if (submit) submit.disabled = true;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            form: form.getAttribute("name"),
+            page: location.href,
+            ...fields,
+          }),
+        });
+
+        if (!response.ok) throw new Error(String(response.status));
+        showSuccess();
       } catch {
         error?.classList.remove("hidden");
       } finally {

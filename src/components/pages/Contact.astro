@@ -8,6 +8,7 @@ import { mailLink, restaurant, phoneLink } from "../../data/restaurant";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
 import type { Language } from "../../i18n/config";
+import { formEndpoint, honeypot } from "../../data/forms";
 
 interface Props {
     language: Language;
@@ -100,14 +101,12 @@ const fields = [
                 data-form-body
                 class="space-y-5"
                 method="post"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
+                action={formEndpoint || undefined}
             >
-                <input type="hidden" name="form-name" value="contact" />
-                <p class="hidden">
+                <p class="hidden" aria-hidden="true">
                     <label>
-                        Bot field
-                        <input name="bot-field" tabindex="-1" autocomplete="off" />
+                        Firma
+                        <input name={honeypot} tabindex="-1" autocomplete="off" />
                     </label>
                 </p>
                 {

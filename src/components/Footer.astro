@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import logo from "../assets/logo-masel-topf.png";
 import { path, type Language } from "../i18n/config";
 import { ui } from "../i18n/ui";
+import { formEndpoint, honeypot } from "../data/forms";
 import { content } from "../i18n/content";
 import { mailLink, restaurant, phoneLink } from "../data/restaurant";
 import SocialLinks from "./SocialLinks.astro";
@@ -105,14 +106,12 @@ const year = new Date().getFullYear();
                         data-form-body
                         class="mt-5 space-y-3"
                         method="post"
-                        data-netlify="true"
-                        data-netlify-honeypot="bot-field"
+                        action={formEndpoint || undefined}
                     >
-                        <input type="hidden" name="form-name" value="newsletter" />
-                        <p class="hidden">
+                        <p class="hidden" aria-hidden="true">
                             <label>
-                                Bot field
-                                <input name="bot-field" tabindex="-1" autocomplete="off" />
+                                Firma
+                                <input name={honeypot} tabindex="-1" autocomplete="off" />
                             </label>
                         </p>
                         <label class="sr-only" for="newsletter-email"

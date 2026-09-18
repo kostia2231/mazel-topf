@@ -249,6 +249,35 @@ Der Dateiname wird zur URL (`de/impressum.md` → `/impressum`,
 `en/imprint.md` → `/en/imprint`). Diese Seiten nutzen das schlichte Layout mit
 Banner und Fließtext und brauchen im Frontmatter ein `route:`-Feld.
 
+## Formulare
+
+Drei Formulare: Kontakt, Newsletter in der Fußzeile und die Buchung, die sich
+auf Catering, Startseite und Über Uns als Dialogfenster öffnet.
+
+Die Seite ist statisch und soll unabhängig vom Hoster laufen – ob Netlify oder
+ein S3-Bucket. Der Empfänger steht deshalb in einer Umgebungsvariablen:
+
+```
+PUBLIC_FORM_ENDPOINT="https://…"
+```
+
+Dorthin schickt `src/layouts/Layout.astro` die Eingaben als JSON:
+
+```json
+{ "form": "contact", "page": "https://…/kontakt", "name": "…", "email": "…" }
+```
+
+`form` benennt das Formular, `page` die Seite, von der abgeschickt wurde, der
+Rest sind die Felder. Alles, was POST mit JSON annimmt, passt: Formspree,
+Web3Forms, eine eigene Lambda hinter API Gateway, ein Cloudflare Worker. Der
+Versand der E-Mail und der Schlüssel dafür liegen dort, nicht im Bündel – die
+Variable trägt `PUBLIC_`, steht also im Klartext im ausgelieferten JavaScript
+und darf kein Geheimnis enthalten.
+
+Ohne gesetzte Variable schicken die Formulare nichts ab und zeigen ihre
+Fehlerzeile. Jedes Formular trägt ein verstecktes Feld `company` als
+Bot-Falle; ist es ausgefüllt, wird still verworfen.
+
 ## Struktur
 
 ```
@@ -273,11 +302,14 @@ src/
 - Karteneinbettung auf `/kontakt` fehlt.
 - Noch ohne Vorlage: das Band nach dem Intro auf `/catering` (im Entwurf
   348 px hoch, Motiv „Hähnchen mit Risotto“) und der Banner von `/kontakt`.
-- Formulare (Kontakt, Newsletter) zeigen auf `/nachricht` bzw. `/newsletter` –
-  beides noch ohne Endpunkt.
+- `PUBLIC_FORM_ENDPOINT` ist noch nicht gesetzt, solange fehlt den Formularen
+  der Empfänger (siehe „Formulare“).
 - `site` in `astro.config.mjs` auf die echte Domain setzen – erst dann liefert
   das Layout canonical- und hreflang-Angaben aus.
-- Verlinkt, aber noch nicht angelegt (je Sprache): `/reservierung`,
-  `/privat-dinning`, `/gutschein`, `/feedback`, `/cookies`, `/datenschutz`.
+- Verlinkt, aber noch nicht angelegt (je Sprache): `/reservierung` – das ist
+  die Schaltfläche „Reservation online“ in der Kopfzeile jeder Seite – und
+  `/feedback` in der Fußzeile.
 - Die englischen Übersetzungen brauchen ein Lektorat.
-- Impressum enthält Platzhalterdaten und muss vor dem Livegang ersetzt werden.
+- Datenschutzerklärung und Cookie-Seite sind aus dem Entwurf übernommen und
+  brauchen vor dem Livegang eine juristische Durchsicht; die englischen
+  Fassungen sind als Übersetzung gekennzeichnet, verbindlich ist Deutsch.
