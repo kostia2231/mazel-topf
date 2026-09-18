@@ -8,10 +8,11 @@ import {
     type RouteKey,
     type Language,
 } from "../i18n/config";
-import { ui } from "../i18n/ui";
+import { ui, isExternal } from "../i18n/ui";
 import { restaurant } from "../data/restaurant";
 import Button from "./Button.astro";
 import Calendar from "./icons/Calendar.astro";
+import ExternalLink from "./icons/ExternalLink.astro";
 import SocialLinks from "./SocialLinks.astro";
 
 interface Props {
@@ -70,24 +71,38 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                 class="hidden items-stretch lg:flex"
             >
                 <ul class="flex items-center gap-6 px-6 text-sm 2xl:gap-8 2xl:px-8">
-                    {t.navigation.map((item) => (
-                        <li>
-                            <a
-                                href={path(item.route, language)}
-                                aria-current={
-                                    item.route === page ? "page" : undefined
-                                }
-                                class:list={[
-                                    "relative py-2 transition-colors hover:text-brick-500 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out motion-reduce:before:transition-none",
-                                    item.route === page
-                                        ? "text-ink-900 before:scale-y-100"
-                                        : "text-ink-600 before:scale-y-0 hover:before:scale-y-100",
-                                ]}
-                            >
-                                {item.label}
-                            </a>
-                        </li>
-                    ))}
+                    {t.navigation.map((item) =>
+                        isExternal(item) ? (
+                            <li>
+                                <a
+                                    href={item.url}
+                                    target="_blank"
+                                    rel="noopener"
+                                    class="flex items-center gap-2 py-2 text-ink-600 transition-colors hover:text-brick-500"
+                                >
+                                    <ExternalLink class="size-3.5 text-brick-500" />
+                                    {item.label}
+                                </a>
+                            </li>
+                        ) : (
+                            <li>
+                                <a
+                                    href={path(item.route, language)}
+                                    aria-current={
+                                        item.route === page ? "page" : undefined
+                                    }
+                                    class:list={[
+                                        "relative py-2 transition-colors hover:text-brick-500 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out motion-reduce:before:transition-none",
+                                        item.route === page
+                                            ? "text-ink-900 before:scale-y-100"
+                                            : "text-ink-600 before:scale-y-0 hover:before:scale-y-100",
+                                    ]}
+                                >
+                                    {item.label}
+                                </a>
+                            </li>
+                        ),
+                    )}
                 </ul>
             </nav>
         </div>
@@ -216,6 +231,18 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                 </li>
             ))}
         </ul>
+
+        <hr class="mt-11 w-17 border-t-2 border-brick-500" />
+
+        <a
+            href={t.drawerOrderOnline.url}
+            target="_blank"
+            rel="noopener"
+            class="caps mt-9 flex items-center gap-2.5 text-[0.8125rem] text-brick-500"
+        >
+            <ExternalLink class="size-3.5" />
+            {t.drawerOrderOnline.label}
+        </a>
 
         <SocialLinks tone="solid" class="mt-auto" />
     </nav>

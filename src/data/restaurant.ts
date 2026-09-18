@@ -10,6 +10,10 @@ export const restaurant = {
   email: 'masel-topf@hotmail.com',
 } as const;
 
+/** Онлайн-заказ идёт на Wolt — внешняя площадка, не раздел сайта. */
+export const orderOnlineUrl =
+  'https://wolt.com/de/deu/berlin/restaurant/ma-sel-topf';
+
 export const cuisine = 'Israeli';
 export const priceRange = '€€';
 

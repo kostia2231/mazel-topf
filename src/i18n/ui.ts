@@ -1,15 +1,20 @@
 import type { RouteKey, Language } from "./config"
+import { orderOnlineUrl } from "../data/restaurant"
 
-interface NavItem {
-    route: RouteKey
-    label: string
-}
+/** Пункт меню ведёт либо на страницу сайта, либо на внешнюю площадку. */
+export type NavItem =
+    | { route: RouteKey; label: string }
+    | { url: string; label: string }
+
+export const isExternal = (item: NavItem): item is { url: string; label: string } =>
+    "url" in item
 
 interface UiText {
     htmlLang: string
     navigation: NavItem[]
     secondaryNavigation: NavItem[]
     drawerNavigation: NavItem[]
+    drawerOrderOnline: { url: string; label: string }
     footerLinks: NavItem[]
     legalLinks: NavItem[]
     header: {
@@ -123,26 +128,26 @@ export const ui: Record<Language, UiText> = {
     de: {
         htmlLang: "de",
         navigation: [
-            { route: "home", label: "Startseite" },
+            { url: orderOnlineUrl, label: "Online bestellen" },
             { route: "menu", label: "Speisekarte" },
-            { route: "about", label: "Über Uns" },
+            { route: "catering", label: "Catering" },
         ],
         secondaryNavigation: [
-            { route: "catering", label: "Catering" },
+            { route: "about", label: "Über Uns" },
             { route: "contact", label: "Kontakt" },
         ],
         drawerNavigation: [
-            { route: "home", label: "Startseite" },
             { route: "menu", label: "Speisekarte" },
-            { route: "about", label: "Über Uns" },
             { route: "catering", label: "Catering" },
+            { route: "about", label: "Über Uns" },
             { route: "contact", label: "Kontakt" },
         ],
+        drawerOrderOnline: { url: orderOnlineUrl, label: "Online bestellen" },
         footerLinks: [
-            { route: "about", label: "Über Uns" },
-            { route: "menu", label: "Speisekarte" },
             { route: "reservation", label: "Tisch reservieren" },
-            { route: "feedback", label: "Feedback senden" },
+            { url: orderOnlineUrl, label: "Online bestellen" },
+            { route: "catering", label: "Catering" },
+            { route: "contact", label: "Kontakt" },
         ],
         legalLinks: [
             { route: "cookies", label: "Cookies" },
@@ -284,26 +289,26 @@ export const ui: Record<Language, UiText> = {
     en: {
         htmlLang: "en",
         navigation: [
-            { route: "home", label: "Home" },
+            { url: orderOnlineUrl, label: "Order online" },
             { route: "menu", label: "Menu" },
-            { route: "about", label: "About Us" },
+            { route: "catering", label: "Catering" },
         ],
         secondaryNavigation: [
-            { route: "catering", label: "Catering" },
+            { route: "about", label: "About Us" },
             { route: "contact", label: "Contact" },
         ],
         drawerNavigation: [
-            { route: "home", label: "Home" },
             { route: "menu", label: "Menu" },
-            { route: "about", label: "About Us" },
             { route: "catering", label: "Catering" },
+            { route: "about", label: "About Us" },
             { route: "contact", label: "Contact" },
         ],
+        drawerOrderOnline: { url: orderOnlineUrl, label: "Order online" },
         footerLinks: [
-            { route: "about", label: "About Us" },
-            { route: "menu", label: "Menu" },
             { route: "reservation", label: "Book a table" },
-            { route: "feedback", label: "Send feedback" },
+            { url: orderOnlineUrl, label: "Order online" },
+            { route: "catering", label: "Catering" },
+            { route: "contact", label: "Contact" },
         ],
         legalLinks: [
             { route: "cookies", label: "Cookies" },

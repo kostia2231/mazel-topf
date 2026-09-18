@@ -2,11 +2,12 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo-masel-topf.png";
 import { path, type Language } from "../i18n/config";
-import { ui } from "../i18n/ui";
+import { ui, isExternal } from "../i18n/ui";
 import { formEndpoint, honeypot } from "../data/forms";
 import { content } from "../i18n/content";
 import { mailLink, restaurant, phoneLink } from "../data/restaurant";
 import SocialLinks from "./SocialLinks.astro";
+import ExternalLink from "./icons/ExternalLink.astro";
 import Button from "./Button.astro";
 
 interface Props {
@@ -86,7 +87,13 @@ const year = new Date().getFullYear();
                         t.footerLinks.map((link) => (
                             <li>
                                 <a
-                                    href={path(link.route, language)}
+                                    href={
+                                        isExternal(link)
+                                            ? link.url
+                                            : path(link.route, language)
+                                    }
+                                    target={isExternal(link) ? "_blank" : undefined}
+                                    rel={isExternal(link) ? "noopener" : undefined}
                                     class="hover:text-white"
                                 >
                                     {link.label}

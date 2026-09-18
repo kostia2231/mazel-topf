@@ -33,6 +33,9 @@ Deutsch ist die Standardsprache und läuft ohne Präfix, Englisch liegt unter
 - `src/i18n/config.ts` – Sprachliste und **die Adresstabelle `routes`**. Jede
   Seite hat dort einen sprachunabhängigen Schlüssel (`menu`), daraus
   baut der Sprachumschalter das Gegenstück. Neue Seite = neuer Eintrag hier.
+- `src/data/restaurant.ts` – u.a. `orderOnlineUrl`: „Online bestellen“ führt
+  zu Wolt, nicht auf eine eigene Seite. Ein Navigationseintrag trägt deshalb
+  `url:` statt `route:` und öffnet in einem neuen Tab.
 - `src/i18n/ui.ts` – alle Bedienungstexte je Sprache: Navigation, Knöpfe,
   Formularfelder, aria-Labels und die Motivbeschreibungen der Bildplatzhalter.
 - `src/i18n/content.ts` – die Fließtexte der Seiten je Sprache.
@@ -306,9 +309,11 @@ src/
   der Empfänger (siehe „Formulare“).
 - `site` in `astro.config.mjs` auf die echte Domain setzen – erst dann liefert
   das Layout canonical- und hreflang-Angaben aus.
-- Verlinkt, aber noch nicht angelegt (je Sprache): `/reservierung` – das ist
-  die Schaltfläche „Reservation online“ in der Kopfzeile jeder Seite – und
-  `/feedback` in der Fußzeile.
+- Verlinkt, aber noch nicht angelegt: `/reservierung` – die Schaltfläche
+  „Reservation online“ in der Kopfzeile jeder Seite, je Sprache.
+- Verwaist in `routes` (`src/i18n/config.ts`), nichts verweist mehr darauf:
+  `privateDining`, `giftCard`, `feedback`, `message`, `newsletter`. Entweder
+  Seiten dafür anlegen oder die Einträge entfernen.
 - Die englischen Übersetzungen brauchen ein Lektorat.
 - Datenschutzerklärung und Cookie-Seite sind aus dem Entwurf übernommen und
   brauchen vor dem Livegang eine juristische Durchsicht; die englischen
