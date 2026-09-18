@@ -252,6 +252,28 @@ Der Dateiname wird zur URL (`de/impressum.md` → `/impressum`,
 `en/imprint.md` → `/en/imprint`). Diese Seiten nutzen das schlichte Layout mit
 Banner und Fließtext und brauchen im Frontmatter ein `route:`-Feld.
 
+## Cookies
+
+Es gibt keine Cookie-Seite, sondern den Einwilligungsbanner aus dem Entwurf
+(`src/components/CookieBanner.astro`), der auf jeder Seite liegt. Er fragt
+einmal; danach öffnet ihn nur noch „Cookies“ in der Fußzeile erneut.
+
+Die Auswahl liegt unter `mazel-cookie-consent` im localStorage des Besuchers –
+nicht in einem Cookie, denn dafür bräuchte es wiederum eine Einwilligung. Jede
+Entscheidung löst `mazel:consent` auf `window` aus:
+
+```js
+addEventListener("mazel:consent", (event) => {
+  if (event.detail.statistics) { /* Zähler hier laden */ }
+});
+```
+
+**Die Seite setzt derzeit selbst keine Cookies** und lädt keine Statistik- oder
+Marketing-Skripte; auch die Schriften kommen vom eigenen Server. Die beiden
+Schalter sind also vorbereitet, steuern aber noch nichts. Wer Zähler ergänzt,
+hängt sie an das Ereignis – sonst behauptet der Banner eine Wahl, die es nicht
+gibt.
+
 ## Formulare
 
 Drei Formulare: Kontakt, Newsletter in der Fußzeile und die Buchung, die sich
@@ -315,6 +337,8 @@ src/
   `privateDining`, `giftCard`, `feedback`, `message`, `newsletter`. Entweder
   Seiten dafür anlegen oder die Einträge entfernen.
 - Die englischen Übersetzungen brauchen ein Lektorat.
-- Datenschutzerklärung und Cookie-Seite sind aus dem Entwurf übernommen und
-  brauchen vor dem Livegang eine juristische Durchsicht; die englischen
-  Fassungen sind als Übersetzung gekennzeichnet, verbindlich ist Deutsch.
+- Die Datenschutzerklärung ist aus dem Entwurf übernommen und braucht vor dem
+  Livegang eine juristische Durchsicht; die englische Fassung ist als
+  Übersetzung gekennzeichnet, verbindlich ist Deutsch.
+- Der Cookie-Banner speichert die Auswahl, aber es hängt noch nichts daran:
+  die Seite lädt weder Statistik- noch Marketing-Skripte (siehe „Cookies“).

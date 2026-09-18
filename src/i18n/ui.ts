@@ -38,6 +38,17 @@ interface UiText {
         successText: string
         errorText: string
     }
+    cookies: {
+        settings: string
+        text: string
+        moreInfo: string
+        necessary: string
+        statistics: string
+        marketing: string
+        acceptAll: string
+        save: string
+        reject: string
+    }
     banner: { home: string }
     menu: {
         title: string
@@ -150,7 +161,6 @@ export const ui: Record<Language, UiText> = {
             { route: "contact", label: "Kontakt" },
         ],
         legalLinks: [
-            { route: "cookies", label: "Cookies" },
             { route: "privacy", label: "Datenschutzhinweise" },
             { route: "imprint", label: "Impressum" },
         ],
@@ -174,6 +184,23 @@ export const ui: Record<Language, UiText> = {
             submit: "Subscribe",
             successText: "Danke! Bitte bestätigen Sie die Anmeldung per E-Mail.",
             errorText: "Die Anmeldung hat nicht geklappt. Bitte versuchen Sie es erneut.",
+        },
+        cookies: {
+            settings: "Cookies",
+            text:
+                "Diese Website benutzt Cookies, die für den technischen Betrieb der Website " +
+                "erforderlich sind und stets gesetzt werden. Andere Cookies, um Inhalte und " +
+                "Anzeigen zu personalisieren und die Zugriffe auf unsere Website zu " +
+                "analysieren, werden nur mit Ihrer Zustimmung gesetzt. Außerdem geben wir " +
+                "Informationen zu Ihrer Verwendung unserer Website an unsere Partner für " +
+                "soziale Medien, Werbung und Analysen weiter.",
+            moreInfo: "Mehr Infos",
+            necessary: "Notwendig",
+            statistics: "Statistiken",
+            marketing: "Marketing",
+            acceptAll: "Alle akzeptieren",
+            save: "Speichern",
+            reject: "Ablehnen",
         },
         banner: { home: "Startseite" },
         menu: {
@@ -311,7 +338,6 @@ export const ui: Record<Language, UiText> = {
             { route: "contact", label: "Contact" },
         ],
         legalLinks: [
-            { route: "cookies", label: "Cookies" },
             { route: "privacy", label: "Privacy notice" },
             { route: "imprint", label: "Imprint" },
         ],
@@ -335,6 +361,22 @@ export const ui: Record<Language, UiText> = {
             submit: "Subscribe",
             successText: "Thanks! Please confirm your subscription by email.",
             errorText: "The subscription did not go through. Please try again.",
+        },
+        cookies: {
+            settings: "Cookies",
+            text:
+                "This website uses cookies that are required for it to work and are always " +
+                "set. Other cookies, used to personalise content and ads and to analyse " +
+                "traffic to our website, are only set with your consent. We also share " +
+                "information about your use of our website with our partners for social " +
+                "media, advertising and analytics.",
+            moreInfo: "More information",
+            necessary: "Necessary",
+            statistics: "Statistics",
+            marketing: "Marketing",
+            acceptAll: "Accept all",
+            save: "Save",
+            reject: "Reject",
         },
         banner: { home: "Home" },
         menu: {

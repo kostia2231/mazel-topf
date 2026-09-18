@@ -18,7 +18,6 @@ export const routes = {
   privateDining: { de: '/privat-dinning', en: '/en/private-dining' },
   giftCard: { de: '/gutschein', en: '/en/gift-card' },
   feedback: { de: '/feedback', en: '/en/feedback' },
-  cookies: { de: '/cookies', en: '/en/cookies' },
   privacy: { de: '/datenschutz', en: '/en/privacy' },
   imprint: { de: '/impressum', en: '/en/imprint' },
   newsletter: { de: '/newsletter', en: '/en/newsletter' },

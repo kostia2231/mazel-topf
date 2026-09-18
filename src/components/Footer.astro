@@ -162,6 +162,15 @@ const year = new Date().getFullYear();
         >
             <span>{restaurant.name} {year}</span>
             <ul class="flex flex-wrap gap-8">
+                <li>
+                    <button
+                        type="button"
+                        class="cursor-pointer hover:text-white"
+                        data-cookie-settings
+                    >
+                        {t.cookies.settings}
+                    </button>
+                </li>
                 {
                     t.legalLinks.map((link) => (
                         <li>

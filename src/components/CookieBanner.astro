@@ -1,0 +1,149 @@
+---
+import { ui } from "../i18n/ui";
+import { path, type Language } from "../i18n/config";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language].cookies;
+
+const categories = [
+    { name: "necessary", label: t.necessary, locked: true },
+    { name: "statistics", label: t.statistics, locked: false },
+    { name: "marketing", label: t.marketing, locked: false },
+] as const;
+---
+
+<div
+    id="cookie-banner"
+    hidden
+    role="dialog"
+    aria-modal="false"
+    aria-label={t.settings}
+    class="fixed right-0 bottom-0 left-0 z-40 bg-cream-100 px-6 py-7 shadow-lg sm:right-6 sm:bottom-6 sm:left-auto sm:w-[26rem] sm:px-8"
+>
+    <p class="text-sm leading-relaxed text-ink-600">{t.text}</p>
+
+    <a
+        href={path("privacy", language)}
+        class="mt-2 inline-block text-sm text-brick-500 underline-offset-4 hover:underline"
+    >
+        {t.moreInfo}
+    </a>
+
+    <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+        {
+            categories.map((category) => (
+                <label class="flex cursor-pointer items-center gap-2.5 text-sm text-ink-900">
+                    <input
+                        type="checkbox"
+                        name={category.name}
+                        checked={category.locked}
+                        disabled={category.locked}
+                        class="size-5 shrink-0 cursor-pointer appearance-none border border-line bg-white checked:border-brick-500 checked:bg-brick-500 disabled:cursor-default"
+                        data-cookie-category
+                    />
+                    {category.label}
+                </label>
+            ))
+        }
+    </div>
+
+    <div class="mt-6 grid grid-cols-[1.9fr_1fr] gap-3">
+        <button
+            type="button"
+            class="caps cursor-pointer bg-brick-500 px-4 py-3.5 text-[0.6875rem] text-white transition-colors hover:bg-brick-600"
+            data-cookie-accept
+        >
+            {t.acceptAll}
+        </button>
+        <button
+            type="button"
+            class="caps cursor-pointer border border-brick-500 px-4 py-3.5 text-[0.6875rem] text-brick-500 transition-colors hover:bg-brick-500 hover:text-white"
+            data-cookie-save
+        >
+            {t.save}
+        </button>
+    </div>
+
+    <button
+        type="button"
+        class="caps mt-3 w-full cursor-pointer border border-brick-500 px-4 py-3.5 text-[0.6875rem] text-brick-500 transition-colors hover:bg-brick-500 hover:text-white"
+        data-cookie-reject
+    >
+        {t.reject}
+    </button>
+</div>
+
+<script>
+    const KEY = "mazel-cookie-consent";
+
+    const banner = document.getElementById("cookie-banner");
+
+    if (banner) {
+        const boxes = [
+            ...banner.querySelectorAll<HTMLInputElement>("[data-cookie-category]"),
+        ];
+
+        const read = () => {
+            try {
+                const raw = localStorage.getItem(KEY);
+                return raw ? (JSON.parse(raw) as Record<string, boolean>) : null;
+            } catch {
+                // приватный режим или заблокированное хранилище
+                return null;
+            }
+        };
+
+        const open = () => {
+            const saved = read();
+            for (const box of boxes) {
+                if (!box.disabled) box.checked = saved?.[box.name] ?? false;
+            }
+            banner.hidden = false;
+        };
+
+        const decide = (consent: Record<string, boolean>) => {
+            try {
+                localStorage.setItem(KEY, JSON.stringify(consent));
+            } catch {
+                // выбор не переживёт перезагрузку, но текущую страницу отработает
+            }
+            banner.hidden = true;
+            // Сюда подключаются будущие счётчики: сейчас сайт ничего не грузит.
+            dispatchEvent(new CustomEvent("mazel:consent", { detail: consent }));
+        };
+
+        const fromBoxes = () =>
+            Object.fromEntries(boxes.map((box) => [box.name, box.checked]));
+
+        banner
+            .querySelector("[data-cookie-accept]")
+            ?.addEventListener("click", () =>
+                decide(Object.fromEntries(boxes.map((box) => [box.name, true]))),
+            );
+
+        banner
+            .querySelector("[data-cookie-save]")
+            ?.addEventListener("click", () => decide(fromBoxes()));
+
+        banner
+            .querySelector("[data-cookie-reject]")
+            ?.addEventListener("click", () =>
+                decide(
+                    Object.fromEntries(
+                        boxes.map((box) => [box.name, box.disabled]),
+                    ),
+                ),
+            );
+
+        for (const opener of document.querySelectorAll("[data-cookie-settings]")) {
+            opener.addEventListener("click", open);
+        }
+
+        // Спрашиваем один раз: если выбор уже сделан, баннер не показываем.
+        if (!read()) open();
+    }
+</script>
