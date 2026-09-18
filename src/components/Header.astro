@@ -78,7 +78,7 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                                     href={item.url}
                                     target="_blank"
                                     rel="noopener"
-                                    class="flex items-center gap-2 py-2 text-ink-600 transition-colors hover:text-brick-500"
+                                    class="relative flex items-center gap-2 py-2 text-ink-600 transition-colors before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:scale-y-0 before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out hover:text-brick-500 hover:before:scale-y-100 motion-reduce:before:transition-none"
                                 >
                                     <ExternalLink class="size-3.5 text-brick-500" />
                                     {item.label}
