@@ -101,6 +101,7 @@ interface UiText {
         dishesFromAbove: string
         facade: string
         challah: string
+        terrace: string
         tableWithBeer: string
         laidTable: string
         diningRoom: string
@@ -260,6 +261,7 @@ export const ui: Record<Language, UiText> = {
             dishesFromAbove: "Mezze und Vorspeisen von oben aufgenommen",
             facade: "Terrasse und Fassade des Restaurants in der Rykestraße",
             challah: "Frisch gebackene Challah mit Sesam auf einem Leinentuch",
+            terrace: "Die Terrasse von Masel Topf in der Rykestraße, gedeckte Tische unter der Markise",
             tableWithBeer: "Tisch mit Bier und Grillteller",
             laidTable: "Gedeckter Tisch im Restaurant",
             diningRoom: "Gastraum mit Kronleuchter, Kerzen und roten Bänken",
@@ -434,6 +436,7 @@ export const ui: Record<Language, UiText> = {
             dishesFromAbove: "Mezze and starters shot from above",
             facade: "Terrace and facade of the restaurant on Rykestraße",
             challah: "Freshly baked sesame challah on a linen cloth",
+            terrace: "The Masel Topf terrace on Rykestraße, tables laid under the awning",
             tableWithBeer: "Table with beer and a grill platter",
             laidTable: "Laid table in the restaurant",
             diningRoom:

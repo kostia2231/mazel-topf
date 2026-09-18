@@ -11,10 +11,11 @@ import { restaurant, phoneLink, mailLink } from "../../data/restaurant";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
 import { path, languageFromId, type Language } from "../../i18n/config";
-import heroImage from "../../assets/hero-grill.webp";
+import BackgroundVideo from "../BackgroundVideo.astro";
+import heroPoster from "../../assets/hero-poster.webp";
+import terracePoster from "../../assets/terrace-poster.webp";
 import facadeImage from "../../assets/facade-terrace.webp";
 import dishesImage from "../../assets/dishes-from-above.webp";
-import challahImage from "../../assets/challah.webp";
 import beerImage from "../../assets/table-with-beer.webp";
 import {
     dishImages,
@@ -45,15 +46,12 @@ const carouselDishes = carouselKeys.flatMap((key) => {
     <section
         class="relative isolate flex min-h-100 flex-col justify-between overflow-hidden sm:min-h-130 lg:min-h-[calc(100vh-4rem)]"
     >
-        <Image
-            src={heroImage}
-            alt={t.images.hero}
-            widths={[960, 1520, 2280]}
-            width={2280}
-            sizes="100vw"
-            loading="eager"
-            fetchpriority="high"
-            class="absolute inset-0 -z-10 h-full w-full object-cover"
+        <BackgroundVideo
+            name="hero"
+            poster={heroPoster}
+            label={t.images.hero}
+            eager
+            class="absolute inset-0 -z-10"
         />
         <div class="absolute inset-0 -z-10 bg-black/55"></div>
         <div
@@ -219,18 +217,12 @@ const carouselDishes = carouselKeys.flatMap((key) => {
         </div>
     </section>
     <CateringBlock language={language} />
-    <div class="group overflow-hidden">
-      <Image
-        src={challahImage}
-        alt={t.images.challah}
-        widths={[960, 1520, 2280]}
-        width={2280}
-        sizes="100vw"
-        loading="eager"
-        fetchpriority="low"
-        class="aspect-1520/606 max-h-151.5 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none sm:min-h-55"
-      />
-    </div>
+    <BackgroundVideo
+        name="terrace"
+        poster={terracePoster}
+        label={t.images.terrace}
+        class="relative aspect-1520/606 max-h-151.5 w-full sm:min-h-55"
+    />
     <section class="grid md:grid-cols-[30%_1fr]">
         <div class="group overflow-hidden md:h-full">
             <Image
