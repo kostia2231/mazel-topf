@@ -107,12 +107,11 @@ export const ui: Record<Language, UiText> = {
         navigation: [
             { route: "home", label: "Startseite" },
             { route: "menu", label: "Speisekarte" },
-            { route: "catering", label: "Catering" },
+            { route: "about", label: "Über Uns" },
         ],
         secondaryNavigation: [
+            { route: "catering", label: "Catering" },
             { route: "contact", label: "Kontakt" },
-            { route: "about", label: "Über Uns" },
-            // { route: "giftCard", label: "Gutschein" },
         ],
         drawerNavigation: [
             { route: "home", label: "Startseite" },
@@ -248,12 +247,10 @@ export const ui: Record<Language, UiText> = {
             { route: "home", label: "Home" },
             { route: "menu", label: "Menu" },
             { route: "about", label: "About Us" },
-            { route: "catering", label: "Catering" },
-            { route: "contact", label: "Contact" },
         ],
         secondaryNavigation: [
-            { route: "privateDining", label: "Private Dining" },
-            { route: "giftCard", label: "Gift Card" },
+            { route: "catering", label: "Catering" },
+            { route: "contact", label: "Contact" },
         ],
         drawerNavigation: [
             { route: "home", label: "Home" },
