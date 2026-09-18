@@ -47,6 +47,20 @@ const pages = defineCollection({
     description: z.string().optional(),
     intro: z.string().optional(),
     route: z.enum(routeKeys),
+    /**
+     * prose   – обычная текстовая страница
+     * legal   – номер и название раздела слева, текст справа
+     * imprint – колонки из `columns`, текст тела под ними
+     */
+    layout: z.enum(['prose', 'legal', 'imprint']).default('prose'),
+    columns: z
+      .array(
+        z.object({
+          heading: z.string().optional(),
+          lines: z.array(z.string()).default([]),
+        }),
+      )
+      .default([]),
   }),
 });
 

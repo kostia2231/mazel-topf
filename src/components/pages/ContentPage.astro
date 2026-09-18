@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageBanner from '../PageBanner.astro';
+import SocialLinks from '../SocialLinks.astro';
 import { pageBanners } from '../../data/page-banners';
 import { render, type CollectionEntry } from 'astro:content';
 import type { RouteKey, Language } from '../../i18n/config';
@@ -13,6 +14,12 @@ interface Props {
 
 const { language, page, entry } = Astro.props;
 const { Content } = await render(entry);
+
+const { layout, columns } = entry.data;
+
+// Правовые страницы идут на всю ширину — текст стоит в колонках, а не в одном
+// узком столбце, как на обычной текстовой странице.
+const wide = layout !== 'prose';
 ---
 
 <Layout
@@ -27,11 +34,57 @@ const { Content } = await render(entry);
     breadcrumb={entry.data.title}
     image={pageBanners[entry.data.route]}
   />
-  <article class="mx-auto max-w-3xl px-6 py-20">
+
+  <article
+    class:list={[
+      'mx-auto px-6 py-20',
+      wide ? 'max-w-[1200px]' : 'max-w-3xl',
+    ]}
+  >
     {entry.data.intro && (
       <p class="text-lg leading-relaxed text-ink-600">{entry.data.intro}</p>
     )}
-    <div class="prose-mazel mt-8">
+
+    {layout === 'imprint' && (
+      <div class="grid gap-12 md:grid-cols-3 md:gap-8 lg:gap-16">
+        {columns.map((column, index) => (
+          <div>
+            {index === 0 ? (
+              <>
+                {/* в макете у первой колонки вместо заголовка черта, но
+                    «Angaben gemäß § 5 DDG» нужен для закона и для чтения вслух */}
+                <h2 class="sr-only">{column.heading}</h2>
+                <hr class="w-14 border-t-2 border-brick-500" />
+              </>
+            ) : (
+              <h2 class="text-[1.0625rem] leading-tight text-ink-900">
+                {column.heading}
+              </h2>
+            )}
+
+            <div
+              class:list={[
+                'space-y-1 text-sm leading-relaxed text-ink-600',
+                index === 0 ? 'mt-7' : 'mt-5',
+              ]}
+            >
+              {column.lines.map((line) =>
+                line ? <p>{line}</p> : <p class="h-3" aria-hidden="true" />,
+              )}
+            </div>
+
+            {index === 0 && <SocialLinks tone="dark" class="mt-9" />}
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div
+      class:list={[
+        layout === 'legal' ? 'prose-legal' : 'prose-mazel',
+        layout === 'imprint' ? 'mt-16' : 'mt-8',
+      ]}
+    >
       <Content />
     </div>
   </article>

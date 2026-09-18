@@ -2,6 +2,7 @@
 route: privacy
 title: Privacy Policy
 description: How we handle your personal data when you visit our website.
+layout: legal
 ---
 
 This is a convenience translation. Only the German version of this privacy

@@ -2,6 +2,7 @@
 route: privacy
 title: Datenschutzerklärung
 description: Wie wir mit Ihren personenbezogenen Daten umgehen, wenn Sie unsere Website besuchen.
+layout: legal
 ---
 
 ## 1. Datenschutz auf einen Blick

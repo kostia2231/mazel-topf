@@ -83,6 +83,97 @@ body {
   background-repeat: repeat-x;
 }
 
+/* Правовые страницы: номер и название раздела слева, текст справа.
+   Разметка плоская, поэтому колонки задаются гридом — h2 уходит в первую
+   колонку, всё остальное во вторую, авторазмещение держит их на одной строке. */
+.prose-legal {
+  counter-reset: legal-section;
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 4rem;
+}
+
+.prose-legal > * {
+  grid-column: 1;
+}
+
+@media (min-width: 1024px) {
+  .prose-legal {
+    grid-template-columns: 17rem 1fr;
+  }
+
+  .prose-legal > * {
+    grid-column: 2;
+  }
+
+  .prose-legal > h2 {
+    grid-column: 1;
+  }
+}
+
+.prose-legal > h2 {
+  counter-increment: legal-section;
+  align-self: start;
+  margin-top: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-ink-900);
+}
+
+.prose-legal > h2::before {
+  content: counter(legal-section) ".";
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  letter-spacing: normal;
+  color: var(--color-brick-500);
+}
+
+/* короткая кирпичная черта открывает текстовую колонку раздела */
+.prose-legal > h2 + * {
+  margin-top: 4rem;
+  padding-top: 1.75rem;
+  border-top: 2px solid var(--color-brick-500);
+  border-image: linear-gradient(to right, var(--color-brick-500) 3.5rem, transparent 3.5rem) 2;
+}
+
+.prose-legal h3 {
+  margin-top: 2rem;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--color-ink-900);
+}
+
+.prose-legal p {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--color-ink-600);
+}
+
+.prose-legal ul {
+  margin-top: 0.75rem;
+  list-style: none;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--color-ink-600);
+}
+
+.prose-legal li {
+  position: relative;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+}
+
+.prose-legal li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-brick-500);
+}
+
 .prose-mazel h2 {
   font-family: var(--font-display);
   font-size: 1.75rem;
