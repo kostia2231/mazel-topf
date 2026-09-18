@@ -18,7 +18,7 @@ interface Content {
         title: string
         paragraphs: string[]
         points: { title: string; text: string }[]
-        stats: { value: string; text: string; color: "brick" | "navy" }[]
+        stats: { value: string; text: string; color: "brick" | "bark" }[]
         cta: string
     }
     home: {
@@ -139,7 +139,7 @@ const de: Content = {
             {
                 value: "4,8",
                 text: "Die durchschnittliche Bewertung, die wir erhalten haben",
-                color: "navy",
+                color: "bark",
             },
         ],
         cta: "Buchen Sie Ihre Veranstaltung",
@@ -352,7 +352,7 @@ const en: Content = {
             {
                 value: "4.8",
                 text: "the average rating we have received",
-                color: "navy",
+                color: "bark",
             },
         ],
         cta: "Book your event",

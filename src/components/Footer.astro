@@ -18,7 +18,7 @@ const i = content[language];
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-navy-700 text-white">
+<footer class="bg-bark-700 text-white">
     <div class="mx-auto max-w-[1520px] px-6 py-16 lg:px-[7.5%]">
         <div
             class="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-center lg:grid-cols-[auto_1fr_auto] lg:items-start lg:gap-16"
@@ -30,7 +30,7 @@ const year = new Date().getFullYear();
                 height={77}
                 class="h-auto w-40 shrink-0 sm:col-span-2 sm:w-[215px] lg:col-span-1"
             />
-            <p class="max-w-xl text-sm leading-relaxed text-white/75">
+            <p class="max-w-xl text-sm leading-relaxed text-mist">
                 {i.quote}
             </p>
             <SocialLinks tone="light" />
@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
                     <h2 class="font-display text-xl font-semibold">
                         {t.footer.openingHours}
                     </h2>
-                    <dl class="mt-5 space-y-1 text-sm text-white/75">
+                    <dl class="mt-5 space-y-1 text-sm text-mist">
                         {
                             i.openingHours.map((day) => (
                                 <div>
@@ -58,7 +58,7 @@ const year = new Date().getFullYear();
                         {t.footer.directions}
                     </h2>
                     <address
-                        class="mt-5 space-y-3 text-sm not-italic text-white/75"
+                        class="mt-5 space-y-3 text-sm not-italic text-mist"
                     >
                         <p>
                             {restaurant.address.street}, {restaurant.address.postalCode}{" "}
@@ -80,7 +80,7 @@ const year = new Date().getFullYear();
                 <h2 class="font-display text-xl font-semibold">
                     {t.footer.links}
                 </h2>
-                <ul class="mt-5 space-y-3 text-sm text-white/75">
+                <ul class="mt-5 space-y-3 text-sm text-mist">
                     {
                         t.footerLinks.map((link) => (
                             <li>
@@ -127,7 +127,7 @@ const year = new Date().getFullYear();
         </div>
         <hr class="my-12 border-line-dark" />
         <div
-            class="flex flex-wrap items-center justify-between gap-4 text-sm text-white/70"
+            class="flex flex-wrap items-center justify-between gap-4 text-sm text-mist"
         >
             <span>{restaurant.name} {year}</span>
             <ul class="flex flex-wrap gap-8">

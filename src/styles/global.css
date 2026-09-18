@@ -5,19 +5,26 @@
   --color-brick-500: #b03a2c;
   --color-brick-600: #97301f;
 
-  --color-navy-700: #293444;
-  --color-navy-800: #1f2836;
+  /* тёмные секции: футер, тёмная плитка статистики */
+  --color-bark-700: #452d26;
 
   --color-cream-50: #faf8f5;
   --color-cream-100: #f3efe9;
 
-  --color-ink-900: #16181d;
-  --color-ink-600: #5b6470;
+  /* заголовки */
+  --color-ink-900: #000000;
+  /* основной текст абзацев */
+  --color-ink-600: #293444;
+  /* приглушённое: пунктир в меню, разделители */
+  --color-ink-400: #748193;
 
-  --color-ink-400: #616d7d;
+  /* холодный серо-голубой: приглушённый текст на тёмном фоне */
+  --color-mist: #cad1da;
 
-  --color-line: #e3ded6;
-  --color-line-dark: #46536a;
+  /* рамки полей, подложка переключателя языка */
+  --color-line: var(--color-mist);
+  /* разделители внутри футера и пунктир в меню */
+  --color-line-dark: var(--color-ink-400);
 
   --color-placeholder: #d8d6d3;
   --color-placeholder-dark: #b8b6b3;
