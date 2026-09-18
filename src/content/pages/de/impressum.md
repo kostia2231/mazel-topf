@@ -6,24 +6,30 @@ description: Rechtliche Angaben zum Betreiber dieser Website.
 
 ## Angaben gemäß § 5 DDG
 
-Masel Topf
-Rykestraße 2
+Masel Topf GmbH & Co. KG\
+Rykestraße 2\
 10405 Berlin
 
-Vertreten durch: **Platzhalter – bitte ergänzen**
-
-## Kontakt
-
-Telefon: +49 (0) 30 443 17 525
+Telefon: +49 (0) 30 443 17 525\
 E-Mail: masel-topf@hotmail.com
 
-## Umsatzsteuer-Identifikationsnummer
+Geschäftsführer: Konstantin Pinski
 
-**Platzhalter – bitte ergänzen**
+## Bankverbindung
 
-## Verantwortlich für den Inhalt
+Empfänger: Masel Topf GmbH & Co. KG\
+IBAN: DE07 1002 0890 0030 2694 62\
+BIC: HYVEDEMM488\
+Bank: Hypo Vereinsbank
 
-**Platzhalter – bitte ergänzen**
+## Steuernummer
+
+27/170/30497
+
+## Reservierung
+
+Telefon: +49 (0) 30 443 17 525\
+E-Mail: masel-topf@hotmail.com
 
 ## Streitschlichtung
 

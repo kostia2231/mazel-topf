@@ -6,24 +6,30 @@ description: Legal information about the operator of this website.
 
 ## Information according to § 5 DDG
 
-Masel Topf
-Rykestraße 2
+Masel Topf GmbH & Co. KG\
+Rykestraße 2\
 10405 Berlin
 
-Represented by: **placeholder – please complete**
-
-## Contact
-
-Phone: +49 (0) 30 443 17 525
+Phone: +49 (0) 30 443 17 525\
 Email: masel-topf@hotmail.com
 
-## VAT identification number
+Managing director: Konstantin Pinski
 
-**placeholder – please complete**
+## Bank details
 
-## Responsible for the content
+Account holder: Masel Topf GmbH & Co. KG\
+IBAN: DE07 1002 0890 0030 2694 62\
+BIC: HYVEDEMM488\
+Bank: Hypo Vereinsbank
 
-**placeholder – please complete**
+## Tax number
+
+27/170/30497
+
+## Reservations
+
+Phone: +49 (0) 30 443 17 525\
+Email: masel-topf@hotmail.com
 
 ## Dispute resolution
 
