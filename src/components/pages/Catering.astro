@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Reviews from "../Reviews.astro";
 import Button from "../Button.astro";
+import EventBookingModal from "../EventBookingModal.astro";
 import Stats from "../Stats.astro";
 import { Image } from "astro:assets";
 import Suitcase from "../icons/Suitcase.astro";
@@ -13,7 +14,7 @@ import format3 from "../../assets/catering-format-3-birthdays.webp";
 import PageBanner from "../PageBanner.astro";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
-import { path, type Language } from "../../i18n/config";
+import type { Language } from "../../i18n/config";
 
 interface Props {
     language: Language;
@@ -51,7 +52,7 @@ const formatImages = [format1, format2, format3];
         >
             {page.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
         </div>
-        <Button href={path("contact", language)} class="mt-10"
+        <Button class="mt-10 cursor-pointer" data-booking-open
             >{page.cta}</Button
         >
     </section>
@@ -104,7 +105,7 @@ const formatImages = [format1, format2, format3];
             }
         </ul>
         <div class="mt-12 text-center">
-            <Button href={path("contact", language)}>{page.cta}</Button>
+            <Button class="cursor-pointer" data-booking-open>{page.cta}</Button>
         </div>
     </section>
     <section class="px-6 py-20 lg:px-[7.5%]">
@@ -116,4 +117,5 @@ const formatImages = [format1, format2, format3];
     <section class="bg-cream-100 py-20">
         <Reviews language={language} />
     </section>
+    <EventBookingModal language={language} />
 </Layout>

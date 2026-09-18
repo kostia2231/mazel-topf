@@ -1,0 +1,203 @@
+---
+import Button from "./Button.astro";
+import { ui } from "../i18n/ui";
+import type { Language } from "../i18n/config";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+const t = ui[language].eventBooking;
+
+const field =
+    "w-full border border-line px-5 py-4 text-sm placeholder:text-ink-400 focus:border-brick-500 focus:outline-none";
+
+const inputs = [
+    { name: "first-name", type: "text", label: t.firstName },
+    { name: "last-name", type: "text", label: t.lastName },
+    { name: "email", type: "email", label: t.email },
+    { name: "phone", type: "tel", label: t.phone },
+] as const;
+---
+
+<dialog
+    id="event-booking"
+    aria-labelledby="event-booking-title"
+    class="w-[calc(100%-2rem)] max-w-3xl bg-white p-0 backdrop:bg-ink-600/50 sm:w-[calc(100%-4rem)]"
+>
+    <div class="relative px-6 py-9 sm:px-12 sm:py-11">
+        <button
+            type="button"
+            class="absolute top-6 right-5 flex size-8 cursor-pointer items-center justify-center text-brick-500 sm:top-9 sm:right-10"
+            aria-label={t.close}
+            data-booking-close
+        >
+            <svg
+                viewBox="0 0 24 24"
+                class="size-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                aria-hidden="true"
+            >
+                <path d="M5 5l14 14M19 5L5 19"></path>
+            </svg>
+        </button>
+
+        <div data-booking-form>
+            <h2
+                id="event-booking-title"
+                class="font-display max-w-md pr-10 text-3xl leading-tight sm:text-[2.125rem]"
+            >
+                {t.title}
+            </h2>
+            <hr class="mt-6 w-14 border-t-2 border-brick-500" />
+
+            <form
+                name="event-booking"
+                method="post"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                class="mt-8 space-y-5"
+            >
+                <input type="hidden" name="form-name" value="event-booking" />
+                <p class="hidden">
+                    <label>
+                        Bot field
+                        <input name="bot-field" tabindex="-1" autocomplete="off" />
+                    </label>
+                </p>
+
+                <div class="grid gap-5 sm:grid-cols-2">
+                    {
+                        inputs.map((input) => (
+                            <div>
+                                <label class="sr-only" for={`booking-${input.name}`}>
+                                    {input.label}
+                                </label>
+                                <input
+                                    id={`booking-${input.name}`}
+                                    name={input.name}
+                                    type={input.type}
+                                    required
+                                    placeholder={input.label}
+                                    class={field}
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <div>
+                    <label class="sr-only" for="booking-message">{t.message}</label>
+                    <textarea
+                        id="booking-message"
+                        name="message"
+                        rows="4"
+                        required
+                        placeholder={t.message}
+                        class={field}></textarea>
+                </div>
+
+                <p
+                    class="hidden text-sm text-brick-500"
+                    role="alert"
+                    data-booking-error
+                >
+                    {t.errorText}
+                </p>
+
+                <Button type="submit" class="cursor-pointer transition-colors">
+                    {t.submit}
+                </Button>
+            </form>
+        </div>
+
+        <div class="hidden" data-booking-success>
+            <h2
+                class="font-display max-w-md pr-10 text-3xl leading-tight whitespace-pre-line sm:text-[2.125rem]"
+                tabindex="-1"
+                data-booking-success-title
+            >
+                {t.successTitle}
+            </h2>
+            <hr class="mt-6 w-14 border-t-2 border-brick-500" />
+            <p class="mt-7 text-sm leading-relaxed text-ink-600">
+                {t.successText}
+            </p>
+        </div>
+    </div>
+</dialog>
+
+<script>
+    const dialog = document.querySelector<HTMLDialogElement>("#event-booking");
+
+    if (dialog) {
+        const form = dialog.querySelector<HTMLFormElement>("form");
+        const formPanel = dialog.querySelector<HTMLElement>("[data-booking-form]");
+        const successPanel = dialog.querySelector<HTMLElement>(
+            "[data-booking-success]",
+        );
+        const successTitle = dialog.querySelector<HTMLElement>(
+            "[data-booking-success-title]",
+        );
+        const error = dialog.querySelector<HTMLElement>("[data-booking-error]");
+
+        const reset = () => {
+            formPanel?.classList.remove("hidden");
+            successPanel?.classList.add("hidden");
+            error?.classList.add("hidden");
+        };
+
+        for (const opener of document.querySelectorAll("[data-booking-open]")) {
+            opener.addEventListener("click", () => {
+                reset();
+                dialog.showModal();
+            });
+        }
+
+        for (const closer of dialog.querySelectorAll("[data-booking-close]")) {
+            closer.addEventListener("click", () => dialog.close());
+        }
+
+        // клик по подложке за пределами панели закрывает окно
+        dialog.addEventListener("click", (event) => {
+            if (event.target === dialog) dialog.close();
+        });
+
+        form?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            error?.classList.add("hidden");
+
+            const submit = form.querySelector<HTMLButtonElement>(
+                "button[type=submit]",
+            );
+            if (submit) submit.disabled = true;
+
+            try {
+                const response = await fetch(location.pathname, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams(
+                        new FormData(form) as unknown as Record<string, string>,
+                    ).toString(),
+                });
+
+                if (!response.ok) throw new Error(String(response.status));
+
+                form.reset();
+                formPanel?.classList.add("hidden");
+                successPanel?.classList.remove("hidden");
+                successTitle?.focus();
+            } catch {
+                error?.classList.remove("hidden");
+            } finally {
+                if (submit) submit.disabled = false;
+            }
+        });
+    }
+</script>

@@ -51,6 +51,19 @@ interface UiText {
         submit: string
         map: string
     }
+    eventBooking: {
+        title: string
+        firstName: string
+        lastName: string
+        email: string
+        phone: string
+        message: string
+        submit: string
+        close: string
+        successTitle: string
+        successText: string
+        errorText: string
+    }
     reviews: {
         previous: string
         next: string
@@ -171,6 +184,21 @@ export const ui: Record<Language, UiText> = {
             message: "Your message",
             submit: "Send a message",
             map: "Karte: Rykestraße 2, 10405 Berlin",
+        },
+        eventBooking: {
+            title: "Buchen Sie Ihre Veranstaltung",
+            firstName: "Vorname",
+            lastName: "Name",
+            email: "Email",
+            phone: "Phone",
+            message: "Your message",
+            submit: "Senden",
+            close: "Schließen",
+            successTitle: "Vielen Dank\nfür Ihre Anfrage",
+            successText: "Wir werden uns in Kürze bei Ihnen melden.",
+            errorText:
+                "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es " +
+                "erneut oder rufen Sie uns an.",
         },
         reviews: {
             previous: "Vorherige Bewertung",
@@ -310,6 +338,20 @@ export const ui: Record<Language, UiText> = {
             message: "Your message",
             submit: "Send a message",
             map: "Map: Rykestraße 2, 10405 Berlin",
+        },
+        eventBooking: {
+            title: "Book your event",
+            firstName: "First name",
+            lastName: "Name",
+            email: "Email",
+            phone: "Phone",
+            message: "Your message",
+            submit: "Send",
+            close: "Close",
+            successTitle: "Thank you\nfor your enquiry",
+            successText: "We will get back to you shortly.",
+            errorText:
+                "The enquiry could not be sent. Please try again or give us a call.",
         },
         reviews: {
             previous: "Previous review",

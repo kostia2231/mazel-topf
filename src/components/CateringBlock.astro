@@ -3,8 +3,9 @@ import { Image } from "astro:assets";
 import tableImage from "../assets/laid-table.webp";
 import { content } from "../i18n/content";
 import { ui } from "../i18n/ui";
-import { path, type Language } from "../i18n/config";
+import type { Language } from "../i18n/config";
 import Button from "./Button.astro";
+import EventBookingModal from "./EventBookingModal.astro";
 import Placeholder from "./Placeholder.astro";
 
 interface Props {
@@ -66,8 +67,8 @@ const t = ui[language];
             }
         </ul>
         <Button
-            href={path("contact", language)}
-            class="mt-8 w-full sm:mt-10 sm:w-auto">{block.cta}</Button
+            class="mt-8 w-full cursor-pointer sm:mt-10 sm:w-auto"
+            data-booking-open>{block.cta}</Button
         >
     </div>
     <div class="-order-1 -mx-6 sm:mx-0 md:order-none">
@@ -104,6 +105,9 @@ const t = ui[language];
         </ul>
     </div>
 </section>
+
+<EventBookingModal language={language} />
+
 <script>
     document
         .querySelectorAll<HTMLButtonElement>("[data-accordion]")
