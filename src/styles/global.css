@@ -372,3 +372,31 @@ body {
     transition: none;
   }
 }
+
+@keyframes band-shift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -22%, 0);
+  }
+}
+
+.band-frame {
+  clip-path: inset(0);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .band-shift {
+      height: 130%;
+      will-change: transform;
+      animation-name: band-shift;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: var(--band-timeline, view());
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
