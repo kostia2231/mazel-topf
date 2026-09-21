@@ -6,11 +6,11 @@ import MenuCategory from '../MenuCategory.astro';
 import PageBanner from '../PageBanner.astro';
 import SetMenus from '../SetMenus.astro';
 import bannerImage from '../../assets/menu-banner-pita-in-paper.webp';
-import falafelImage from '../../assets/menu-band-1-falafel-bowl.webp';
-import mezzeImage from '../../assets/menu-band-2-mezze-plate.webp';
-import fattoushImage from '../../assets/menu-band-3-fattoush.webp';
-import shortRibsImage from '../../assets/menu-band-4-short-ribs.webp';
-import saladImage from '../../assets/menu-band-5-goat-cheese-salad.webp';
+import falafelImage from '../../assets/menu-band-1-salmon-salad.webp';
+import mezzeImage from '../../assets/menu-band-2-aubergine-couscous.webp';
+import fattoushImage from '../../assets/menu-band-3-short-ribs.webp';
+import shortRibsImage from '../../assets/menu-band-4-sea-bream.webp';
+import saladImage from '../../assets/menu-band-5-aubergine-beetroot.webp';
 import { ui } from '../../i18n/ui';
 import { languageFromId, type Language } from '../../i18n/config';
 import { getCollection, render } from 'astro:content';
@@ -39,9 +39,9 @@ const setMenus = entries.filter((entry) => entry.data.group === 'set-menus');
 const carte = entries.filter((entry) => entry.data.group === 'menu');
 
 const blockLayout: { size: number; image: ImageMetadata; alt: string }[] = [
-  { size: 2, image: fattoushImage, alt: t.images.fattoush },
-  { size: 4, image: shortRibsImage, alt: t.images.shortRibs },
-  { size: 1, image: saladImage, alt: t.images.goatCheeseSalad },
+  { size: 2, image: fattoushImage, alt: t.images.ribsSalsa },
+  { size: 4, image: shortRibsImage, alt: t.images.seaBream },
+  { size: 1, image: saladImage, alt: t.images.aubergineBeetroot },
 ];
 
 const blocks: { categories: typeof carte; image?: ImageMetadata; alt?: string }[] = [];
@@ -93,7 +93,7 @@ if (taken < carte.length) blocks.push({ categories: carte.slice(taken) });
       ))}
     </div>
   </section>
-  <ImageBand image={falafelImage} alt={t.images.falafelBowl} />
+  <ImageBand image={falafelImage} alt={t.images.salmonSalad} />
   {setMenus.map(({ data }) => (
     <section class="px-6 py-20 lg:px-[7.5%]">
       <div class="mx-auto max-w-[1200px]">
@@ -102,7 +102,7 @@ if (taken < carte.length) blocks.push({ categories: carte.slice(taken) });
     </section>
   ))}
 
-  <ImageBand image={mezzeImage} alt={t.images.mezzePlate} />
+  <ImageBand image={mezzeImage} alt={t.images.aubergineCouscous} />
   {blocks.map((block) => (
     <>
       <section class="px-6 py-20 lg:px-[7.5%]">

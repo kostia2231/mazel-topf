@@ -104,20 +104,20 @@ interface UiText {
         terrace: string
         tableWithBeer: string
         laidTable: string
-        diningRoom: string
-        signature: string
+        interiorLamp: string
+        tableMezze: string
         chickenRisotto: string
         falafelPlate: string
-        goatCheeseSalad: string
+        aubergineBeetroot: string
         pitaInPaper: string
         tableWithMatzo: string
         cateringBanner: string
-        wineGlass: string
+        cocktail: string
         cateringFormats: [string, string, string]
-        falafelBowl: string
-        mezzePlate: string
-        fattoush: string
-        shortRibs: string
+        salmonSalad: string
+        aubergineCouscous: string
+        ribsSalsa: string
+        seaBream: string
         banner: (page: string) => string
         dish: (position: number) => string
         tiles: [string, string, string, string, string]
@@ -264,31 +264,34 @@ export const ui: Record<Language, UiText> = {
             terrace: "Die Terrasse von Masel Topf in der Rykestraße, gedeckte Tische unter der Markise",
             tableWithBeer: "Tisch mit Bier und Grillteller",
             laidTable: "Gedeckter Tisch im Restaurant",
-            diningRoom: "Gastraum mit Kronleuchter, Kerzen und roten Bänken",
-            signature:
-                "Geschmorte Aubergine mit Rucola, Granatapfel und Tahina",
+            interiorLamp:
+                "Gastraum am Fenster mit Tischlampen, Mustertapete und gedecktem Tisch",
+            tableMezze:
+                "Gedeckter Tisch von oben: Mezze in der Fladenbrotschale, Getränke und Speisekarte",
             chickenRisotto:
                 "Gegrilltes Hähnchen auf Graupen mit Kräutersauce, daneben Auberginensalat",
             falafelPlate: "Falafel-Teller",
-            goatCheeseSalad: "Ziegenkäse Salat",
+            aubergineBeetroot:
+                "Gegrillte Auberginen mit Rote-Bete-Sauce und Koriander",
             pitaInPaper: "Pita mit Hähnchen und Harissa, in Papier gewickelt",
             tableWithMatzo: "Gäste am gedeckten Tisch, Matze wird gebrochen",
             cateringBanner:
                 "Dessert auf mit Beerensauce bemaltem Teller, daneben Matze und Spieße",
-            wineGlass: "Glas Weißwein neben einer Vase mit Olivenzweigen",
+            cocktail:
+                "Cocktail mit Zitronenscheibe und Minze auf dem Tresen der Bar",
             cateringFormats: [
                 "Kellner deckt den Tisch für eine Veranstaltung ein",
                 "Festlich eingedeckte Tafel unter Kronleuchtern im Zelt",
                 "Wunderkerzen bei einer Feier am Abend",
             ],
-            falafelBowl:
-                "Falafel in einer Fladenbrotschale mit Hummus und Grillgemüse",
-            mezzePlate:
-                "Mezze-Teller mit Hummus, Baba Ghanoush, Schafskäse und gegrillter Aubergine",
-            fattoush:
-                "Fattusch mit Tomaten, Gurke, Minze und geröstetem Fladenbrot",
-            shortRibs:
-                "Geschmorte Kalbs-Short-Ribs in Rotweinsauce mit Topinambur-Chips",
+            salmonSalad:
+                "Salat mit Ziegenkäse und Granatapfel, daneben geräucherter Lachs und marinierte Auberginen",
+            aubergineCouscous:
+                "Geschmorte Auberginen in Sauce mit Couscous und Koriander",
+            ribsSalsa:
+                "Glasierte Short Ribs mit Tomatensalsa und Fladenbrot-Chips",
+            seaBream:
+                "Gebratene Dorade mit Kräuteröl und Kartoffelpüree",
             banner: (page) => `Bannerbild ${page}`,
             dish: (position) => `Gericht ${position}`,
             tiles: [
@@ -439,32 +442,34 @@ export const ui: Record<Language, UiText> = {
             terrace: "The Masel Topf terrace on Rykestraße, tables laid under the awning",
             tableWithBeer: "Table with beer and a grill platter",
             laidTable: "Laid table in the restaurant",
-            diningRoom:
-                "Dining room with chandelier, candles and red banquettes",
-            signature: "Braised aubergine with rocket, pomegranate and tahina",
+            interiorLamp:
+                "Dining room by the window with table lamps, patterned wallpaper and a laid table",
+            tableMezze:
+                "Laid table from above: mezze in a flatbread bowl, drinks and the menu",
             chickenRisotto:
                 "Grilled chicken on barley with herb sauce, aubergine salad alongside",
             falafelPlate: "Falafel plate",
-            goatCheeseSalad: "Goat cheese salad",
+            aubergineBeetroot:
+                "Grilled aubergines with beetroot sauce and coriander",
             pitaInPaper: "Pita with chicken and harissa, wrapped in paper",
             tableWithMatzo: "Guests at the laid table, breaking matzo",
             cateringBanner:
                 "Dessert on a plate painted with berry sauce, matzo and skewers alongside",
-            wineGlass:
-                "A glass of white wine beside a vase with olive branches",
+            cocktail:
+                "Cocktail with a lemon slice and mint on the bar counter",
             cateringFormats: [
                 "A waiter setting the table for an event",
                 "Festively laid table under chandeliers in a marquee",
                 "Sparklers at an evening celebration",
             ],
-            falafelBowl:
-                "Falafel in a flatbread bowl with hummus and grilled vegetables",
-            mezzePlate:
-                "Mezze plate with hummus, baba ghanoush, feta and grilled aubergine",
-            fattoush:
-                "Fattoush with tomatoes, cucumber, mint and toasted flatbread",
-            shortRibs:
-                "Braised veal short ribs in red wine sauce with Jerusalem artichoke chips",
+            salmonSalad:
+                "Salad with goat cheese and pomegranate, smoked salmon and marinated aubergines alongside",
+            aubergineCouscous:
+                "Braised aubergines in sauce with couscous and coriander",
+            ribsSalsa:
+                "Glazed short ribs with tomato salsa and flatbread crisps",
+            seaBream:
+                "Pan-fried sea bream with herb oil and potato purée",
             banner: (page) => `Banner image ${page}`,
             dish: (position) => `Dish ${position}`,
             tiles: [
