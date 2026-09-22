@@ -44,6 +44,8 @@ if ! aws iam get-open-id-connect-provider --open-id-connect-provider-arn "$provi
 fi
 
 role_name="${GITHUB_ROLE:-maseltopf-deploy}"
+repo_owner="${GITHUB_REPO%%/*}"
+repo_name="${GITHUB_REPO##*/}"
 
 trust="$(mktemp)"
 cat > "$trust" <<JSON
@@ -56,10 +58,14 @@ cat > "$trust" <<JSON
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+          "token.actions.githubusercontent.com:repository": "$GITHUB_REPO"
         },
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": "repo:$GITHUB_REPO:*"
+          "token.actions.githubusercontent.com:sub": [
+            "repo:$GITHUB_REPO:*",
+            "repo:$repo_owner@*/$repo_name@*:*"
+          ]
         }
       }
     }
