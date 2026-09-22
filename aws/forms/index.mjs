@@ -111,7 +111,7 @@ export const handler = async (event) => {
         return reply(200, { ok: true }, origin);
     }
 
-    const form = FORMS[payload.form];
+    const form = Object.hasOwn(FORMS, payload.form) ? FORMS[payload.form] : null;
     if (!form) return reply(400, { error: "unknown form" }, origin);
 
     const fields = {};

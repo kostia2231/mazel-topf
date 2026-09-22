@@ -124,6 +124,7 @@ const cleanSection = (data, path) => {
     if (typeof data.note === "string" && data.note.trim()) result.note = data.note.trim();
 
     const dishes = Array.isArray(data.dishes) ? data.dishes : [];
+    if (dishes.length > 200) throw new InputError(`${path}: too many dishes`);
     if (dishes.length) result.dishes = dishes.map((dish) => cleanDish(dish, path));
 
     if (Array.isArray(data.menus) && data.menus.length) result.menus = data.menus;
@@ -186,8 +187,9 @@ const save = async (files, note) => {
         body: JSON.stringify({ base_tree: commit.tree.sha, tree }),
     });
 
-    const message = typeof note === "string" && note.trim()
-        ? `content: ${note.trim().slice(0, 100)}`
+    const clean = typeof note === "string" ? note.replace(/[\r\n]+/g, " ").trim() : "";
+    const message = clean
+        ? `content: ${clean.slice(0, 100)}`
         : "content: menu update from the admin page";
 
     const created = await api(`/repos/${GITHUB_REPO}/git/commits`, {
@@ -210,6 +212,8 @@ export const handler = async (event) => {
     const raw = event.isBase64Encoded
         ? Buffer.from(event.body ?? "", "base64").toString("utf8")
         : (event.body ?? "");
+
+    if (raw.length > 2_000_000) return reply(413, { error: "payload too large" });
 
     let payload;
     try {

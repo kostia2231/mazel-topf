@@ -7,7 +7,6 @@ export const GET: APIRoute = ({ site }) => {
   const lines = indexable
     ? [
         'User-agent: *',
-        'Disallow: /admin',
         'Allow: /',
         '',
         `Sitemap: ${new URL('sitemap-index.xml', site).href}`,
