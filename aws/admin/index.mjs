@@ -1,5 +1,5 @@
 import { createHash, timingSafeEqual } from "node:crypto";
-import yaml from "js-yaml";
+import { load as parseYaml, dump as dumpYaml } from "js-yaml";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPO = process.env.GITHUB_REPO;
@@ -31,6 +31,8 @@ const api = async (path, options = {}) => {
     return response.json();
 };
 
+class InputError extends Error {}
+
 const reply = (statusCode, body) => ({
     statusCode,
     headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
@@ -47,12 +49,12 @@ const authorised = (key) => {
 
 const parseFile = (text) => {
     const match = /^---\n([\s\S]*?)\n---\s*$/.exec(text.trim());
-    if (!match) throw new Error("file has no front matter");
-    return yaml.load(match[1]) ?? {};
+    if (!match) throw new InputError("file has no front matter");
+    return parseYaml(match[1]) ?? {};
 };
 
 const serialiseFile = (data) => {
-    const body = yaml.dump(data, {
+    const body = dumpYaml(data, {
         indent: 2,
         lineWidth: -1,
         noRefs: true,
@@ -64,13 +66,13 @@ const serialiseFile = (data) => {
 const asNumber = (value) => {
     if (value === "" || value === null || value === undefined) return undefined;
     const number = Number(value);
-    if (!Number.isFinite(number) || number < 0) throw new Error(`price is not a number: ${value}`);
+    if (!Number.isFinite(number) || number < 0) throw new InputError(`price is not a number: ${value}`);
     return Math.round(number * 100) / 100;
 };
 
 const cleanDish = (dish, where) => {
     const name = typeof dish.name === "string" ? dish.name.trim() : "";
-    if (!name) throw new Error(`${where}: a dish has no name`);
+    if (!name) throw new InputError(`${where}: a dish has no name`);
 
     const result = { name };
 
@@ -109,7 +111,7 @@ const cleanDish = (dish, where) => {
 
 const cleanSection = (data, path) => {
     const title = typeof data.title === "string" ? data.title.trim() : "";
-    if (!title) throw new Error(`${path}: the section has no title`);
+    if (!title) throw new InputError(`${path}: the section has no title`);
 
     const result = { title };
 
@@ -158,11 +160,11 @@ const load = async () => {
 };
 
 const save = async (files, note) => {
-    if (!Array.isArray(files) || !files.length) throw new Error("nothing to save");
-    if (files.length > 40) throw new Error("too many files at once");
+    if (!Array.isArray(files) || !files.length) throw new InputError("nothing to save");
+    if (files.length > 40) throw new InputError("too many files at once");
 
     for (const file of files) {
-        if (!safePath(file.path)) throw new Error(`path not allowed: ${file.path}`);
+        if (!safePath(file.path)) throw new InputError(`path not allowed: ${file.path}`);
     }
 
     const head = await api(`/repos/${GITHUB_REPO}/git/ref/heads/${BRANCH}`);
@@ -229,6 +231,7 @@ export const handler = async (event) => {
         return reply(400, { error: "unknown action" });
     } catch (error) {
         console.error("admin failed", error);
-        return reply(500, { error: String(error.message ?? error).slice(0, 300) });
+        const status = error instanceof InputError ? 400 : 500;
+        return reply(status, { error: String(error.message ?? error).slice(0, 300) });
     }
 };

@@ -36,9 +36,16 @@ set -a
 . ./.env.deploy
 set +a
 
-for name in DISTRIBUTION GITHUB_REPO GITHUB_TOKEN; do
+for name in DISTRIBUTION GITHUB_REPO; do
     [ -n "${!name:-}" ] || { echo "$name is not set in .env.deploy" >&2; exit 2; }
 done
+
+if [ -z "${GITHUB_TOKEN:-}" ]; then
+    echo "GITHUB_TOKEN is not set: the page will open and check the key, but"
+    echo "loading and saving the menu will fail until you add the token and"
+    echo "run this script again."
+    echo
+fi
 
 region="${SES_REGION:-eu-central-1}"
 account="$(aws sts get-caller-identity --query Account --output text)"
@@ -86,7 +93,7 @@ envfile="$(mktemp)"
 ADMIN_KEY_HASH="$key_hash" GITHUB_BRANCH="${GITHUB_BRANCH:-main}" python3 -c "
 import json, os, sys
 json.dump({'Variables': {
-    'GITHUB_TOKEN': os.environ['GITHUB_TOKEN'],
+    'GITHUB_TOKEN': os.environ.get('GITHUB_TOKEN', ''),
     'GITHUB_REPO': os.environ['GITHUB_REPO'],
     'GITHUB_BRANCH': os.environ['GITHUB_BRANCH'],
     'ADMIN_KEY_HASH': os.environ['ADMIN_KEY_HASH'],
