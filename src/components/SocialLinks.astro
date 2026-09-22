@@ -18,6 +18,10 @@ const iconPaths: Record<string, string> = {
   pin: 'M10 1a6 6 0 0 0-6 6c0 4.3 6 12 6 12s6-7.7 6-12a6 6 0 0 0-6-6Zm0 8.3A2.3 2.3 0 1 1 10 4.7a2.3 2.3 0 0 1 0 4.6Z',
 };
 
+const iconShift: Record<string, string> = {
+  facebook: 'translate(-1.5 .5)',
+};
+
 const styles = {
   light: 'border-white/40 text-white hover:bg-white hover:text-bark-700',
   dark: 'border-line bg-cream-100 text-brick-500 hover:bg-brick-500 hover:text-white',
@@ -40,7 +44,7 @@ const style = styles[tone];
         ]}
       >
         <svg viewBox="0 0 20 20" fill="currentColor" class="size-4" aria-hidden="true">
-          <path d={iconPaths[link.icon]} />
+          <path d={iconPaths[link.icon]} transform={iconShift[link.icon]} />
         </svg>
       </a>
     </li>
