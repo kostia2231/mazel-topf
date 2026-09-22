@@ -5,7 +5,7 @@ import { path, type Language } from "../i18n/config";
 import { ui, isExternal } from "../i18n/ui";
 import { formEndpoint, honeypot } from "../data/forms";
 import { content } from "../i18n/content";
-import { mailLink, restaurant, phoneLink } from "../data/restaurant";
+import { mailLink, mapsUrl, restaurant, phoneLink } from "../data/restaurant";
 import SocialLinks from "./SocialLinks.astro";
 import ExternalLink from "./icons/ExternalLink.astro";
 import Button from "./Button.astro";
@@ -63,8 +63,15 @@ const year = new Date().getFullYear();
                         class="mt-5 space-y-3 text-sm not-italic text-mist"
                     >
                         <p>
-                            {restaurant.address.street}, {restaurant.address.postalCode}{" "}
-                            {restaurant.address.city}
+                            <a
+                                href={mapsUrl}
+                                target="_blank"
+                                rel="noopener"
+                                class="hover:text-white"
+                            >
+                                {restaurant.address.street}, {restaurant.address.postalCode}{" "}
+                                {restaurant.address.city}
+                            </a>
                         </p>
                         <p>
                             <a href={mailLink} class="hover:text-white"

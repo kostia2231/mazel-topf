@@ -4,7 +4,7 @@ import Button from "../Button.astro";
 import bannerImage from "../../assets/contact-banner-cocktail.webp";
 import PageBanner from "../PageBanner.astro";
 import SocialLinks from "../SocialLinks.astro";
-import { mailLink, restaurant, phoneLink } from "../../data/restaurant";
+import { mailLink, mapsUrl, restaurant, phoneLink } from "../../data/restaurant";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
 import type { Language } from "../../i18n/config";
@@ -58,10 +58,18 @@ const fields = [
                     <address
                         class="mt-4 space-y-1 text-sm not-italic text-ink-600"
                     >
-                        <p>{restaurant.address.street}</p>
                         <p>
-                            {restaurant.address.postalCode}{" "}
-                            {restaurant.address.city}
+                            <a
+                                href={mapsUrl}
+                                target="_blank"
+                                rel="noopener"
+                                class="hover:text-brick-500"
+                            >
+                                {restaurant.address.street}
+                                <br />
+                                {restaurant.address.postalCode}{" "}
+                                {restaurant.address.city}
+                            </a>
                         </p>
                         <p>
                             <a href={phoneLink} class="hover:text-brick-500"

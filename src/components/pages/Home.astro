@@ -7,7 +7,7 @@ import Reviews from "../Reviews.astro";
 import Button from "../Button.astro";
 import CateringBlock from "../CateringBlock.astro";
 import DishCarousel from "../DishCarousel.astro";
-import { restaurant, phoneLink, mailLink } from "../../data/restaurant";
+import { restaurant, mapsUrl, phoneLink, mailLink } from "../../data/restaurant";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
 import { path, languageFromId, type Language } from "../../i18n/config";
@@ -105,9 +105,11 @@ const carouselDishes = carouselKeys.flatMap((key) => {
             <div>
                 <h2 class="caps text-xs">{t.contact.address}</h2>
                 <p class="mt-3 text-white/85">
-                    {restaurant.address.street}<br />
-                    {restaurant.address.postalCode}{" "}
-                    {restaurant.address.city}
+                    <a href={mapsUrl} target="_blank" rel="noopener" class="hover:text-white">
+                        {restaurant.address.street}<br />
+                        {restaurant.address.postalCode}{" "}
+                        {restaurant.address.city}
+                    </a>
                 </p>
             </div>
         </div>
