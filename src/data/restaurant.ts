@@ -34,9 +34,16 @@ export const phoneNumber = restaurant.phone.replace('(0)', '').replace(/[^\d+]/g
 export const phoneLink = `tel:${phoneNumber}`;
 export const mailLink = `mailto:${restaurant.email}`;
 
+export const mapsUrl =
+  'https://www.google.com/maps/search/?api=1&query=Masel+Topf+Rykestra%C3%9Fe+2+Berlin';
+
 export const socialLinks = [
-  { label: 'Facebook', href: '#', icon: 'facebook' },
-  { label: 'Tripadvisor', href: '#', icon: 'tripadvisor' },
-  { label: 'Instagram', href: '#', icon: 'instagram' },
-  { label: 'Google Maps', href: '#', icon: 'pin' },
+  { label: 'Facebook', href: 'https://www.facebook.com/MaselTopf/', icon: 'facebook' },
+  {
+    label: 'Tripadvisor',
+    href: 'https://www.tripadvisor.de/Restaurant_Review-g187323-d6780640-Reviews-Masel_Topf-Berlin.html',
+    icon: 'tripadvisor',
+  },
+  { label: 'Instagram', href: 'https://www.instagram.com/maseltopf/', icon: 'instagram' },
+  { label: 'Google Maps', href: mapsUrl, icon: 'pin' },
 ] as const;
