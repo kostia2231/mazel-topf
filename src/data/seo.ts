@@ -1,4 +1,4 @@
-const deployUrl = process.env.URL;
+const deployUrl = process.env.URL?.trim().replace(/^["']|["']$/g, '');
 
 export const isCanonicalHost = (site: URL | undefined): boolean => {
   if (!site || !deployUrl) return false;
