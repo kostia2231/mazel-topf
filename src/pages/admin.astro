@@ -75,12 +75,20 @@ import "../styles/global.css";
                         Speichern und veröffentlichen
                     </button>
                     <p id="status" class="text-sm text-ink-600" role="status"></p>
+                    <button
+                        type="button"
+                        id="signout"
+                        class="ml-auto cursor-pointer text-xs text-ink-400 hover:text-brick-500"
+                    >
+                        Abmelden
+                    </button>
                 </div>
             </div>
         </div>
 
         <script>
             const ENDPOINT = "/api/admin";
+            const STORAGE = "maseltopf-admin-key";
 
             const state = {
                 key: "",
@@ -93,7 +101,7 @@ import "../styles/global.css";
             const $ = (id) => document.getElementById(id);
 
             const send = async (payload) => {
-                const body = JSON.stringify({ ...payload, key: state.key });
+                const body = JSON.stringify({ key: state.key, ...payload });
                 const headers = {
                     "Content-Type": "application/json",
                     Accept: "application/json",
@@ -304,9 +312,20 @@ import "../styles/global.css";
                 }
             };
 
+            const forget = () => {
+                state.key = "";
+                state.files = [];
+                state.original = new Map();
+                try {
+                    sessionStorage.removeItem(STORAGE);
+                } catch {}
+                $("editor").classList.add("hidden");
+                $("gate-screen").classList.remove("hidden");
+            };
+
             const open = async (key) => {
+                const data = await send({ action: "load", key });
                 state.key = key;
-                const data = await send({ action: "load" });
                 state.files = data.files;
                 state.original = new Map(
                     data.files.map((file) => [file.path, JSON.stringify(file.data)]),
@@ -324,14 +343,25 @@ import "../styles/global.css";
             $("gate").addEventListener("submit", async (event) => {
                 event.preventDefault();
                 const error = $("gate-error");
+                const button = event.target.querySelector("button[type=submit]");
                 error.classList.add("hidden");
+                button.disabled = true;
 
                 try {
                     await open($("key").value.trim());
-                    sessionStorage.setItem("maseltopf-admin-key", state.key);
+                    try {
+                        sessionStorage.setItem(STORAGE, state.key);
+                    } catch {}
                 } catch (failure) {
-                    error.textContent = String(failure.message ?? failure);
+                    forget();
+                    $("key").value = "";
+                    error.textContent =
+                        String(failure.message ?? failure) === "wrong key"
+                            ? "Falscher Schlüssel"
+                            : String(failure.message ?? failure);
                     error.classList.remove("hidden");
+                } finally {
+                    button.disabled = false;
                 }
             });
 
@@ -378,9 +408,20 @@ import "../styles/global.css";
                 }
             });
 
-            const remembered = sessionStorage.getItem("maseltopf-admin-key");
+            $("signout").addEventListener("click", () => {
+                forget();
+                $("key").value = "";
+                $("status").textContent = "";
+            });
+
+            let remembered = null;
+            try {
+                remembered = sessionStorage.getItem(STORAGE);
+            } catch {}
+
             if (remembered) {
-                open(remembered).catch(() => sessionStorage.removeItem("maseltopf-admin-key"));
+                $("gate-screen").classList.add("hidden");
+                open(remembered).catch(forget);
             }
         </script>
     </body>
