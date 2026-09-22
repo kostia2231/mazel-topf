@@ -134,9 +134,6 @@ const canonical = absoluteUrl(language);
 </script>
 
 <script>
-  // Общая отправка для всех форм сайта. Сайт статический и может стоять где
-  // угодно, поэтому шлём JSON на внешний обработчик из PUBLIC_FORM_ENDPOINT,
-  // а форму на месте подменяем блоком благодарности.
   const { endpoint, honeypot } = window.__mazelForms ?? {};
 
   for (const form of document.querySelectorAll<HTMLFormElement>("[data-form] form")) {
@@ -161,7 +158,6 @@ const canonical = absoluteUrl(language);
 
       const fields = Object.fromEntries(new FormData(form)) as Record<string, string>;
 
-      // Ловушку заполняют только боты. Показываем им благодарность и молчим.
       if (honeypot && fields[honeypot]) return showSuccess();
       if (honeypot) delete fields[honeypot];
 

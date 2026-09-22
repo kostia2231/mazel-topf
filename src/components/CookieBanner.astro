@@ -92,7 +92,6 @@ const categories = [
                 const raw = localStorage.getItem(KEY);
                 return raw ? (JSON.parse(raw) as Record<string, boolean>) : null;
             } catch {
-                // приватный режим или заблокированное хранилище
                 return null;
             }
         };
@@ -108,11 +107,8 @@ const categories = [
         const decide = (consent: Record<string, boolean>) => {
             try {
                 localStorage.setItem(KEY, JSON.stringify(consent));
-            } catch {
-                // выбор не переживёт перезагрузку, но текущую страницу отработает
-            }
+            } catch {}
             banner.hidden = true;
-            // Сюда подключаются будущие счётчики: сейчас сайт ничего не грузит.
             dispatchEvent(new CustomEvent("mazel:consent", { detail: consent }));
         };
 
@@ -143,7 +139,6 @@ const categories = [
             opener.addEventListener("click", open);
         }
 
-        // Спрашиваем один раз: если выбор уже сделан, баннер не показываем.
         if (!read()) open();
     }
 </script>

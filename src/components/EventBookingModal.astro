@@ -140,7 +140,6 @@ const inputs = [
 
         for (const opener of document.querySelectorAll("[data-booking-open]")) {
             opener.addEventListener("click", () => {
-                // каждый раз открываем с чистой формой, а не с прошлой благодарностью
                 body?.classList.remove("hidden");
                 success?.classList.add("hidden");
                 error?.classList.add("hidden");
@@ -152,7 +151,6 @@ const inputs = [
             closer.addEventListener("click", () => dialog.close());
         }
 
-        // клик по подложке за пределами панели закрывает окно
         dialog.addEventListener("click", (event) => {
             if (event.target === dialog) dialog.close();
         });

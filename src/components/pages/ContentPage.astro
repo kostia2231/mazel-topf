@@ -17,8 +17,6 @@ const { Content } = await render(entry);
 
 const { layout, columns } = entry.data;
 
-// Правовые страницы идут на всю ширину — текст стоит в колонках, а не в одном
-// узком столбце, как на обычной текстовой странице.
 const wide = layout !== 'prose';
 ---
 
@@ -51,8 +49,6 @@ const wide = layout !== 'prose';
           <div>
             {index === 0 ? (
               <>
-                {/* в макете у первой колонки вместо заголовка черта, но
-                    «Angaben gemäß § 5 DDG» нужен для закона и для чтения вслух */}
                 <h2 class="sr-only">{column.heading}</h2>
                 <hr class="w-14 border-t-2 border-brick-500" />
               </>
