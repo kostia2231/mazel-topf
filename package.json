@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "bash scripts/deploy.sh"
+    "deploy": "bash scripts/deploy.sh",
+    "publish": "bash scripts/publish.sh"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
