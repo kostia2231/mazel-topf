@@ -114,7 +114,44 @@ Function URL можно дать форме напрямую: в `ALLOWED_ORIGIN
 Function URL. Работает, но адрес лямбды виден в исходниках страницы, поэтому
 Reserved concurrency из шага 2 тогда обязателен.
 
-## 4. Деплой
+## 4. Права и CLI для деплоя
+
+Деплой идёт с рабочей машины через AWS CLI. Установка на Linux arm64
+(распаковывать не в корне проекта — там уже есть каталог `aws/`):
+
+```sh
+cd /tmp
+curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o awscliv2.zip
+unzip awscliv2.zip && sudo ./aws/install
+aws configure
+```
+
+Для деплоя хватает отдельного IAM-пользователя с такой политикой:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+      "Resource": "arn:aws:s3:::<бакет>"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject", "s3:DeleteObject"],
+      "Resource": "arn:aws:s3:::<бакет>/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["cloudfront:GetDistribution", "cloudfront:CreateInvalidation"],
+      "Resource": "arn:aws:cloudfront::<account-id>:distribution/<id>"
+    }
+  ]
+}
+```
+
+## 5. Деплой
 
 Скопировать `.env.deploy.example` в `.env.deploy` и вписать свои значения
 (файл в `.gitignore`, в репозиторий не попадёт):
