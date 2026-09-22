@@ -1,0 +1,68 @@
+---
+import { zenchefRestaurantId, reservationUrl } from "../data/restaurant";
+import type { Language } from "../i18n/config";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+---
+
+<div
+    class="zc-widget-config"
+    data-restaurant={zenchefRestaurantId}
+    data-lang={language}
+    data-open="false"
+    data-position="center"
+    data-primary-color="#b03a2c"
+    data-hide-default-button="true"
+>
+</div>
+
+<script define:vars={{ fallback: reservationUrl }}>
+    (() => {
+        const SDK = "https://sdk.zenchef.com/v1/sdk.min.js";
+        const ID = "zenchef-sdk";
+
+        const widget = () =>
+            new Promise((resolve) => {
+                const started = Date.now();
+                const look = () => {
+                    if (window.ZcWidget) return resolve(window.ZcWidget);
+                    if (Date.now() - started > 8000) return resolve(null);
+                    setTimeout(look, 100);
+                };
+                look();
+            });
+
+        let loading = null;
+
+        const load = () => {
+            if (loading) return loading;
+
+            if (!document.getElementById(ID)) {
+                const script = document.createElement("script");
+                script.id = ID;
+                script.async = true;
+                script.src = SDK;
+                document.head.append(script);
+            }
+
+            loading = widget();
+            return loading;
+        };
+
+        document.addEventListener("click", async (event) => {
+            const trigger = event.target.closest?.("[data-zenchef]");
+            if (!trigger) return;
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+
+            event.preventDefault();
+
+            const zc = await load();
+            if (zc) zc.open();
+            else window.location.href = fallback;
+        });
+    })();
+</script>

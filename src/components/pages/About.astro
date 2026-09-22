@@ -9,10 +9,10 @@ import bannerImage from "../../assets/about-banner-table-with-matzo.webp";
 import diningRoomImage from "../../assets/about-interior-lamp.webp";
 import signatureImage from "../../assets/about-table-mezze.webp";
 import PageBanner from "../PageBanner.astro";
-import { restaurant } from "../../data/restaurant";
+import { restaurant, reservationUrl } from "../../data/restaurant";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
-import { path, type Language } from "../../i18n/config";
+import type { Language } from "../../i18n/config";
 
 interface Props {
     language: Language;
@@ -81,7 +81,7 @@ const page = content[language].aboutPage;
             >
                 {page.kitchen.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
             </div>
-            <Button href={path("reservation", language)} class="mt-10"
+            <Button href={reservationUrl} data-zenchef class="mt-10"
                 >{page.kitchen.cta}</Button
             >
         </div>

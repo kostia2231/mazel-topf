@@ -14,6 +14,10 @@ export const restaurant = {
 export const orderOnlineUrl =
   'https://wolt.com/de/deu/berlin/restaurant/ma-sel-topf';
 
+export const zenchefRestaurantId = '380952';
+
+export const reservationUrl = `https://bookings.zenchef.com/results?rid=${zenchefRestaurantId}`;
+
 export const cuisine = 'Israeli';
 export const priceRange = '€€';
 

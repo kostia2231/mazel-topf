@@ -1,6 +1,7 @@
 ---
 import { content } from '../i18n/content';
-import { path, type Language } from '../i18n/config';
+import type { Language } from '../i18n/config';
+import { reservationUrl } from '../data/restaurant';
 import Button from './Button.astro';
 
 interface Props {
@@ -17,6 +18,6 @@ const block = content[language].closingBlock;
       {block.title}
     </h2>
     <p class="mx-auto mt-6 max-w-3xl text-sm leading-relaxed text-ink-600">{block.text}</p>
-    <Button href={path('reservation', language)} class="mt-10">{block.cta}</Button>
+    <Button href={reservationUrl} data-zenchef class="mt-10">{block.cta}</Button>
   </div>
 </section>

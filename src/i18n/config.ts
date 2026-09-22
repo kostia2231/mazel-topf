@@ -14,7 +14,6 @@ export const routes = {
   about: { de: '/ueber-uns', en: '/en/about' },
   catering: { de: '/catering', en: '/en/catering' },
   contact: { de: '/kontakt', en: '/en/contact' },
-  reservation: { de: '/reservierung', en: '/en/reservation' },
   privateDining: { de: '/privat-dinning', en: '/en/private-dining' },
   giftCard: { de: '/gutschein', en: '/en/gift-card' },
   feedback: { de: '/feedback', en: '/en/feedback' },

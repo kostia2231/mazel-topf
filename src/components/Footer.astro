@@ -92,8 +92,19 @@ const year = new Date().getFullYear();
                                             ? link.url
                                             : path(link.route, language)
                                     }
-                                    target={isExternal(link) ? "_blank" : undefined}
-                                    rel={isExternal(link) ? "noopener" : undefined}
+                                    data-zenchef={
+                                        isExternal(link) && link.zenchef ? "" : undefined
+                                    }
+                                    target={
+                                        isExternal(link) && !link.zenchef
+                                            ? "_blank"
+                                            : undefined
+                                    }
+                                    rel={
+                                        isExternal(link) && !link.zenchef
+                                            ? "noopener"
+                                            : undefined
+                                    }
                                     class="hover:text-white"
                                 >
                                     {link.label}

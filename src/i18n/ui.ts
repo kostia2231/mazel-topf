@@ -1,13 +1,13 @@
 import type { RouteKey, Language } from "./config"
-import { orderOnlineUrl } from "../data/restaurant"
+import { orderOnlineUrl, reservationUrl } from "../data/restaurant"
 
-/** Пункт меню ведёт либо на страницу сайта, либо на внешнюю площадку. */
 export type NavItem =
     | { route: RouteKey; label: string }
-    | { url: string; label: string }
+    | { url: string; label: string; zenchef?: true }
 
-export const isExternal = (item: NavItem): item is { url: string; label: string } =>
-    "url" in item
+export const isExternal = (
+    item: NavItem,
+): item is { url: string; label: string; zenchef?: true } => "url" in item
 
 interface UiText {
     htmlLang: string
@@ -156,7 +156,7 @@ export const ui: Record<Language, UiText> = {
         ],
         drawerOrderOnline: { url: orderOnlineUrl, label: "Online bestellen" },
         footerLinks: [
-            { route: "reservation", label: "Tisch reservieren" },
+            { url: reservationUrl, label: "Tisch reservieren", zenchef: true },
             { url: orderOnlineUrl, label: "Online bestellen" },
             { route: "catering", label: "Catering" },
             { route: "contact", label: "Kontakt" },
@@ -337,7 +337,7 @@ export const ui: Record<Language, UiText> = {
         ],
         drawerOrderOnline: { url: orderOnlineUrl, label: "Order online" },
         footerLinks: [
-            { route: "reservation", label: "Book a table" },
+            { url: reservationUrl, label: "Book a table", zenchef: true },
             { url: orderOnlineUrl, label: "Order online" },
             { route: "catering", label: "Catering" },
             { route: "contact", label: "Contact" },

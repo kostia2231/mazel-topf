@@ -9,6 +9,7 @@ import {
     type Language,
 } from "../i18n/config";
 import { ui, isExternal } from "../i18n/ui";
+import { reservationUrl } from "../data/restaurant";
 import { restaurant } from "../data/restaurant";
 import Button from "./Button.astro";
 import Calendar from "./icons/Calendar.astro";
@@ -151,14 +152,16 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
             </nav>
             <div class="ml-auto flex shrink-0 items-center pr-6">
                 <a
-                    href={path("reservation", language)}
+                    href={reservationUrl}
+                    data-zenchef
                     class="flex size-9 items-center justify-center text-brick-500 sm:hidden"
                     aria-label={t.header.reservation}
                 >
                     <Calendar class="size-8" />
                 </a>
                 <Button
-                    href={path("reservation", language)}
+                    href={reservationUrl}
+                    data-zenchef
                     class="hidden px-5! py-3! text-[0.625rem]! sm:inline-block 2xl:px-7! 2xl:text-[0.6875rem]!"
                 >
                     {t.header.reservation}
