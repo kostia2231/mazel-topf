@@ -1,0 +1,374 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Speisekarte pflegen</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    </head>
+    <body class="bg-cream-50 text-ink-900">
+        <div class="mx-auto max-w-4xl px-5 py-10 sm:px-8">
+            <h1 class="font-display text-3xl font-semibold">Speisekarte pflegen</h1>
+
+            <form id="gate" class="mt-8 max-w-sm space-y-4">
+                <label class="block text-sm text-ink-600" for="key">Schlüssel</label>
+                <input
+                    id="key"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                    class="w-full border border-line bg-white px-4 py-3 text-sm focus:border-brick-500 focus:outline-none"
+                />
+                <button
+                    type="submit"
+                    class="caps w-full cursor-pointer bg-brick-500 px-4 py-3 text-xs text-white hover:bg-brick-600"
+                >
+                    Öffnen
+                </button>
+                <p id="gate-error" class="hidden text-sm text-brick-500" role="alert"></p>
+            </form>
+
+            <div id="editor" class="hidden">
+                <div class="mt-8 flex flex-wrap items-center gap-3">
+                    <div class="flex border border-line bg-white" role="tablist" id="languages"></div>
+                    <select
+                        id="sections"
+                        class="border border-line bg-white px-4 py-2.5 text-sm focus:border-brick-500 focus:outline-none"
+                    ></select>
+                    <span id="changes" class="text-sm text-ink-400"></span>
+                </div>
+
+                <div id="section" class="mt-8 space-y-4"></div>
+
+                <div class="mt-8 flex flex-wrap items-center gap-3 border-t border-line pt-6">
+                    <button
+                        type="button"
+                        id="add"
+                        class="caps cursor-pointer border border-brick-500 px-4 py-3 text-xs text-brick-500 hover:bg-brick-500 hover:text-white"
+                    >
+                        Gericht hinzufügen
+                    </button>
+                    <button
+                        type="button"
+                        id="save"
+                        class="caps cursor-pointer bg-brick-500 px-6 py-3 text-xs text-white hover:bg-brick-600 disabled:cursor-default disabled:opacity-40"
+                        disabled
+                    >
+                        Speichern und veröffentlichen
+                    </button>
+                    <p id="status" class="text-sm text-ink-600" role="status"></p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const ENDPOINT = "/api/admin";
+
+            const state = {
+                key: "",
+                files: [],
+                original: new Map(),
+                language: "de",
+                path: "",
+            };
+
+            const $ = (id) => document.getElementById(id);
+
+            const send = async (payload) => {
+                const body = JSON.stringify({ ...payload, key: state.key });
+                const headers = {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                };
+
+                if (crypto?.subtle) {
+                    const digest = await crypto.subtle.digest(
+                        "SHA-256",
+                        new TextEncoder().encode(body),
+                    );
+                    headers["x-amz-content-sha256"] = [...new Uint8Array(digest)]
+                        .map((byte) => byte.toString(16).padStart(2, "0"))
+                        .join("");
+                }
+
+                const response = await fetch(ENDPOINT, { method: "POST", headers, body });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.error ?? `Fehler ${response.status}`);
+                return data;
+            };
+
+            const fingerprint = (file) => JSON.stringify(file.data);
+
+            const changed = () =>
+                state.files.filter((file) => fingerprint(file) !== state.original.get(file.path));
+
+            const label = (file) => {
+                const name = file.path.split("/").pop().replace(".md", "");
+                return `${name.replace(/^\d+-/, "")} · ${file.data.title}`;
+            };
+
+            const refreshChanges = () => {
+                const count = changed().length;
+                $("changes").textContent = count ? `${count} geändert` : "";
+                $("save").disabled = count === 0;
+            };
+
+            const field = (labelText, value, type, onInput) => {
+                const wrap = document.createElement("label");
+                wrap.className = "block";
+
+                const caption = document.createElement("span");
+                caption.className = "block text-xs text-ink-400";
+                caption.textContent = labelText;
+                wrap.append(caption);
+
+                const input = document.createElement("input");
+                input.type = type;
+                if (type === "number") {
+                    input.step = "0.10";
+                    input.min = "0";
+                }
+                input.value = value ?? "";
+                input.className =
+                    "mt-1 w-full border border-line bg-white px-3 py-2 text-sm focus:border-brick-500 focus:outline-none";
+                input.addEventListener("input", () => {
+                    onInput(input.value);
+                    refreshChanges();
+                });
+                wrap.append(input);
+
+                return wrap;
+            };
+
+            const renderDish = (file, dish, index) => {
+                const card = document.createElement("div");
+                card.className = "border border-line bg-white/60 p-4";
+
+                const grid = document.createElement("div");
+                grid.className = "grid gap-4 sm:grid-cols-[2fr_3fr_1fr]";
+
+                grid.append(
+                    field("Name", dish.name, "text", (value) => {
+                        dish.name = value;
+                    }),
+                    field("Beschreibung", dish.description, "text", (value) => {
+                        dish.description = value;
+                    }),
+                    field(
+                        dish.priceText === undefined ? "Preis" : "Preis (Text)",
+                        dish.priceText === undefined ? dish.price : dish.priceText,
+                        dish.priceText === undefined ? "number" : "text",
+                        (value) => {
+                            if (dish.priceText === undefined) {
+                                dish.price = value === "" ? undefined : Number(value);
+                            } else {
+                                dish.priceText = value;
+                            }
+                        },
+                    ),
+                );
+
+                card.append(grid);
+
+                const tools = document.createElement("div");
+                tools.className = "mt-3 flex gap-4 text-xs text-ink-400";
+
+                const move = (offset) => {
+                    const target = index + offset;
+                    if (target < 0 || target >= file.data.dishes.length) return;
+                    const [item] = file.data.dishes.splice(index, 1);
+                    file.data.dishes.splice(target, 0, item);
+                    renderSection();
+                    refreshChanges();
+                };
+
+                const button = (text, action) => {
+                    const element = document.createElement("button");
+                    element.type = "button";
+                    element.className = "cursor-pointer hover:text-brick-500";
+                    element.textContent = text;
+                    element.addEventListener("click", action);
+                    return element;
+                };
+
+                tools.append(
+                    button("hoch", () => move(-1)),
+                    button("runter", () => move(1)),
+                    button("entfernen", () => {
+                        file.data.dishes.splice(index, 1);
+                        renderSection();
+                        refreshChanges();
+                    }),
+                );
+
+                card.append(tools);
+                return card;
+            };
+
+            const currentFile = () => state.files.find((file) => file.path === state.path);
+
+            const renderSection = () => {
+                const file = currentFile();
+                const container = $("section");
+                container.replaceChildren();
+                if (!file) return;
+
+                const head = document.createElement("div");
+                head.className = "grid gap-4 sm:grid-cols-2";
+                head.append(
+                    field("Überschrift", file.data.title, "text", (value) => {
+                        file.data.title = value;
+                    }),
+                    field("Hinweis", file.data.note, "text", (value) => {
+                        file.data.note = value;
+                    }),
+                );
+                container.append(head);
+
+                if (!Array.isArray(file.data.dishes)) file.data.dishes = [];
+
+                for (const [index, dish] of file.data.dishes.entries()) {
+                    container.append(renderDish(file, dish, index));
+                }
+
+                if (!file.data.dishes.length && file.data.menus) {
+                    const hint = document.createElement("p");
+                    hint.className = "text-sm text-ink-400";
+                    hint.textContent =
+                        "Dieser Abschnitt enthält Menüs statt einzelner Gerichte und wird hier nicht bearbeitet.";
+                    container.append(hint);
+                }
+            };
+
+            const renderSections = () => {
+                const select = $("sections");
+                select.replaceChildren();
+
+                const files = state.files.filter((file) => file.language === state.language);
+                for (const file of files) {
+                    const option = document.createElement("option");
+                    option.value = file.path;
+                    option.textContent = label(file);
+                    select.append(option);
+                }
+
+                const stillThere = files.some((file) => file.path === state.path);
+                if (!stillThere) state.path = files[0]?.path ?? "";
+                select.value = state.path;
+                renderSection();
+            };
+
+            const renderLanguages = () => {
+                const box = $("languages");
+                box.replaceChildren();
+
+                for (const language of ["de", "en"]) {
+                    const tab = document.createElement("button");
+                    tab.type = "button";
+                    tab.textContent = language.toUpperCase();
+                    tab.className = `caps cursor-pointer px-4 py-2.5 text-xs ${
+                        language === state.language
+                            ? "bg-brick-500 text-white"
+                            : "text-ink-600 hover:text-brick-500"
+                    }`;
+                    tab.addEventListener("click", () => {
+                        const previous = state.path.split("/").pop();
+                        state.language = language;
+                        const match = state.files.find(
+                            (file) =>
+                                file.language === language && file.path.endsWith(`/${previous}`),
+                        );
+                        state.path = match?.path ?? "";
+                        renderLanguages();
+                        renderSections();
+                    });
+                    box.append(tab);
+                }
+            };
+
+            const open = async (key) => {
+                state.key = key;
+                const data = await send({ action: "load" });
+                state.files = data.files;
+                state.original = new Map(
+                    data.files.map((file) => [file.path, JSON.stringify(file.data)]),
+                );
+                state.path =
+                    state.files.find((file) => file.language === "de")?.path ?? "";
+
+                $("gate").classList.add("hidden");
+                $("editor").classList.remove("hidden");
+                renderLanguages();
+                renderSections();
+                refreshChanges();
+            };
+
+            $("gate").addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const error = $("gate-error");
+                error.classList.add("hidden");
+
+                try {
+                    await open($("key").value.trim());
+                    sessionStorage.setItem("maseltopf-admin-key", state.key);
+                } catch (failure) {
+                    error.textContent = String(failure.message ?? failure);
+                    error.classList.remove("hidden");
+                }
+            });
+
+            $("sections").addEventListener("change", (event) => {
+                state.path = event.target.value;
+                renderSection();
+            });
+
+            $("add").addEventListener("click", () => {
+                const file = currentFile();
+                if (!file) return;
+                if (!Array.isArray(file.data.dishes)) file.data.dishes = [];
+                file.data.dishes.push({ name: "", description: "", price: undefined });
+                renderSection();
+                refreshChanges();
+            });
+
+            $("save").addEventListener("click", async () => {
+                const files = changed();
+                if (!files.length) return;
+
+                const status = $("status");
+                const button = $("save");
+                button.disabled = true;
+                status.textContent = "Wird gespeichert …";
+
+                try {
+                    const note = files.length === 1 ? label(files[0]) : `${files.length} Abschnitte`;
+                    const result = await send({
+                        action: "save",
+                        note,
+                        files: files.map((file) => ({ path: file.path, data: file.data })),
+                    });
+
+                    for (const file of files) {
+                        state.original.set(file.path, JSON.stringify(file.data));
+                    }
+
+                    status.textContent = `Gespeichert (${result.commit}). Die Seite ist in etwa zwei Minuten aktuell.`;
+                } catch (failure) {
+                    status.textContent = `Fehler: ${String(failure.message ?? failure)}`;
+                } finally {
+                    refreshChanges();
+                }
+            });
+
+            const remembered = sessionStorage.getItem("maseltopf-admin-key");
+            if (remembered) {
+                open(remembered).catch(() => sessionStorage.removeItem("maseltopf-admin-key"));
+            }
+        </script>
+    </body>
+</html>

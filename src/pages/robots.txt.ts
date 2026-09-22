@@ -5,7 +5,13 @@ export const GET: APIRoute = ({ site }) => {
   const indexable = isCanonicalHost(site);
 
   const lines = indexable
-    ? ['User-agent: *', 'Allow: /', '', `Sitemap: ${new URL('sitemap-index.xml', site).href}`]
+    ? [
+        'User-agent: *',
+        'Disallow: /admin',
+        'Allow: /',
+        '',
+        `Sitemap: ${new URL('sitemap-index.xml', site).href}`,
+      ]
     : ['User-agent: *', 'Disallow: /'];
 
   return new Response(`${lines.join('\n')}\n`, {

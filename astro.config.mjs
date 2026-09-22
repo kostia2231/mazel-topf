@@ -7,7 +7,9 @@ export default defineConfig({
   site: 'https://restaurant-maseltopf.de',
   trailingSlash: 'never',
 
-  integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
+  integrations: [
+    sitemap({ filter: (page) => !page.includes('/404') && !page.includes('/admin') }),
+  ],
 
   i18n: {
     locales: ['de', 'en'],
