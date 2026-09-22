@@ -12,28 +12,41 @@ import "../styles/global.css";
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </head>
     <body class="bg-cream-50 text-ink-900">
-        <div class="mx-auto max-w-4xl px-5 py-10 sm:px-8">
-            <h1 class="font-display text-3xl font-semibold">Speisekarte pflegen</h1>
+        <div id="gate-screen" class="flex min-h-screen items-center justify-center px-5">
+            <form id="gate" class="w-full max-w-sm">
+                <h1 class="font-display text-center text-3xl font-semibold">
+                    Speisekarte pflegen
+                </h1>
+                <hr class="mx-auto mt-6 w-14 border-t-2 border-brick-500" />
 
-            <form id="gate" class="mt-8 max-w-sm space-y-4">
-                <label class="block text-sm text-ink-600" for="key">Schlüssel</label>
+                <label class="sr-only" for="key">Schlüssel</label>
                 <input
                     id="key"
                     type="password"
                     autocomplete="current-password"
+                    placeholder="Schlüssel"
                     required
-                    class="w-full border border-line bg-white px-4 py-3 text-sm focus:border-brick-500 focus:outline-none"
+                    class="mt-8 w-full border border-line bg-white px-4 py-3 text-center text-sm placeholder:text-ink-400 focus:border-brick-500 focus:outline-none"
                 />
                 <button
                     type="submit"
-                    class="caps w-full cursor-pointer bg-brick-500 px-4 py-3 text-xs text-white hover:bg-brick-600"
+                    class="caps mt-3 w-full cursor-pointer bg-brick-500 px-4 py-3.5 text-xs text-white hover:bg-brick-600"
                 >
                     Öffnen
                 </button>
-                <p id="gate-error" class="hidden text-sm text-brick-500" role="alert"></p>
+                <p
+                    id="gate-error"
+                    class="mt-4 hidden text-center text-sm text-brick-500"
+                    role="alert"
+                >
+                </p>
             </form>
+        </div>
 
+        <div class="mx-auto max-w-4xl px-5 py-10 sm:px-8">
             <div id="editor" class="hidden">
+                <h1 class="font-display text-3xl font-semibold">Speisekarte pflegen</h1>
+
                 <div class="mt-8 flex flex-wrap items-center gap-3">
                     <div class="flex border border-line bg-white" role="tablist" id="languages"></div>
                     <select
@@ -301,7 +314,7 @@ import "../styles/global.css";
                 state.path =
                     state.files.find((file) => file.language === "de")?.path ?? "";
 
-                $("gate").classList.add("hidden");
+                $("gate-screen").classList.add("hidden");
                 $("editor").classList.remove("hidden");
                 renderLanguages();
                 renderSections();
