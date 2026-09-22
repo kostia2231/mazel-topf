@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # design mockups (not needed for the build)
 mazel_design/
+
+# deploy settings
+.env.deploy
