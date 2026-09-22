@@ -14,8 +14,12 @@ Settings are read from .env.deploy in the project root:
     BUCKET=maseltopf-site
     DISTRIBUTION=E1234567890ABC
     FORM_ENDPOINT=/api/forms
+    SITE_URL=https://restaurant-maseltopf.de
     AWS_PROFILE=maseltopf      optional
     AWS_REGION=eu-central-1    optional
+
+Without SITE_URL the build is marked noindex, which is what a test
+distribution wants and a live site does not.
 TXT
 }
 
@@ -70,6 +74,7 @@ echo "account   $identity"
 echo "bucket    s3://$BUCKET"
 echo "cdn       $DISTRIBUTION"
 echo "forms     $FORM_ENDPOINT"
+echo "site      ${SITE_URL:-not set, build will be noindex}"
 $dry_run && echo "mode      dry run"
 echo
 
@@ -79,7 +84,7 @@ if ! $dry_run && ! $assume_yes; then
 fi
 
 echo "building"
-PUBLIC_FORM_ENDPOINT="$FORM_ENDPOINT" npm run build
+PUBLIC_FORM_ENDPOINT="$FORM_ENDPOINT" URL="${SITE_URL:-}" npm run build
 
 [ -f dist/index.html ] || { echo "dist/index.html missing after build" >&2; exit 1; }
 
@@ -87,6 +92,15 @@ grep -q "$FORM_ENDPOINT" dist/kontakt/index.html || {
     echo "form endpoint did not reach the build" >&2
     exit 1
 }
+
+if [ -n "${SITE_URL:-}" ]; then
+    grep -q "Allow: /" dist/robots.txt || {
+        echo "SITE_URL is set but the build came out noindex" >&2
+        exit 1
+    }
+else
+    echo "no SITE_URL: this build is noindex"
+fi
 
 flags=(--no-progress)
 $dry_run && flags+=(--dryrun)
