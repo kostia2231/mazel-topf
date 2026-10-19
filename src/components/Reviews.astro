@@ -42,14 +42,14 @@ const reviews = content[language].reviews;
         >
             {reviews.map((review) => (
                 <li class="w-full shrink-0 snap-center">
-                    <h3 class="caps font-display font-semibold text-lg">
+                    <h3 class="caps font-semibold text-lg">
                         {review.title}
                     </h3>
                     <p class="mt-6 font-display text-lg leading-relaxed text-ink-900">
                         {review.text}
                     </p>
                     <p
-                        class="mt-6 tracking-[0.2em] text-brick-500"
+                        class="mt-6 tracking-stamp text-brick-500"
                         aria-label={t.reviews.stars(review.stars)}
                     >
                         {"★".repeat(review.stars)}

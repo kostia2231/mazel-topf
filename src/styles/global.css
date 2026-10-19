@@ -45,6 +45,10 @@
   --text-6xl: 3rem;
   --text-6xl--line-height: 3.5rem;
 
+  --tracking-title: 1px;
+  --tracking-label: 2px;
+  --tracking-stamp: 0.2em;
+
   --font-display: var(--font-plex-mono);
   --font-sans: var(--font-nunito);
 }
@@ -61,8 +65,9 @@ body {
 }
 
 @utility caps {
+  font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-label);
 }
 
 @utility btn-outline {
