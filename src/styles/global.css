@@ -14,6 +14,8 @@
   --color-ink-600: #293444;
   --color-ink-400: #748193;
 
+  --color-navy-900: #142027;
+
   --color-mist: #cad1da;
 
   --color-line: var(--color-mist);
@@ -22,8 +24,8 @@
   --color-placeholder: #d8d6d3;
   --color-placeholder-dark: #b8b6b3;
 
-  --font-display: var(--font-cormorant-infant);
-  --font-sans: var(--font-nunito);
+  --font-display: var(--font-plex-mono);
+  --font-sans: var(--font-plex-mono);
 }
 
 :root {

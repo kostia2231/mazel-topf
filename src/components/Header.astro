@@ -52,7 +52,7 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                     aria-label={t.header.switchLanguage}
                 >
                     <span
-                        class="uppercase tracking-wider flex size-8 items-center justify-center rounded-full bg-cream-100 text-xs text-ink-900"
+                        class="uppercase tracking-wider flex size-8 items-center justify-center rounded-full bg-brick-500 text-xs text-white"
                         aria-current="true"
                     >
                         {languageLabel[language]}
@@ -79,7 +79,7 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                                     href={item.url}
                                     target="_blank"
                                     rel="noopener"
-                                    class="relative flex items-center gap-2 py-2 text-ink-600 transition-colors before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:scale-y-0 before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out hover:text-brick-500 hover:before:scale-y-100 motion-reduce:before:transition-none"
+                                    class="caps relative flex items-center gap-2 py-2 text-[0.875rem] text-navy-900 transition-colors before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:scale-y-0 before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out hover:text-brick-500 hover:before:scale-y-100 motion-reduce:before:transition-none"
                                 >
                                     <ExternalLink class="size-3.5 text-brick-500" />
                                     {item.label}
@@ -93,10 +93,10 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                                         item.route === page ? "page" : undefined
                                     }
                                     class:list={[
-                                        "relative py-2 transition-colors hover:text-brick-500 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out motion-reduce:before:transition-none",
+                                        "caps relative py-2 text-[0.875rem] transition-colors hover:text-brick-500 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out motion-reduce:before:transition-none",
                                         item.route === page
-                                            ? "text-ink-900 before:scale-y-100"
-                                            : "text-ink-600 before:scale-y-0 hover:before:scale-y-100",
+                                            ? "text-brick-500 before:scale-y-100"
+                                            : "text-navy-900 before:scale-y-0 hover:before:scale-y-100",
                                     ]}
                                 >
                                     {item.label}
@@ -116,8 +116,8 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
             <Image
                 src={logo}
                 alt={restaurant.name}
-                width={240}
-                height={43}
+                width={356}
+                height={76}
                 loading="eager"
                 fetchpriority="high"
                 class="h-auto w-24 lg:w-27 2xl:w-30"
@@ -138,10 +138,10 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                                     item.route === page ? "page" : undefined
                                 }
                                 class:list={[
-                                    "relative py-2 transition-colors hover:text-brick-500 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out motion-reduce:before:transition-none",
+                                    "caps relative py-2 text-[0.875rem] transition-colors hover:text-brick-500 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out motion-reduce:before:transition-none",
                                     item.route === page
-                                        ? "text-ink-900 before:scale-y-100"
-                                        : "text-ink-600 before:scale-y-0 hover:before:scale-y-100",
+                                        ? "text-brick-500 before:scale-y-100"
+                                        : "text-navy-900 before:scale-y-0 hover:before:scale-y-100",
                                 ]}
                             >
                                 {item.label}
@@ -162,7 +162,8 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                 <Button
                     href={reservationUrl}
                     data-zenchef
-                    class="hidden px-5! py-3! text-[0.625rem]! sm:inline-block 2xl:px-7! 2xl:text-[0.6875rem]!"
+                    variant="none"
+                    class="hidden bg-brick-500 px-5! py-3! text-[0.625rem]! text-white transition-colors hover:bg-brick-600 sm:inline-block 2xl:px-7! 2xl:text-[0.6875rem]!"
                 >
                     {t.header.reservation}
                 </Button>

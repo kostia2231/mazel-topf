@@ -23,23 +23,13 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Cormorant Infant',
-      cssVariable: '--font-cormorant-infant',
+      name: 'IBM Plex Mono',
+      cssVariable: '--font-plex-mono',
       weights: [400, 600],
       styles: ['normal', 'italic'],
-      subsets: ['latin'],
+      subsets: ['latin', 'latin-ext'],
       display: 'block',
-      fallbacks: ['Georgia', 'Times New Roman', 'serif'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'Nunito',
-      cssVariable: '--font-nunito',
-      weights: [400, 600],
-      styles: ['normal', 'italic'],
-      subsets: ['latin'],
-      display: 'block',
-      fallbacks: ['Segoe UI', 'system-ui', 'sans-serif'],
+      fallbacks: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
     },
   ],
   vite: {
