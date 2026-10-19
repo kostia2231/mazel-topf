@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
     poster: ImageMetadata;
     label: string;
     class?: string;
-    posterWidths?: number[];
+    posterWidth?: number;
     eager?: boolean;
 }
 
@@ -16,30 +16,26 @@ const {
     poster,
     label,
     class: className = "",
-    posterWidths = [960, 1520],
+    posterWidth = 1520,
     eager = false,
 } = Astro.props;
+
+const still = await getImage({
+    src: poster,
+    width: Math.min(posterWidth, poster.width),
+    format: "webp",
+});
 ---
 
 <div class:list={["overflow-hidden", className]}>
-    <Image
-        src={poster}
-        alt={label}
-        widths={posterWidths}
-        width={poster.width}
-        sizes="100vw"
-        loading={eager ? "eager" : "lazy"}
-        fetchpriority={eager ? "high" : "auto"}
-        class="absolute inset-0 h-full w-full object-cover"
-    />
-
     <video
         muted
         loop
         playsinline
-        preload="none"
+        preload={eager ? "metadata" : "none"}
+        poster={still.src}
         aria-label={label}
-        class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-out motion-reduce:transition-none"
+        class="absolute inset-0 h-full w-full object-cover"
         data-background-video
     >
         <source src={`/video/${name}.mp4`} type="video/mp4" />
@@ -52,16 +48,29 @@ const {
     ];
 
     if (videos.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        const start = (video: HTMLVideoElement) => {
-            video.addEventListener(
-                "playing",
-                () => video.classList.remove("opacity-0"),
-                { once: true },
-            );
-            video.preload = "auto";
-            video.load();
-            video.play().catch(() => {});
+        const attempt = (video: HTMLVideoElement) => {
+            const playing = video.play();
+            if (playing) playing.catch(() => {});
         };
+
+        const start = (video: HTMLVideoElement) => {
+            video.muted = true;
+            video.preload = "auto";
+            video.addEventListener("canplay", () => attempt(video), { once: true });
+            video.load();
+            attempt(video);
+        };
+
+        const revive = () => {
+            for (const video of videos) {
+                if (video.paused && video.readyState >= 2) attempt(video);
+            }
+        };
+
+        addEventListener("visibilitychange", () => {
+            if (!document.hidden) revive();
+        });
+        addEventListener("pointerdown", revive, { once: true });
 
         if (!("IntersectionObserver" in window)) {
             for (const video of videos) start(video);
