@@ -15,7 +15,7 @@ import BackgroundVideo from "../BackgroundVideo.astro";
 import heroPoster from "../../assets/hero-poster.webp";
 import terracePoster from "../../assets/terrace-poster.webp";
 import facadeImage from "../../assets/facade-terrace.webp";
-import dishesImage from "../../assets/home-chicken-barley.webp";
+import dishesImage from "../../assets/about-plate-on-wood.webp";
 import beerImage from "../../assets/table-with-beer.webp";
 import {
     dishImages,
@@ -148,7 +148,7 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                         sizes="(min-width: 1024px) 34vw, 75vw"
                         loading="eager"
                         fetchpriority="low"
-                        class="aspect-3/4 w-full object-cover object-right transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                        class="aspect-3/4 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                     />
                 </div>
                 <div class="group absolute top-[33%] left-[52%] z-10 w-[48%] overflow-hidden">
@@ -167,17 +167,17 @@ const carouselDishes = carouselKeys.flatMap((key) => {
         </div>
         <div class="lg:pt-12" data-reveal>
             <hr class="w-12 border-t-2 border-brick-500" />
-            <p class="caps mt-6 text-xs text-ink-400">
+            <p
+                class="caps font-display mt-6 text-base tracking-[2px] text-ink-400"
+            >
                 {i.home.about.eyebrow}
             </p>
             <h2
-                class="mt-5 font-display text-2xl leading-[1.15] whitespace-pre-line font-semibold sm:text-4xl lg:text-[2.75rem]"
+                class="font-display mt-5 text-2xl leading-[1.25] tracking-[1px] whitespace-pre-line sm:text-3xl"
             >
                 {i.home.about.title}
             </h2>
-            <div
-                class="mt-8 max-w-md space-y-5 text-sm leading-relaxed text-ink-600"
-            >
+            <div class="mt-5 max-w-xl space-y-5 text-base text-ink-600">
                 {
                     i.home.about.paragraphs.map((paragraph) => (
                         <p>{paragraph}</p>

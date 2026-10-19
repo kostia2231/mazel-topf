@@ -269,7 +269,7 @@ export const ui: Record<Language, UiText> = {
             tableMezze:
                 "Gedeckter Tisch von oben: Mezze in der Fladenbrotschale, Getränke und Speisekarte",
             chickenRisotto:
-                "Gegrilltes Hähnchen auf Graupen mit Kräutersauce, daneben Auberginensalat",
+                "Teller mit Hähnchen, Bulgur und Kräutern auf einem Holztisch",
             falafelPlate: "Falafel-Teller",
             aubergineBeetroot:
                 "Gegrillte Auberginen mit Rote-Bete-Sauce und Koriander",
@@ -447,7 +447,7 @@ export const ui: Record<Language, UiText> = {
             tableMezze:
                 "Laid table from above: mezze in a flatbread bowl, drinks and the menu",
             chickenRisotto:
-                "Grilled chicken on barley with herb sauce, aubergine salad alongside",
+                "Plate of chicken, bulgur and herbs on a wooden table",
             falafelPlate: "Falafel plate",
             aubergineBeetroot:
                 "Grilled aubergines with beetroot sauce and coriander",

@@ -154,16 +154,13 @@ const de: Content = {
             eyebrow: "Masel Topf – zeitgenössische israelische Küche.",
             title: "Tradition, die lebt.\nAtmosphäre zum Verweilen.",
             paragraphs: [
-                "Masel Topf ist ein neues Kapitel im Berliner Gastronomieleben geworden – mit einer " +
-                    "Seele aus dem Mittelmeerraum und einem im Prenzlauer Berg geborenen Charakter.",
-                "Ein Restaurant, in dem jedes Gericht eine Geschichte erzählt: im Herzen der Stadt, " +
-                    "inmitten gemütlicher Straßen, ganz in der Nähe der wichtigsten Sehenswürdigkeiten " +
-                    "der Hauptstadt.",
-                "Hier werden Familienrezepte sorgfältig kombiniert, wodurch die Einzigartigkeit Israels " +
-                    "und die Freiheit der Berliner kulinarischen Szene bewahrt werden. Bei jedem Besuch " +
-                    "geht es hier um mehr als nur Essen.",
-                "Masel Topf ist ein Ort, an den die Menschen zurückkehren. Nicht aus Gewohnheit, " +
-                    "sondern aus Liebe.",
+                "Masel Topf ist ein besonderer Ort im Herzen von Prenzlauer Berg – mit " +
+                    "mediterraner Seele und Berliner Charakter.",
+                "Inmitten gemütlicher Straßen treffen traditionelle Familienrezepte auf die " +
+                    "kulinarische Vielfalt Israels und die kreative Freiheit Berlins. Jedes " +
+                    "Gericht erzählt seine eigene Geschichte.",
+                "Masel Topf ist mehr als ein Restaurant – ein Ort, an den man gerne " +
+                    "zurückkehrt. Aus Liebe, nicht aus Gewohnheit.",
             ],
             cta: "Erfahren Sie mehr über uns",
             stamp: "Israelisches Restaurant · seit 2022 · Masel Topf ·",
@@ -206,14 +203,12 @@ const de: Content = {
     cateringPage: {
         title: "Tadelloses Catering mit Charakter Masel Topf",
         paragraphs: [
-            "Egal, ob Sie ein wichtiges Familienfest feiern oder eine Geschäftsveranstaltung " +
-                "organisieren, das Team von Masel Topf schafft eine Atmosphäre, in der jeder Gast Wärme, " +
-                "Geschmack und Liebe zum Detail spürt.",
-            "Wir bieten flexible Formate und durchdachte Catering-Pakete – vom intimen Abendessen bis " +
-                "zum großen Empfang – mit Schwerpunkt auf modernen Interpretationen der israelischen " +
-                "Küche und hochwertigem Service.",
-            "Was auch immer Sie feiern, es wird ein ganz besonderer Moment sein, über den man spricht. " +
-                "Schreiben Sie uns und wir informieren Sie über alle Details und Sonderkonditionen.",
+            "Ob Familienfeier oder Business-Event – Masel Topf sorgt für eine herzliche " +
+                "Atmosphäre, köstliches Essen und Liebe zum Detail.",
+            "Von intimen Dinnern bis zu großen Empfängen bieten wir individuelle " +
+                "Catering-Lösungen mit moderner israelischer Küche und erstklassigem Service.",
+            "Planen Sie Ihr besonderes Event mit uns! Kontaktieren Sie uns für weitere " +
+                "Informationen und individuelle Angebote.",
         ],
         cta: "Buchen Sie Ihre Veranstaltung",
         slogan: [
