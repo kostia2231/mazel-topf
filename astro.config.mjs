@@ -31,6 +31,16 @@ export default defineConfig({
       display: 'block',
       fallbacks: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
     },
+    {
+      provider: fontProviders.google(),
+      name: 'Nunito',
+      cssVariable: '--font-nunito',
+      weights: [400, 600],
+      styles: ['normal', 'italic'],
+      subsets: ['latin', 'latin-ext'],
+      display: 'block',
+      fallbacks: ['Segoe UI', 'system-ui', 'sans-serif'],
+    },
   ],
   vite: {
     plugins: [tailwindcss()],
