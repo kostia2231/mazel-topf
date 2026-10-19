@@ -52,7 +52,10 @@ const formatImages = [format1, format2, format3];
         >
             {page.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
         </div>
-        <Button class="mt-10 cursor-pointer" data-booking-open
+        <Button
+            variant="none"
+            class="mt-10 cursor-pointer border-brick-500 bg-brick-500 text-white transition-colors hover:bg-brick-600"
+            data-booking-open
             >{page.cta}</Button
         >
     </section>
