@@ -168,23 +168,23 @@ const carouselDishes = carouselKeys.flatMap((key) => {
         <div class="lg:pt-12" data-reveal>
             <hr class="w-12 border-t-2 border-brick-500" />
             <p
-                class="caps mt-6 text-xs text-ink-400"
+                class="caps mt-6 text-xs text-ink-400 lg:text-base"
             >
                 {i.home.about.eyebrow}
             </p>
             <h2
-                class="font-display mt-5 text-2xl leading-tight tracking-title whitespace-pre-line sm:text-3xl"
+                class="font-display mt-5 text-xl leading-tight tracking-title whitespace-pre-line lg:text-3xl"
             >
                 {i.home.about.title}
             </h2>
-            <div class="mt-5 max-w-xl space-y-5 text-base text-ink-600">
+            <div class="mt-5 max-w-xl space-y-5 text-sm text-ink-600 lg:text-base">
                 {
                     i.home.about.paragraphs.map((paragraph) => (
                         <p>{paragraph}</p>
                     ))
                 }
             </div>
-            <Button href={path("about", language)} class="mt-8 w-full sm:mt-10 sm:w-auto">
+            <Button href={path("about", language)} class="mt-8 w-full sm:mt-10 lg:w-auto">
                 {i.home.about.cta}
             </Button>
         </div>
