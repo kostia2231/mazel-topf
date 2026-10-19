@@ -17,10 +17,10 @@ const { items, class: className = "" } = Astro.props;
     {
         items.map((item) => (
             <li>
-                <p class="font-display font-bold text-4xl leading-none">
+                <p class="font-display text-4xl leading-none">
                     {item.value}
                 </p>
-                <p class="uppercase tracking-wider font-semibold mx-auto mt-3 max-w-xs text-xs">
+                <p class="uppercase tracking-wider mx-auto mt-3 max-w-xs text-xs">
                     {item.text}
                 </p>
             </li>

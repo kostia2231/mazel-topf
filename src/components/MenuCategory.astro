@@ -41,7 +41,7 @@ const price = (value: number) =>
 ---
 
 <section data-reveal>
-    <h2 class="font-display text-4xl font-semibold">{title}</h2>
+    <h2 class="font-display text-4xl">{title}</h2>
     <hr class="mt-4 w-12 border-t-2 border-brick-500" />
     {note && <p class="mt-4 text-sm italic text-ink-600">{note}</p>}
 
@@ -50,7 +50,7 @@ const price = (value: number) =>
             dishes.map((dish) => (
                 <li>
                     <div class="flex items-end gap-3">
-                        <h3 class="min-w-0 font-display text-xl font-semibold leading-tight">
+                        <h3 class="min-w-0 font-display text-xl leading-tight">
                             {dish.name}
                             {dish.tags.includes("vegetarian") && (
                                 <span
@@ -68,7 +68,7 @@ const price = (value: number) =>
                                     class="leader-dots"
                                     aria-hidden="true"
                                 />
-                                <span class="shrink-0 font-display text-xl font-semibold leading-none">
+                                <span class="shrink-0 font-display text-xl leading-none">
                                     {dish.priceText ?? price(dish.price!)}
                                 </span>
                             </>
@@ -82,7 +82,7 @@ const price = (value: number) =>
 
                     {dish.variants && dish.variants.length > 0 && (
                         <div class="mt-3">
-                            <p class="text-sm font-semibold">
+                            <p class="text-sm">
                                 {dish.variantsNote ??
                                     t.menu.addOn}
                             </p>
