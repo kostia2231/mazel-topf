@@ -279,8 +279,9 @@ gibt.
 Drei Formulare: Kontakt, Newsletter in der Fußzeile und die Buchung, die sich
 auf Catering, Startseite und Über Uns als Dialogfenster öffnet.
 
-Die Seite ist statisch und soll unabhängig vom Hoster laufen – ob Netlify oder
-ein S3-Bucket. Der Empfänger steht deshalb in einer Umgebungsvariablen:
+Die Seite ist statisch und liegt als S3-Bucket hinter CloudFront, hat also
+keinen eigenen Server, der Post annehmen könnte. Der Empfänger steht deshalb in
+einer Umgebungsvariablen:
 
 ```
 PUBLIC_FORM_ENDPOINT="https://…"
