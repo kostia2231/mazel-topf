@@ -113,7 +113,7 @@ const canonical = absoluteUrl(language);
           watcher.unobserve(element);
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
     );
 
     for (const item of items) watcher.observe(item);

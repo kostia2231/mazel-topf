@@ -42,22 +42,21 @@ const formatImages = [format1, format2, format3];
         imagePosition="center top"
     />
     <section class="mx-auto py-20 text-center" data-reveal>
-        <h2
-            class="font-display max-w-4xl mx-auto min-w-fit text-4xl leading-tight sm:text-4xl"
-        >
+        <h2 class="font-display max-w-2xl mx-auto text-4xl leading-tight sm:text-4xl">
             {page.title}
         </h2>
-        <div
-            class="mt-8 space-y-5 max-w-3xl mx-auto text-sm leading-relaxed text-ink-600"
-        >
-            {page.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="mt-8 space-y-5 max-w-3xl mx-auto text-sm leading-relaxed text-ink-600">
+            {page.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+            ))}
         </div>
         <Button
             variant="none"
             class="mt-10 cursor-pointer border-brick-500 bg-brick-500 text-white transition-colors hover:bg-brick-600"
             data-booking-open
-            >{page.cta}</Button
         >
+            {page.cta}
+        </Button>
     </section>
     <div class="group overflow-hidden">
         <Image
@@ -73,49 +72,42 @@ const formatImages = [format1, format2, format3];
     </div>
     <section class="bg-cream-100 px-6 py-20 lg:px-[7.5%]">
         <div class="mx-auto max-w-3xl space-y-4 text-center" data-reveal>
-            {
-                page.slogan.map((line) => (
-                    <p class="font-display text-2xl leading-snug italic">
-                        {line}
-                    </p>
-                ))
-            }
+            {page.slogan.map((line) => (
+                <p class="font-display text-2xl leading-snug italic">{line}</p>
+            ))}
         </div>
         <ul class="mx-auto mt-16 grid max-w-[1200px] gap-6 md:grid-cols-3">
-            {
-                page.formats.map((format, n) => (
-                    <li class="group relative isolate flex min-h-125 flex-col justify-end overflow-hidden p-8 text-center text-white hover:justify-center">
-                        <Image
-                            src={formatImages[n]}
-                            alt={t.images.cateringFormats[n]}
-                            widths={[420, 840]}
-                            width={840}
-                            sizes="(min-width: 640px) 28vw, 90vw"
-                            loading="eager"
-                            fetchpriority="low"
-                            class="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
-                        />
-                        <div class="absolute inset-0 -z-10 bg-black/25 group-hover:bg-black/70" />
-                        <Suitcase class="mx-auto mb-4 hidden size-6 text-white group-hover:block" />
-                        <h3 class="caps text-xl leading-tight whitespace-pre-line">
-                            {format.title}
-                        </h3>
-                        <p class="mt-4 hidden text-sm leading-relaxed text-white/90 group-hover:block">
-                            {format.text}
-                        </p>
-                    </li>
-                ))
-            }
+            {page.formats.map((format, n) => (
+                <li class="group relative isolate flex min-h-125 flex-col justify-end overflow-hidden p-8 text-center text-white hover:justify-center">
+                    <Image
+                        src={formatImages[n]}
+                        alt={t.images.cateringFormats[n]}
+                        widths={[420, 840]}
+                        width={840}
+                        sizes="(min-width: 640px) 28vw, 90vw"
+                        loading="eager"
+                        fetchpriority="low"
+                        class="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                    />
+                    <div class="absolute inset-0 -z-10 bg-black/25 group-hover:bg-black/70" />
+                    <Suitcase class="mx-auto mb-4 hidden size-6 text-white group-hover:block" />
+                    <h3 class="caps text-xl leading-tight whitespace-pre-line">
+                        {format.title}
+                    </h3>
+                    <p class="mt-4 hidden text-sm leading-relaxed text-white/90 group-hover:block">
+                        {format.text}
+                    </p>
+                </li>
+            ))}
         </ul>
         <div class="mt-12 text-center">
-            <Button class="cursor-pointer" data-booking-open>{page.cta}</Button>
+            <Button class="cursor-pointer" data-booking-open>
+                {page.cta}
+            </Button>
         </div>
     </section>
     <section class="px-6 py-20 lg:px-[7.5%]">
-        <Stats
-            items={page.stats}
-            class="mx-auto max-w-[1200px]"
-        />
+        <Stats items={page.stats} class="mx-auto max-w-[1200px]" />
     </section>
     <section class="bg-cream-100 py-20">
         <Reviews language={language} />

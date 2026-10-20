@@ -7,7 +7,12 @@ import Reviews from "../Reviews.astro";
 import Button from "../Button.astro";
 import CateringBlock from "../CateringBlock.astro";
 import DishCarousel from "../DishCarousel.astro";
-import { restaurant, mapsUrl, phoneLink, mailLink } from "../../data/restaurant";
+import {
+    restaurant,
+    mapsUrl,
+    phoneLink,
+    mailLink,
+} from "../../data/restaurant";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
 import { path, languageFromId, type Language } from "../../i18n/config";
@@ -17,10 +22,7 @@ import terracePoster from "../../assets/terrace-poster.webp";
 import facadeImage from "../../assets/facade-terrace.webp";
 import dishesImage from "../../assets/about-plate-on-wood.webp";
 import beerImage from "../../assets/table-with-beer.webp";
-import {
-    dishImages,
-    carouselKeys,
-} from "../../data/dish-images";
+import { dishImages, carouselKeys } from "../../data/dish-images";
 import { getCollection } from "astro:content";
 
 interface Props {
@@ -43,9 +45,7 @@ const carouselDishes = carouselKeys.flatMap((key) => {
 ---
 
 <Layout language={language} page="home" title={t.pageTitles.home}>
-    <section
-        class="relative isolate flex min-h-100 flex-col justify-between overflow-hidden sm:min-h-130 lg:min-h-[calc(100vh-4rem)]"
-    >
+    <section class="relative isolate flex min-h-100 flex-col justify-between overflow-hidden sm:min-h-130 lg:min-h-[calc(100vh-4rem)]">
         <BackgroundVideo
             name="hero"
             poster={heroPoster}
@@ -54,9 +54,7 @@ const carouselDishes = carouselKeys.flatMap((key) => {
             class="absolute inset-0 -z-10"
         />
         <div class="absolute inset-0 -z-10 bg-black/55"></div>
-        <div
-            class="flex flex-1 flex-col items-center justify-center px-6 py-10 text-center text-white sm:py-14 lg:py-24"
-        >
+        <div class="flex flex-1 flex-col items-center justify-center px-6 py-10 text-center text-white sm:py-14 lg:py-24">
             <hr class="w-18 border-t-2 border-white" data-reveal />
             <h1
                 class="mt-8 max-w-4xl font-display text-3xl leading-tight whitespace-pre-line sm:text-5xl lg:text-6xl"
@@ -64,7 +62,10 @@ const carouselDishes = carouselKeys.flatMap((key) => {
             >
                 {i.home.hero.title}
             </h1>
-            <p class="mt-4 font-display text-2xl text-white/95 lg:text-3xl" data-reveal>
+            <p
+                class="mt-4 font-display text-xl text-white/95 lg:text-2xl"
+                data-reveal
+            >
                 {i.home.hero.subline}
             </p>
             <Button
@@ -75,38 +76,40 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                 {i.home.hero.cta}
             </Button>
         </div>
-        <div
-            class="hidden gap-8 px-6 pb-10 text-center text-sm text-white sm:grid sm:grid-cols-3 lg:pb-16 lg:px-[15%]"
-        >
+        <div class="hidden gap-8 px-6 pb-10 text-center text-sm text-white sm:grid sm:grid-cols-3 lg:pb-16 lg:px-[15%]">
             <div>
                 <h2 class="caps text-xs">{t.contact.title}</h2>
                 <p class="mt-3 space-y-1 text-white/85">
-                    <a href={phoneLink} class="block hover:text-white"
-                        >{restaurant.phone}</a
-                    >
-                    <a href={mailLink} class="block hover:text-white"
-                        >{restaurant.email}</a
-                    >
+                    <a href={phoneLink} class="block hover:text-white">
+                        {restaurant.phone}
+                    </a>
+                    <a href={mailLink} class="block hover:text-white">
+                        {restaurant.email}
+                    </a>
                 </p>
             </div>
             <div>
                 <h2 class="caps text-xs">{t.footer.openingHours}</h2>
                 <dl class="mt-3 space-y-1 text-white/85">
-                    {
-                        i.openingHours.map((day) => (
-                            <div>
-                                <dt class="inline">{day.days}</dt>
-                                <dd class="inline"> {day.hours}</dd>
-                            </div>
-                        ))
-                    }
+                    {i.openingHours.map((day) => (
+                        <div>
+                            <dt class="inline">{day.days}</dt>
+                            <dd class="inline"> {day.hours}</dd>
+                        </div>
+                    ))}
                 </dl>
             </div>
             <div>
                 <h2 class="caps text-xs">{t.contact.address}</h2>
                 <p class="mt-3 text-white/85">
-                    <a href={mapsUrl} target="_blank" rel="noopener" class="hover:text-white">
-                        {restaurant.address.street}<br />
+                    <a
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noopener"
+                        class="hover:text-white"
+                    >
+                        {restaurant.address.street}
+                        <br />
                         {restaurant.address.postalCode}{" "}
                         {restaurant.address.city}
                     </a>
@@ -114,9 +117,7 @@ const carouselDishes = carouselKeys.flatMap((key) => {
             </div>
         </div>
     </section>
-    <section
-        class="mx-auto grid max-w-380 gap-12 px-6 py-14 sm:py-16 md:grid-cols-2 lg:gap-20 lg:px-[7.5%] lg:py-24"
-    >
+    <section class="mx-auto grid max-w-380 gap-12 px-6 py-14 sm:py-16 md:grid-cols-2 lg:gap-20 lg:px-[7.5%] lg:py-24">
         <div class="relative">
             <svg
                 viewBox="0 0 120 120"
@@ -129,13 +130,8 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                         d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"
                     ></path>
                 </defs>
-                <text
-                    class="caps"
-                    style="font-size: 10px; letter-spacing: 2px"
-                >
-                    <textPath href="#stamp-path"
-                        >{i.home.about.stamp}</textPath
-                    >
+                <text class="caps" style="font-size: 10px; letter-spacing: 2px">
+                    <textPath href="#stamp-path">{i.home.about.stamp}</textPath>
                 </text>
             </svg>
             <div class="relative">
@@ -167,55 +163,50 @@ const carouselDishes = carouselKeys.flatMap((key) => {
         </div>
         <div class="lg:pt-12" data-reveal>
             <hr class="w-12 border-t-2 border-brick-500" />
-            <p
-                class="caps mt-6 text-xs text-ink-400"
-            >
-                {i.home.about.eyebrow}
-            </p>
-            <h2
-                class="font-display mt-5 text-xl leading-tight tracking-title whitespace-pre-line lg:text-3xl"
-            >
+            <p class="caps mt-6 text-xs text-ink-400">{i.home.about.eyebrow}</p>
+            <h2 class="font-display mt-5 text-xl leading-tight tracking-title whitespace-pre-line lg:text-3xl">
                 {i.home.about.title}
             </h2>
             <div class="mt-5 max-w-xl space-y-5 text-sm text-ink-600 lg:text-base">
-                {
-                    i.home.about.paragraphs.map((paragraph) => (
-                        <p>{paragraph}</p>
-                    ))
-                }
+                {i.home.about.paragraphs.map((paragraph) => (
+                    <p>{paragraph}</p>
+                ))}
             </div>
-            <Button href={path("about", language)} class="mt-8 w-full sm:mt-10 lg:w-auto">
+            <Button
+                href={path("about", language)}
+                class="mt-8 w-full sm:mt-10 lg:w-auto"
+            >
                 {i.home.about.cta}
             </Button>
         </div>
     </section>
     <section class="bg-cream-100 pt-10 pb-10 sm:pt-16 sm:pb-12 lg:pt-24 lg:pb-16">
-        <div
-            class="mx-auto flex max-w-380 flex-col gap-6 px-6 pb-8 md:flex-row md:items-start md:justify-between md:gap-8 lg:pb-16 lg:px-[7.5%]"
-        >
-            <div class="md:max-w-1/2" data-reveal>
-                <h2
-                    class="font-display text-2xl leading-tight sm:text-4xl lg:text-4xl"
-                >
+        <div class="mx-auto flex max-w-380 flex-col gap-6 px-6 pb-8 md:flex-row md:items-start md:justify-between md:gap-8 lg:pb-16 lg:px-[7.5%]">
+            <div data-reveal>
+                <h2 class="font-display text-2xl leading-tight sm:text-4xl lg:text-4xl">
                     {i.home.dishes.title}
                 </h2>
                 <p class="mt-6 text-sm leading-relaxed text-ink-600">
                     {i.home.dishes.text}
                 </p>
             </div>
-            <Button href={path("menu", language)} class="w-full shrink-0 sm:w-auto">
+            <Button
+                href={path("menu", language)}
+                class="w-full shrink-0 sm:w-auto"
+            >
                 {i.home.dishes.cta}
             </Button>
         </div>
         <DishCarousel language={language} dishes={carouselDishes} />
-        <div class="mx-auto mt-10 max-w-3xl space-y-4 px-6 text-center lg:mt-16" data-reveal>
-            {
-                i.home.dishes.slogan.map((line) => (
-                    <p class="font-display text-base leading-snug italic sm:text-xl lg:text-2xl">
-                        {line}
-                    </p>
-                ))
-            }
+        <div
+            class="mx-auto mt-10 max-w-3xl space-y-4 px-6 text-center lg:mt-16"
+            data-reveal
+        >
+            {i.home.dishes.slogan.map((line) => (
+                <p class="font-display text-base leading-snug italic sm:text-xl lg:text-2xl">
+                    {line}
+                </p>
+            ))}
         </div>
     </section>
     <CateringBlock language={language} />
