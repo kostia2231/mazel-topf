@@ -117,10 +117,37 @@ import "../styles/global.css";
                         .join("");
                 }
 
-                const response = await fetch(ENDPOINT, { method: "POST", headers, body });
+                let response;
+                try {
+                    response = await fetch(ENDPOINT, { method: "POST", headers, body });
+                } catch {
+                    throw new Error("Keine Verbindung zum Server");
+                }
+
                 const data = await response.json().catch(() => ({}));
+                if (response.status === 401 || response.status === 403) {
+                    throw new Error("wrong key");
+                }
                 if (!response.ok) throw new Error(data.error ?? `Fehler ${response.status}`);
                 return data;
+            };
+
+            const explain = (failure) => {
+                const message = String(failure?.message ?? failure);
+                return message === "wrong key" ? "Falscher Schlüssel" : message;
+            };
+
+            const busy = (on) => {
+                const button = $("gate").querySelector("button[type=submit]");
+                button.disabled = on;
+                button.textContent = on ? "Wird geöffnet …" : "Öffnen";
+                $("key").disabled = on;
+            };
+
+            const showError = (failure) => {
+                const error = $("gate-error");
+                error.textContent = explain(failure);
+                error.classList.remove("hidden");
             };
 
             const fingerprint = (file) => JSON.stringify(file.data);
@@ -342,10 +369,8 @@ import "../styles/global.css";
 
             $("gate").addEventListener("submit", async (event) => {
                 event.preventDefault();
-                const error = $("gate-error");
-                const button = event.target.querySelector("button[type=submit]");
-                error.classList.add("hidden");
-                button.disabled = true;
+                $("gate-error").classList.add("hidden");
+                busy(true);
 
                 try {
                     await open($("key").value.trim());
@@ -355,13 +380,9 @@ import "../styles/global.css";
                 } catch (failure) {
                     forget();
                     $("key").value = "";
-                    error.textContent =
-                        String(failure.message ?? failure) === "wrong key"
-                            ? "Falscher Schlüssel"
-                            : String(failure.message ?? failure);
-                    error.classList.remove("hidden");
+                    showError(failure);
                 } finally {
-                    button.disabled = false;
+                    busy(false);
                 }
             });
 
@@ -420,8 +441,13 @@ import "../styles/global.css";
             } catch {}
 
             if (remembered) {
-                $("gate-screen").classList.add("hidden");
-                open(remembered).catch(forget);
+                busy(true);
+                open(remembered)
+                    .catch((failure) => {
+                        forget();
+                        showError(failure);
+                    })
+                    .finally(() => busy(false));
             }
         </script>
     </body>
