@@ -1,146 +1,146 @@
-import type { RouteKey, Language } from "./config"
-import { orderOnlineUrl, reservationUrl } from "../data/restaurant"
+import type { RouteKey, Language } from "./config";
+import { orderOnlineUrl, reservationUrl } from "../data/restaurant";
 
 export type NavItem =
     | { route: RouteKey; label: string }
-    | { url: string; label: string; zenchef?: true }
+    | { url: string; label: string; zenchef?: true };
 
 export const isExternal = (
     item: NavItem,
-): item is { url: string; label: string; zenchef?: true } => "url" in item
+): item is { url: string; label: string; zenchef?: true } => "url" in item;
 
 interface UiText {
-    htmlLang: string
-    navigation: NavItem[]
-    secondaryNavigation: NavItem[]
-    drawerNavigation: NavItem[]
-    drawerOrderOnline: { url: string; label: string }
-    footerLinks: NavItem[]
-    legalLinks: NavItem[]
+    htmlLang: string;
+    navigation: NavItem[];
+    secondaryNavigation: NavItem[];
+    drawerNavigation: NavItem[];
+    drawerOrderOnline: { url: string; label: string };
+    footerLinks: NavItem[];
+    legalLinks: NavItem[];
     header: {
-        mainNavigation: string
-        navigation: string
-        openMenu: string
-        closeMenu: string
-        toHome: string
-        reservation: string
-        switchLanguage: string
-        extras: string
-    }
+        mainNavigation: string;
+        navigation: string;
+        openMenu: string;
+        closeMenu: string;
+        toHome: string;
+        reservation: string;
+        switchLanguage: string;
+        extras: string;
+    };
     footer: {
-        openingHours: string
-        directions: string
-        links: string
-        newsletter: string
-        emailPlaceholder: string
-        emailLabel: string
-        submit: string
-        successText: string
-        errorText: string
-    }
+        openingHours: string;
+        directions: string;
+        links: string;
+        newsletter: string;
+        emailPlaceholder: string;
+        emailLabel: string;
+        submit: string;
+        successText: string;
+        errorText: string;
+    };
     cookies: {
-        settings: string
-        text: string
-        moreInfo: string
-        necessary: string
-        statistics: string
-        marketing: string
-        acceptAll: string
-        save: string
-        reject: string
-    }
-    banner: { home: string }
+        settings: string;
+        text: string;
+        moreInfo: string;
+        necessary: string;
+        statistics: string;
+        marketing: string;
+        acceptAll: string;
+        save: string;
+        reject: string;
+    };
+    banner: { home: string };
     menu: {
-        title: string
-        description: string
-        lunchSpecial: string
-        lunchHours: string
-        vegetarian: string
-        addOn: string
-    }
+        title: string;
+        description: string;
+        lunchSpecial: string;
+        lunchHours: string;
+        vegetarian: string;
+        addOn: string;
+    };
     contact: {
-        title: string
-        description: string
-        address: string
-        openingHours: string
-        name: string
-        email: string
-        message: string
-        submit: string
-        map: string
-        successTitle: string
-        successText: string
-        errorText: string
-    }
+        title: string;
+        description: string;
+        address: string;
+        openingHours: string;
+        name: string;
+        email: string;
+        message: string;
+        submit: string;
+        map: string;
+        successTitle: string;
+        successText: string;
+        errorText: string;
+    };
     eventBooking: {
-        title: string
-        firstName: string
-        lastName: string
-        email: string
-        phone: string
-        message: string
-        submit: string
-        close: string
-        successTitle: string
-        successText: string
-        errorText: string
-    }
+        title: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        phone: string;
+        message: string;
+        submit: string;
+        close: string;
+        successTitle: string;
+        successText: string;
+        errorText: string;
+    };
     reviews: {
-        previous: string
-        next: string
-        show: (position: number) => string
-        stars: (count: number) => string
-    }
+        previous: string;
+        next: string;
+        show: (position: number) => string;
+        stars: (count: number) => string;
+    };
     dishes: {
-        viewOnMenu: (name: string) => string
-        previous: string
-        next: string
-    }
+        viewOnMenu: (name: string) => string;
+        previous: string;
+        next: string;
+    };
     images: {
-        hero: string
-        dishesFromAbove: string
-        facade: string
-        challah: string
-        terrace: string
-        tableWithBeer: string
-        laidTable: string
-        interiorLamp: string
-        tableMezze: string
-        chickenRisotto: string
-        falafelPlate: string
-        aubergineBeetroot: string
-        pitaInPaper: string
-        tableWithMatzo: string
-        cateringBanner: string
-        cocktail: string
-        cateringFormats: [string, string, string]
-        salmonSalad: string
-        aubergineCouscous: string
-        ribsSalsa: string
-        seaBream: string
-        banner: (page: string) => string
-        dish: (position: number) => string
-        tiles: [string, string, string, string, string]
-    }
+        hero: string;
+        dishesFromAbove: string;
+        facade: string;
+        challah: string;
+        terrace: string;
+        tableWithBeer: string;
+        laidTable: string;
+        interiorLamp: string;
+        tableMezze: string;
+        chickenRisotto: string;
+        falafelPlate: string;
+        aubergineBeetroot: string;
+        pitaInPaper: string;
+        tableWithMatzo: string;
+        cateringBanner: string;
+        cocktail: string;
+        cateringFormats: [string, string, string];
+        salmonSalad: string;
+        aubergineCouscous: string;
+        ribsSalsa: string;
+        seaBream: string;
+        banner: (page: string) => string;
+        dish: (position: number) => string;
+        tiles: [string, string, string, string, string];
+    };
     notFound: {
-        title: string
-        text: string
-        cta: string
-    }
+        title: string;
+        text: string;
+        cta: string;
+    };
     pageTitles: {
-        home: string
-        about: string
-        aboutDescription: string
-        catering: string
-        cateringDescription: string
-    }
+        home: string;
+        about: string;
+        aboutDescription: string;
+        catering: string;
+        cateringDescription: string;
+    };
 }
 
 export const ui: Record<Language, UiText> = {
     de: {
         htmlLang: "de",
         navigation: [
-            { url: orderOnlineUrl, label: "Online bestellen" },
+            { url: orderOnlineUrl, label: "Bestellen" },
             { route: "menu", label: "Speisekarte" },
             { route: "catering", label: "Catering" },
         ],
@@ -154,10 +154,10 @@ export const ui: Record<Language, UiText> = {
             { route: "about", label: "Über Uns" },
             { route: "contact", label: "Kontakt" },
         ],
-        drawerOrderOnline: { url: orderOnlineUrl, label: "Online bestellen" },
+        drawerOrderOnline: { url: orderOnlineUrl, label: "Bestellen" },
         footerLinks: [
             { url: reservationUrl, label: "Tisch reservieren", zenchef: true },
-            { url: orderOnlineUrl, label: "Online bestellen" },
+            { url: orderOnlineUrl, label: "Bestellen" },
             { route: "catering", label: "Catering" },
             { route: "contact", label: "Kontakt" },
         ],
@@ -183,8 +183,10 @@ export const ui: Record<Language, UiText> = {
             emailPlaceholder: "Email",
             emailLabel: "E-Mail-Adresse",
             submit: "Subscribe",
-            successText: "Danke! Bitte bestätigen Sie die Anmeldung per E-Mail.",
-            errorText: "Die Anmeldung hat nicht geklappt. Bitte versuchen Sie es erneut.",
+            successText:
+                "Danke! Bitte bestätigen Sie die Anmeldung per E-Mail.",
+            errorText:
+                "Die Anmeldung hat nicht geklappt. Bitte versuchen Sie es erneut.",
         },
         cookies: {
             settings: "Cookies",
@@ -261,7 +263,8 @@ export const ui: Record<Language, UiText> = {
             dishesFromAbove: "Mezze und Vorspeisen von oben aufgenommen",
             facade: "Terrasse und Fassade des Restaurants in der Rykestraße",
             challah: "Frisch gebackene Challah mit Sesam auf einem Leinentuch",
-            terrace: "Die Terrasse von Masel Topf in der Rykestraße, gedeckte Tische unter der Markise",
+            terrace:
+                "Die Terrasse von Masel Topf in der Rykestraße, gedeckte Tische unter der Markise",
             tableWithBeer: "Tisch mit Bier und Grillteller",
             laidTable: "Gedeckter Tisch im Restaurant",
             interiorLamp:
@@ -290,8 +293,7 @@ export const ui: Record<Language, UiText> = {
                 "Geschmorte Auberginen in Sauce mit Couscous und Koriander",
             ribsSalsa:
                 "Glasierte Short Ribs mit Tomatensalsa und Fladenbrot-Chips",
-            seaBream:
-                "Gebratene Dorade mit Kräuteröl und Kartoffelpüree",
+            seaBream: "Gebratene Dorade mit Kräuteröl und Kartoffelpüree",
             banner: (page) => `Bannerbild ${page}`,
             dish: (position) => `Gericht ${position}`,
             tiles: [
@@ -439,7 +441,8 @@ export const ui: Record<Language, UiText> = {
             dishesFromAbove: "Mezze and starters shot from above",
             facade: "Terrace and facade of the restaurant on Rykestraße",
             challah: "Freshly baked sesame challah on a linen cloth",
-            terrace: "The Masel Topf terrace on Rykestraße, tables laid under the awning",
+            terrace:
+                "The Masel Topf terrace on Rykestraße, tables laid under the awning",
             tableWithBeer: "Table with beer and a grill platter",
             laidTable: "Laid table in the restaurant",
             interiorLamp:
@@ -455,8 +458,7 @@ export const ui: Record<Language, UiText> = {
             tableWithMatzo: "Guests at the laid table, breaking matzo",
             cateringBanner:
                 "Dessert on a plate painted with berry sauce, matzo and skewers alongside",
-            cocktail:
-                "Cocktail with a lemon slice and mint on the bar counter",
+            cocktail: "Cocktail with a lemon slice and mint on the bar counter",
             cateringFormats: [
                 "A waiter setting the table for an event",
                 "Festively laid table under chandeliers in a marquee",
@@ -468,8 +470,7 @@ export const ui: Record<Language, UiText> = {
                 "Braised aubergines in sauce with couscous and coriander",
             ribsSalsa:
                 "Glazed short ribs with tomato salsa and flatbread crisps",
-            seaBream:
-                "Pan-fried sea bream with herb oil and potato purée",
+            seaBream: "Pan-fried sea bream with herb oil and potato purée",
             banner: (page) => `Banner image ${page}`,
             dish: (position) => `Dish ${position}`,
             tiles: [
@@ -495,4 +496,4 @@ export const ui: Record<Language, UiText> = {
                 "Catering by Masel Topf – from a private dinner to an event with hundreds of guests.",
         },
     },
-}
+};

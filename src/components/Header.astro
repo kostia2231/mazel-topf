@@ -248,7 +248,26 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
             {t.drawerOrderOnline.label}
         </a>
 
-        <SocialLinks tone="solid" class="mt-auto" />
+        <div
+            class="mt-auto flex items-center gap-2"
+            aria-label={t.header.switchLanguage}
+        >
+            <span
+                class="uppercase tracking-wider flex size-8 items-center justify-center rounded-full bg-brick-500 text-xs text-white"
+                aria-current="true"
+            >
+                {languageLabel[language]}
+            </span>
+            <a
+                href={path(page, other)}
+                hreflang={other}
+                class="uppercase tracking-wider text-xs text-ink-400 transition-colors hover:text-ink-900"
+            >
+                {languageLabel[other]}
+            </a>
+        </div>
+
+        <SocialLinks tone="solid" class="mt-8" />
     </nav>
 </div>
 
