@@ -22,9 +22,7 @@ const year = new Date().getFullYear();
 
 <footer class="bg-bark-700 text-white">
     <div class="mx-auto max-w-[1520px] px-6 py-16 lg:px-[7.5%]">
-        <div
-            class="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-center lg:grid-cols-[auto_1fr_auto] lg:items-start lg:gap-16"
-        >
+        <div class="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-center lg:grid-cols-[auto_1fr_auto] lg:items-start lg:gap-16">
             <Image
                 src={logo}
                 alt={restaurant.name}
@@ -32,36 +30,28 @@ const year = new Date().getFullYear();
                 height={92}
                 class="h-auto w-40 shrink-0 sm:col-span-2 sm:w-[215px] lg:col-span-1"
             />
-            <p class="max-w-xl text-sm leading-relaxed text-mist">
-                {i.quote}
-            </p>
+            <p class="max-w-xl text-sm leading-relaxed text-mist">{i.quote}</p>
             <SocialLinks tone="light" />
         </div>
         <hr class="my-12 border-line-dark" />
         <div class="grid gap-10 sm:grid-cols-3 lg:grid-cols-4">
             <div class="space-y-10 lg:contents">
                 <div>
-                    <h2 class="font-display text-xl">
+                    <h2 class="font-display text-lg">
                         {t.footer.openingHours}
                     </h2>
                     <dl class="mt-5 space-y-1 text-sm text-mist">
-                        {
-                            i.openingHours.map((day) => (
-                                <div>
-                                    <dt class="inline">{day.days}</dt>
-                                    <dd class="inline"> {day.hours}</dd>
-                                </div>
-                            ))
-                        }
+                        {i.openingHours.map((day) => (
+                            <div>
+                                <dt class="inline">{day.days}</dt>
+                                <dd class="inline"> {day.hours}</dd>
+                            </div>
+                        ))}
                     </dl>
                 </div>
                 <div>
-                    <h2 class="font-display text-xl">
-                        {t.footer.directions}
-                    </h2>
-                    <address
-                        class="mt-5 space-y-3 text-sm not-italic text-mist"
-                    >
+                    <h2 class="font-display text-lg">{t.footer.directions}</h2>
+                    <address class="mt-5 space-y-3 text-sm not-italic text-mist">
                         <p>
                             <a
                                 href={mapsUrl}
@@ -69,16 +59,17 @@ const year = new Date().getFullYear();
                                 rel="noopener"
                                 class="hover:text-white"
                             >
-                                {restaurant.address.street}, {restaurant.address.postalCode}{" "}
+                                {restaurant.address.street},{" "}
+                                {restaurant.address.postalCode}{" "}
                                 {restaurant.address.city}
                             </a>
                         </p>
                         <p>
-                            <a href={mailLink} class="hover:text-white"
-                                >{restaurant.email}</a
-                            >
+                            <a href={mailLink} class="hover:text-white">
+                                {restaurant.email}
+                            </a>
                         </p>
-                        <p class="font-display text-xl text-white">
+                        <p class="font-display text-md text-white">
                             <a href={phoneLink}>{restaurant.phone}</a>
                         </p>
                     </address>
@@ -86,45 +77,41 @@ const year = new Date().getFullYear();
             </div>
 
             <div>
-                <h2 class="font-display text-xl">
-                    {t.footer.links}
-                </h2>
+                <h2 class="font-display text-lg">{t.footer.links}</h2>
                 <ul class="mt-5 space-y-3 text-sm text-mist">
-                    {
-                        t.footerLinks.map((link) => (
-                            <li>
-                                <a
-                                    href={
-                                        isExternal(link)
-                                            ? link.url
-                                            : path(link.route, language)
-                                    }
-                                    data-zenchef={
-                                        isExternal(link) && link.zenchef ? "" : undefined
-                                    }
-                                    target={
-                                        isExternal(link) && !link.zenchef
-                                            ? "_blank"
-                                            : undefined
-                                    }
-                                    rel={
-                                        isExternal(link) && !link.zenchef
-                                            ? "noopener"
-                                            : undefined
-                                    }
-                                    class="hover:text-white"
-                                >
-                                    {link.label}
-                                </a>
-                            </li>
-                        ))
-                    }
+                    {t.footerLinks.map((link) => (
+                        <li>
+                            <a
+                                href={
+                                    isExternal(link)
+                                        ? link.url
+                                        : path(link.route, language)
+                                }
+                                data-zenchef={
+                                    isExternal(link) && link.zenchef
+                                        ? ""
+                                        : undefined
+                                }
+                                target={
+                                    isExternal(link) && !link.zenchef
+                                        ? "_blank"
+                                        : undefined
+                                }
+                                rel={
+                                    isExternal(link) && !link.zenchef
+                                        ? "noopener"
+                                        : undefined
+                                }
+                                class="hover:text-white"
+                            >
+                                {link.label}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
             </div>
             <div>
-                <h2 class="font-display text-xl">
-                    {t.footer.newsletter}
-                </h2>
+                <h2 class="font-display text-lg">{t.footer.newsletter}</h2>
                 <div data-form>
                     <form
                         name="newsletter"
@@ -136,12 +123,16 @@ const year = new Date().getFullYear();
                         <p class="hidden" aria-hidden="true">
                             <label>
                                 Firma
-                                <input name={honeypot} tabindex="-1" autocomplete="off" />
+                                <input
+                                    name={honeypot}
+                                    tabindex="-1"
+                                    autocomplete="off"
+                                />
                             </label>
                         </p>
-                        <label class="sr-only" for="newsletter-email"
-                            >{t.footer.emailLabel}</label
-                        >
+                        <label class="sr-only" for="newsletter-email">
+                            {t.footer.emailLabel}
+                        </label>
                         <input
                             id="newsletter-email"
                             type="email"
@@ -158,7 +149,11 @@ const year = new Date().getFullYear();
                             {t.footer.submit}
                         </Button>
 
-                        <p class="hidden text-sm text-mist" role="alert" data-form-error>
+                        <p
+                            class="hidden text-sm text-mist"
+                            role="alert"
+                            data-form-error
+                        >
                             {t.footer.errorText}
                         </p>
                     </form>
@@ -175,10 +170,10 @@ const year = new Date().getFullYear();
             </div>
         </div>
         <hr class="my-12 border-line-dark" />
-        <div
-            class="flex flex-wrap items-center justify-between gap-4 text-sm text-mist"
-        >
-            <span>{restaurant.name} {year}</span>
+        <div class="flex flex-wrap items-center justify-between gap-4 text-sm text-mist">
+            <span>
+                {restaurant.name} {year}
+            </span>
             <ul class="flex flex-wrap gap-8">
                 <li>
                     <button
@@ -189,18 +184,16 @@ const year = new Date().getFullYear();
                         {t.cookies.settings}
                     </button>
                 </li>
-                {
-                    t.legalLinks.map((link) => (
-                        <li>
-                            <a
-                                href={path(link.route, language)}
-                                class="hover:text-white"
-                            >
-                                {link.label}
-                            </a>
-                        </li>
-                    ))
-                }
+                {t.legalLinks.map((link) => (
+                    <li>
+                        <a
+                            href={path(link.route, language)}
+                            class="hover:text-white"
+                        >
+                            {link.label}
+                        </a>
+                    </li>
+                ))}
             </ul>
         </div>
     </div>

@@ -4,7 +4,12 @@ import Button from "../Button.astro";
 import bannerImage from "../../assets/contact-banner-cocktail.webp";
 import PageBanner from "../PageBanner.astro";
 import SocialLinks from "../SocialLinks.astro";
-import { mailLink, mapsUrl, restaurant, phoneLink } from "../../data/restaurant";
+import {
+    mailLink,
+    mapsUrl,
+    restaurant,
+    phoneLink,
+} from "../../data/restaurant";
 import { content } from "../../i18n/content";
 import { ui } from "../../i18n/ui";
 import type { Language } from "../../i18n/config";
@@ -37,13 +42,9 @@ const fields = [
         image={bannerImage}
         imageAlt={t.images.cocktail}
     />
-    <section
-        class="mx-auto grid max-w-[1200px] gap-14 px-6 py-24 lg:grid-cols-2 lg:gap-20"
-    >
+    <section class="mx-auto grid max-w-[1200px] gap-14 px-6 py-24 lg:grid-cols-2 lg:gap-20">
         <div data-reveal>
-            <h2
-                class="font-display text-4xl leading-tight whitespace-pre-line sm:text-4xl"
-            >
+            <h2 class="font-display text-2xl leading-tight whitespace-pre-line lg:text-3xl">
                 {i.contactPage.title}
             </h2>
             <p class="mt-6 max-w-md text-sm leading-relaxed text-ink-600">
@@ -52,12 +53,8 @@ const fields = [
             <hr class="mt-8 w-12 border-t-2 border-brick-500" />
             <div class="mt-8 grid gap-10 sm:grid-cols-2">
                 <div>
-                    <h3 class="caps text-xs">
-                        {t.contact.address}
-                    </h3>
-                    <address
-                        class="mt-4 space-y-1 text-sm not-italic text-ink-600"
-                    >
+                    <h3 class="caps text-xs">{t.contact.address}</h3>
+                    <address class="mt-4 space-y-1 text-sm not-italic text-ink-600">
                         <p>
                             <a
                                 href={mapsUrl}
@@ -72,30 +69,26 @@ const fields = [
                             </a>
                         </p>
                         <p>
-                            <a href={phoneLink} class="hover:text-brick-500"
-                                >{restaurant.phone}</a
-                            >
+                            <a href={phoneLink} class="hover:text-brick-500">
+                                {restaurant.phone}
+                            </a>
                         </p>
                         <p>
-                            <a href={mailLink} class="hover:text-brick-500"
-                                >{restaurant.email}</a
-                            >
+                            <a href={mailLink} class="hover:text-brick-500">
+                                {restaurant.email}
+                            </a>
                         </p>
                     </address>
                 </div>
                 <div>
-                    <h3 class="caps text-xs">
-                        {t.contact.openingHours}
-                    </h3>
+                    <h3 class="caps text-xs">{t.contact.openingHours}</h3>
                     <dl class="mt-4 space-y-1 text-sm text-ink-600">
-                        {
-                            i.openingHours.map((day) => (
-                                <div>
-                                    <dt class="inline">{day.days}</dt>
-                                    <dd class="inline"> {day.hours}</dd>
-                                </div>
-                            ))
-                        }
+                        {i.openingHours.map((day) => (
+                            <div>
+                                <dt class="inline">{day.days}</dt>
+                                <dd class="inline"> {day.hours}</dd>
+                            </div>
+                        ))}
                     </dl>
                 </div>
             </div>
@@ -114,30 +107,32 @@ const fields = [
                 <p class="hidden" aria-hidden="true">
                     <label>
                         Firma
-                        <input name={honeypot} tabindex="-1" autocomplete="off" />
+                        <input
+                            name={honeypot}
+                            tabindex="-1"
+                            autocomplete="off"
+                        />
                     </label>
                 </p>
-                {
-                    fields.map((field) => (
-                        <div>
-                            <label class="sr-only" for={field.name}>
-                                {field.label}
-                            </label>
-                            <input
-                                id={field.name}
-                                name={field.name}
-                                type={field.type}
-                                required
-                                placeholder={field.label}
-                                class="w-full border border-line px-5 py-4 text-sm placeholder:text-ink-400 focus:border-brick-500 focus:outline-none"
-                            />
-                        </div>
-                    ))
-                }
+                {fields.map((field) => (
+                    <div>
+                        <label class="sr-only" for={field.name}>
+                            {field.label}
+                        </label>
+                        <input
+                            id={field.name}
+                            name={field.name}
+                            type={field.type}
+                            required
+                            placeholder={field.label}
+                            class="w-full border border-line px-5 py-4 text-sm placeholder:text-ink-400 focus:border-brick-500 focus:outline-none"
+                        />
+                    </div>
+                ))}
                 <div>
-                    <label class="sr-only" for="message"
-                        >{t.contact.message}</label
-                    >
+                    <label class="sr-only" for="message">
+                        {t.contact.message}
+                    </label>
                     <textarea
                         id="message"
                         name="message"
@@ -147,7 +142,11 @@ const fields = [
                         class="w-full border border-line px-5 py-4 text-sm placeholder:text-ink-400 focus:border-brick-500 focus:outline-none"
                     ></textarea>
                 </div>
-                <p class="hidden text-sm text-brick-500" role="alert" data-form-error>
+                <p
+                    class="hidden text-sm text-brick-500"
+                    role="alert"
+                    data-form-error
+                >
                     {t.contact.errorText}
                 </p>
 

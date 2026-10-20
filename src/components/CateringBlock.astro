@@ -19,10 +19,8 @@ const t = ui[language];
 
 <section class="mx-auto grid max-w-380 gap-8 px-6 pb-12 sm:gap-12 sm:py-16 md:grid-cols-2 lg:gap-20 lg:px-[7.5%] lg:py-24">
     <div data-reveal>
-        <p class="caps text-xs text-ink-400">
-            {block.eyebrow}
-        </p>
-        <h2 class="mt-5 font-display text-2xl leading-tight sm:text-4xl lg:text-4xl">
+        <p class="caps text-xs text-ink-400">{block.eyebrow}</p>
+        <h2 class="mt-5 font-display text-2xl leading-tight lg:text-3xl">
             {block.title}
         </h2>
         <hr class="mt-6 w-12 border-t-2 border-brick-500" />
@@ -48,7 +46,7 @@ const t = ui[language];
                                 <span class="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 bg-brick-500" />
                                 <span class="accordion-bar absolute top-0 left-1/2 h-full w-0.5 -translate-x-1/2 bg-brick-500" />
                             </span>
-                            <span class="font-display text-2xl leading-tight">
+                            <span class="font-display text-xl leading-tight">
                                 {point.title}
                             </span>
                         </button>
@@ -74,7 +72,10 @@ const t = ui[language];
             <Image
                 src={tableImage}
                 alt={t.images.laidTable}
-                loading="eager"
+                widths={[666, 1332]}
+                width={1332}
+                sizes="(min-width: 768px) 46vw, 100vw"
+                loading="lazy"
                 fetchpriority="low"
                 class="aspect-[666/651] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
             />
