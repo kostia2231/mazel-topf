@@ -260,7 +260,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stamp-spin {
+  .stamp-spin,
+  .animate-spin {
     animation: none;
   }
 }

@@ -30,9 +30,14 @@ import "../styles/global.css";
                 />
                 <button
                     type="submit"
-                    class="caps mt-3 w-full cursor-pointer bg-brick-500 px-4 py-3.5 text-xs text-white hover:bg-brick-600"
+                    class="caps mt-3 flex w-full cursor-pointer items-center justify-center gap-2.5 bg-brick-500 px-4 py-3.5 text-xs text-white hover:bg-brick-600 disabled:cursor-not-allowed disabled:bg-brick-500/60 disabled:hover:bg-brick-500/60"
                 >
-                    Öffnen
+                    <span
+                        id="gate-spinner"
+                        class="hidden size-3.5 animate-spin rounded-full border-2 border-white/40 border-t-white"
+                        aria-hidden="true"
+                    ></span>
+                    <span id="gate-label">Öffnen</span>
                 </button>
                 <p
                     id="gate-error"
@@ -138,10 +143,10 @@ import "../styles/global.css";
             };
 
             const busy = (on) => {
-                const button = $("gate").querySelector("button[type=submit]");
-                button.disabled = on;
-                button.textContent = on ? "Wird geöffnet …" : "Öffnen";
+                $("gate").querySelector("button[type=submit]").disabled = on;
                 $("key").disabled = on;
+                $("gate-spinner").classList.toggle("hidden", !on);
+                $("gate-label").textContent = on ? "Wird geöffnet" : "Öffnen";
             };
 
             const showError = (failure) => {
