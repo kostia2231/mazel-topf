@@ -92,6 +92,7 @@ body {
 
 @utility leader-dots {
   flex: 1 1 auto;
+  min-width: 1.5rem;
   align-self: end;
   margin-bottom: 0.4rem;
   height: var(--dot-size);
