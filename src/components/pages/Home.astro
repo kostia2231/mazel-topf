@@ -130,8 +130,14 @@ const carouselDishes = carouselKeys.flatMap((key) => {
                         d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"
                     ></path>
                 </defs>
-                <text class="caps" style="font-size: 10px; letter-spacing: 2px">
-                    <textPath href="#stamp-path">{i.home.about.stamp}</textPath>
+                <text class="caps" style="font-size: 8px; letter-spacing: normal">
+                    <textPath
+                        href="#stamp-path"
+                        textLength="276"
+                        lengthAdjust="spacing"
+                    >
+                        {i.home.about.stamp}
+                    </textPath>
                 </text>
             </svg>
             <div class="relative">
