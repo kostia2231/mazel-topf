@@ -160,7 +160,7 @@ const de: Content = {
                     "zurückkehrt. Aus Liebe, nicht aus Gewohnheit.",
             ],
             cta: "Erfahren Sie mehr über uns",
-            stamp: "Israelisches Restaurant · seit 2022 · Masel Topf ·\u00a0\u00a0",
+            stamp: "Israelisches Restaurant · seit 2022 · Masel Topf ·\u00a0",
         },
         dishes: {
             title: "Sie werden es unbedingt ausprobieren wollen",
@@ -366,7 +366,7 @@ const en: Content = {
                 "Masel Topf is a place people come back to. Not out of habit, but out of love.",
             ],
             cta: "Learn more about us",
-            stamp: "Israeli restaurant · since 2022 · Masel Topf ·\u00a0\u00a0",
+            stamp: "Israeli restaurant · since 2022 · Masel Topf ·\u00a0",
         },
         dishes: {
             title: "You will definitely want to try these",
