@@ -105,6 +105,21 @@ body {
   background-repeat: repeat-x;
 }
 
+@utility leader-run {
+  position: absolute;
+  bottom: 0.4rem;
+  width: 100%;
+  margin-left: 0.5rem;
+  height: var(--dot-size);
+  background-image: radial-gradient(
+    circle closest-side,
+    var(--color-ink-400) 100%,
+    transparent 100%
+  );
+  background-size: var(--dot-gap) var(--dot-size);
+  background-repeat: repeat-x;
+}
+
 .prose-legal {
   counter-reset: legal-section;
   display: grid;
