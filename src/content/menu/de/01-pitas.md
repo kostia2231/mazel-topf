@@ -2,7 +2,6 @@
 title: Pitas
 order: 1
 group: lunch-special
-note: asdasd
 dishes:
   - name: Dr. Shawarma
     key: dr-shawarma
