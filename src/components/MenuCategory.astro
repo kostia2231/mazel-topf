@@ -48,32 +48,28 @@ const price = (value: number) =>
     <ul class="mt-8 space-y-7">
         {dishes.map((dish) => (
             <li>
-                <div class="flex flex-wrap items-end gap-x-3 gap-y-1 sm:flex-nowrap">
-                    <h3 class="relative w-full min-w-0 overflow-hidden font-display text-base leading-tight sm:flex-1 sm:text-xl">
-                        {dish.name}
-                        {dish.tags.includes("vegetarian") && (
-                            <span
-                                class="ml-1 inline-flex size-5 items-center justify-center rounded-full bg-cream-100 align-middle font-sans text-xs text-ink-600"
-                                title={t.menu.vegetarian}
-                                aria-label={t.menu.vegetarian}
-                            >
-                                V
-                            </span>
-                        )}
+                <div class="flex items-end gap-3">
+                    <h3 class="relative min-w-0 flex-1 font-display text-base leading-tight sm:text-xl">
                         {(dish.priceText || dish.price !== undefined) && (
-                            <span
-                                class="leader-run hidden sm:block"
-                                aria-hidden="true"
-                            />
+                            <span class="leader-run" aria-hidden="true" />
                         )}
+                        <span class="relative bg-white pr-2">
+                            {dish.name}
+                            {dish.tags.includes("vegetarian") && (
+                                <span
+                                    class="ml-1 inline-flex size-5 items-center justify-center rounded-full bg-cream-100 align-middle font-sans text-xs text-ink-600"
+                                    title={t.menu.vegetarian}
+                                    aria-label={t.menu.vegetarian}
+                                >
+                                    V
+                                </span>
+                            )}
+                        </span>
                     </h3>
                     {(dish.priceText || dish.price !== undefined) && (
-                        <>
-                            <span class="leader-dots sm:hidden" aria-hidden="true" />
-                            <span class="shrink-0 font-display text-base leading-none sm:text-xl">
-                                {dish.priceText ?? price(dish.price!)}
-                            </span>
-                        </>
+                        <span class="shrink-0 font-display text-base font-semibold leading-none sm:text-xl">
+                            {dish.priceText ?? price(dish.price!)}
+                        </span>
                     )}
                 </div>
                 {dish.description && (

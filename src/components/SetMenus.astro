@@ -26,13 +26,12 @@ const { title, menus } = Astro.props;
         {menus.map((menu) => (
             <article>
                 <p class="caps text-xs text-ink-400">{menu.label}</p>
-                <div class="mt-2 flex flex-wrap items-end gap-x-3 gap-y-1 sm:flex-nowrap">
-                    <h3 class="relative w-full min-w-0 overflow-hidden font-display text-lg leading-tight sm:flex-1 sm:text-2xl">
-                        {menu.name}
-                        <span class="leader-run hidden sm:block" aria-hidden="true" />
+                <div class="mt-2 flex items-end gap-3">
+                    <h3 class="relative min-w-0 flex-1 font-display text-lg leading-tight sm:text-2xl">
+                        <span class="leader-run" aria-hidden="true" />
+                        <span class="relative bg-white pr-2">{menu.name}</span>
                     </h3>
-                    <span class="leader-dots sm:hidden" aria-hidden="true" />
-                    <span class="shrink-0 font-display text-lg leading-none sm:text-2xl">
+                    <span class="shrink-0 font-display text-lg font-semibold leading-none sm:text-2xl">
                         {menu.priceText}
                     </span>
                 </div>

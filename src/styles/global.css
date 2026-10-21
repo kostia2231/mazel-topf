@@ -107,9 +107,8 @@ body {
 
 @utility leader-run {
   position: absolute;
+  inset-inline: 0;
   bottom: 0.4rem;
-  width: 100%;
-  margin-left: 0.5rem;
   height: var(--dot-size);
   background-image: radial-gradient(
     circle closest-side,
