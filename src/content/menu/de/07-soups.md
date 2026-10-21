@@ -1,13 +1,12 @@
 ---
 title: Suppen
 order: 7
+group: menu
 dishes:
-  - name: Matze Ball Soup
+  - name: Matze Ball Suppe
     description: Hühnerbrühe mit Matzeknödeln
     price: 9.0
-    tags: [vegetarian]
-  - name: Spargelcremesuppe
-    description: Cremige Beelitzer Spargelcremesuppe, verfeinert mit frischem Kräuteröl.
-    price: 11.0
-    tags: [vegetarian]
+  - name: Kürbiscremesuppe
+    description: Cremige Kürbissuppe mit Harissa-Öl und Baharat Challah-Croûtons
+    price: 10.0
 ---

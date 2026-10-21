@@ -22,11 +22,18 @@ export const priceRange = '€€';
 
 export const openingHours = [
   {
-    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    days: [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ],
     opens: '12:00',
     closes: '23:59',
   },
-  { days: ['Saturday', 'Sunday'], opens: '09:00', closes: '23:59' },
 ] as const;
 
 export const phoneNumber = restaurant.phone.replace('(0)', '').replace(/[^\d+]/g, '');

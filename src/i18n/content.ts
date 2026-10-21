@@ -63,10 +63,7 @@ const de: Content = {
         "Familienlegenden, orientalische Gewürze und Berliner Rhythmus aufeinandertreffen. " +
         "Mitten im Herzen der Stadt gelegen, bringt es eine Prise Tradition und einen Hauch " +
         "Geschichte in den Alltag.“",
-    openingHours: [
-        { days: "Montag - Freitag", hours: "12:00 - 24:00" },
-        { days: "Samsatag - Sontag", hours: "9:00 - 24:00" },
-    ],
+    openingHours: [{ days: "Montag - Sonntag", hours: "12:00 - 24:00" }],
     reviews: [
         {
             title: "Toller Ort zum Abendessen in Berlin!",
@@ -273,10 +270,7 @@ const en: Content = {
         "“Masel Topf is not just a restaurant but a living stage where family legends, oriental " +
         "spices and Berlin rhythm meet. Right in the heart of the city, it brings a pinch of " +
         "tradition and a touch of history into everyday life.”",
-    openingHours: [
-        { days: "Monday – Friday", hours: "12:00 - 24:00" },
-        { days: "Saturday – Sunday", hours: "9:00 - 24:00" },
-    ],
+    openingHours: [{ days: "Monday – Sunday", hours: "12:00 - 24:00" }],
     reviews: [
         {
             title: "Great place for dinner in Berlin!",

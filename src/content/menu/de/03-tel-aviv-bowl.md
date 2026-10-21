@@ -4,10 +4,11 @@ order: 3
 group: lunch-special
 dishes:
   - name: Chicken
-    description: gegrilltes Hähnchen, gegrillte Aubergine Hummus, Baba Ghanoush, Israelischer Salat, Harissa, gekochtes Ei, Tahina, Mango Sauce
-    price: 13.0
+    description: Gegrilltes Hähnchen, Aubergine, Hummus, Baba Ghanoush, israelischer Salat, gekochtes Ei, Tahina und Mango-Sauce
+    price: 13.5
   - name: Vegetarisch
-    description: Schafskäse, gegrillte Aubergine Hummus, Baba Ghanoush, Israelischer Salat, Harissa, gekochtes Ei, Tahina, Mango Sauce
-    price: 12.5
-    tags: [vegetarian]
+    description: Schafskäse, Aubergine, Hummus, Baba Ghanoush, israelischer Salat, gekochtes Ei, Tahina und Mango-Sauce
+    price: 13.0
+    tags:
+      - vegetarian
 ---

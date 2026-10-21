@@ -1,13 +1,12 @@
 ---
 title: Soups
 order: 7
+group: menu
 dishes:
-  - name: Matze Ball Soup
-    description: chicken broth with matzo balls
+  - name: Matzo Ball Soup
+    description: Chicken broth with matzo balls
     price: 9.0
-    tags: [vegetarian]
-  - name: Cream of Asparagus Soup
-    description: creamy Beelitz asparagus soup, refined with fresh herb oil.
-    price: 11.0
-    tags: [vegetarian]
+  - name: Creamy Pumpkin Soup
+    description: Creamy pumpkin soup with harissa oil and challah croutons
+    price: 10.0
 ---

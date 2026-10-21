@@ -9,7 +9,8 @@ import {
     type Language,
 } from "../i18n/config";
 import { ui, isExternal } from "../i18n/ui";
-import { reservationUrl } from "../data/restaurant";
+import { reservationUrl, socialLinks } from "../data/restaurant";
+import { iconPaths } from "../data/social-icons";
 import { restaurant } from "../data/restaurant";
 import Button from "./Button.astro";
 import Calendar from "./icons/Calendar.astro";
@@ -24,6 +25,8 @@ interface Props {
 const { language, page } = Astro.props;
 const t = ui[language];
 const other = otherLanguage(language);
+
+const instagram = socialLinks.find((link) => link.icon === "instagram");
 
 const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.src});mask-size:contain;-webkit-mask-size:contain;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:left center;-webkit-mask-position:left center`;
 ---
@@ -64,6 +67,25 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                     >
                         {languageLabel[other]}
                     </a>
+
+                    {instagram && (
+                        <a
+                            href={instagram.href}
+                            target="_blank"
+                            rel="noopener"
+                            aria-label={instagram.label}
+                            class="ml-1 flex size-8 items-center justify-center rounded-full bg-cream-100 text-ink-400 transition-colors hover:bg-brick-500 hover:text-white"
+                        >
+                            <svg
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                class="size-4"
+                                aria-hidden="true"
+                            >
+                                <path d={iconPaths.instagram} />
+                            </svg>
+                        </a>
+                    )}
                 </div>
             </div>
 

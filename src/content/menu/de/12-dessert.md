@@ -1,9 +1,10 @@
 ---
 title: Dessert
 order: 12
+group: menu
 dishes:
-  - name: NY Cheesecake
-    description: New York Style Cheesecake mit geschlagener Sahne aus Orangenblütebwasser und Sumac, anbei Beerenkompott
+  - name: Hokkaido Cheesecake
+    description: Hokkaido Kürbis Cheesecake nach New Yorker Art mit aufgeschlagener Crème fraîche, Orangenblütenwasser und Sumach, dazu Beerenkompott
     price: 9.5
   - name: Hafer Malabi
     description: Hafermilch-Rosenwasser-Pudding mit Minze und Erdbeerpüree

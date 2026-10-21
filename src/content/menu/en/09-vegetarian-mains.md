@@ -1,17 +1,31 @@
 ---
-title: Vegetarian Mains
+title: Vegetarian
 order: 9
+group: menu
 dishes:
-  - name: Aubergine & Couscous
-    description: braised aubergine in tomato and thyme sauce with green olives, served with couscous and preserved lemon.
-    price: 18.5
-    tags: [vegetarian]
+  - name: Lemon Ptitim Risotto with Chanterelles
+    description: Creamy ptitim risotto with lemon, thyme and parmesan, served with fried chanterelles and stracciatella
+    price: 20.0
+    tags:
+      - vegetarian
+  - name: Eggplant Salad
+    description: Flambéed eggplant, pine nuts, feta cheese, hummus, pomegranate seeds, arugula, cherry tomatoes, tahini and olive oil
+    price: 15.0
+    tags:
+      - vegetarian
+  - name: Eggplant & Couscous
+    description: Braised eggplant in tomato-thyme sauce with green olives, served with couscous and preserved lemon
+    price: 19.0
+    tags:
+      - vegetarian
   - name: Cauliflower & S-Chug
-    description: fried cauliflower with panko and harissa, s-chug sauce, beetroot tahina and fresh tomatoes
-    price: 18.0
-    tags: [vegetarian]
+    description: Crispy cauliflower with s-chug sauce, beetroot-tahini, harissa and pine nuts for the perfect crunch
+    price: 19.0
+    tags:
+      - vegetarian
   - name: Falafel Plate
-    description: in a flatbread bowl with sheep cheese, hummus, baba ghanoush, harissa, grilled vegetables, tahina, herbs and pickles
-    price: 17.5
-    tags: [vegetarian]
+    description: Served in a flatbread bowl with feta cheese, hummus, baba ghanoush, harissa, grilled vegetables, tahini, herbs and pickled cucumbers
+    price: 18.0
+    tags:
+      - vegetarian
 ---

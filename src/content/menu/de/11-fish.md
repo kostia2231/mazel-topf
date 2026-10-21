@@ -1,8 +1,9 @@
 ---
 title: Fisch
 order: 11
+group: menu
 dishes:
-  - name: Spargel & Dorado
-    description: Zart gegrilltes Doradefilet auf frischem Beelitzer Spargel, serviert mit feiner Spargel-Beurre-Blanc, dazu levantinisch gewürzte Kartoffeln mit Kräutern.
-    price: 28.5
+  - name: Dorado & Zitrone
+    description: Knuspriges Doradefilet mit leichter Mangold-Spinat-Füllung, serviert auf Gnocchi eingelegt, in Zitronen Sauce
+    price: 26.0
 ---

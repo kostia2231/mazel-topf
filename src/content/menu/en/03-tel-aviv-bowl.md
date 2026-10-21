@@ -4,10 +4,11 @@ order: 3
 group: lunch-special
 dishes:
   - name: Chicken
-    description: grilled chicken, grilled aubergine, hummus, baba ghanoush, Israeli salad, harissa, boiled egg, tahina, mango sauce
-    price: 13.0
+    description: Grilled chicken, eggplant, hummus, baba ghanoush, Israeli salad, boiled egg, tahini and mango sauce
+    price: 13.5
   - name: Vegetarian
-    description: sheep cheese, grilled aubergine, hummus, baba ghanoush, Israeli salad, harissa, boiled egg, tahina, mango sauce
-    price: 12.5
-    tags: [vegetarian]
+    description: Feta cheese, eggplant, hummus, baba ghanoush, Israeli salad, boiled egg, tahini and mango sauce
+    price: 13.0
+    tags:
+      - vegetarian
 ---

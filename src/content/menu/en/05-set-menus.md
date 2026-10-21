@@ -5,17 +5,17 @@ group: set-menus
 menus:
   - label: Menu 1
     name: Happy and Healthy
-    priceText: € 31
+    priceText: € 32
     courses:
       - title: Course 1 - Goat Cheese Salad
-        description: with mixed leaves, pine nuts, strawberries and balsamic honey dressing
+        description: Mixed salad, pine nuts, fresh persimmon and balsamic honey dressing
       - title: Course 2 - Falafel Plate
         description: with hummus, baba ghanoush, cherry tomatoes and pickles, served on flatbread
       - title: Course 3 - Oat Malabi
         description: oat milk and rose water pudding with mint and strawberry purée
   - label: Menu 2
     name: Orient Express
-    priceText: € 38.5
+    priceText: € 36
     courses:
       - title: Course 1 - Pastrami Latkes
         description: pastrami-style cured salmon on potato rösti with dill crème fraîche

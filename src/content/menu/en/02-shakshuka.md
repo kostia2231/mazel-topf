@@ -1,16 +1,18 @@
 ---
-title: Shackshuka
+title: Shakshuka
 order: 2
 group: lunch-special
 dishes:
   - name: Shakshuka
-    description: ragout of peppers, tomatoes and onions with poached eggs and pita
-    price: 11.0
-    variantsNote: add on
+    description: Ragout of peppers, tomatoes and onions with poached eggs and pita
+    price: 12.0
+    tags:
+      - vegetarian
+    variantsNote: Optional
     variants:
-      - name: fresh sheep cheese
+      - name: fresh feta cheese
         price: 3.0
-      - name: fried aubergine
+      - name: fried eggplant
         price: 2.0
       - name: fresh avocado
         price: 2.5
