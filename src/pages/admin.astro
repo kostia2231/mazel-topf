@@ -201,6 +201,47 @@ import "../styles/global.css";
                 return wrap;
             };
 
+            const isSetMenu = (file) =>
+                file.data.group === "set-menus" || Array.isArray(file.data.menus);
+
+            const toolButton = (text, action) => {
+                const element = document.createElement("button");
+                element.type = "button";
+                element.className = "cursor-pointer hover:text-brick-500";
+                element.textContent = text;
+                element.addEventListener("click", action);
+                return element;
+            };
+
+            const rowTools = (list, index, className) => {
+                const bar = document.createElement("div");
+                bar.className = className;
+
+                const redraw = () => {
+                    renderSection();
+                    refreshChanges();
+                };
+
+                const move = (offset) => {
+                    const target = index + offset;
+                    if (target < 0 || target >= list.length) return;
+                    const [item] = list.splice(index, 1);
+                    list.splice(target, 0, item);
+                    redraw();
+                };
+
+                bar.append(
+                    toolButton("hoch", () => move(-1)),
+                    toolButton("runter", () => move(1)),
+                    toolButton("entfernen", () => {
+                        list.splice(index, 1);
+                        redraw();
+                    }),
+                );
+
+                return bar;
+            };
+
             const renderDish = (file, dish, index) => {
                 const card = document.createElement("div");
                 card.className = "border border-line bg-white/60 p-4";
@@ -231,38 +272,83 @@ import "../styles/global.css";
 
                 card.append(grid);
 
-                const tools = document.createElement("div");
-                tools.className = "mt-3 flex gap-4 text-xs text-ink-400";
+                card.append(
+                    rowTools(
+                        file.data.dishes,
+                        index,
+                        "mt-3 flex gap-4 text-xs text-ink-400",
+                    ),
+                );
+                return card;
+            };
 
-                const move = (offset) => {
-                    const target = index + offset;
-                    if (target < 0 || target >= file.data.dishes.length) return;
-                    const [item] = file.data.dishes.splice(index, 1);
-                    file.data.dishes.splice(target, 0, item);
-                    renderSection();
-                    refreshChanges();
-                };
+            const renderMenu = (file, menu, index) => {
+                const card = document.createElement("div");
+                card.className = "border border-line bg-white/60 p-4";
 
-                const button = (text, action) => {
-                    const element = document.createElement("button");
-                    element.type = "button";
-                    element.className = "cursor-pointer hover:text-brick-500";
-                    element.textContent = text;
-                    element.addEventListener("click", action);
-                    return element;
-                };
-
-                tools.append(
-                    button("hoch", () => move(-1)),
-                    button("runter", () => move(1)),
-                    button("entfernen", () => {
-                        file.data.dishes.splice(index, 1);
-                        renderSection();
-                        refreshChanges();
+                const grid = document.createElement("div");
+                grid.className = "grid gap-4 sm:grid-cols-[1fr_2fr_1fr]";
+                grid.append(
+                    field("Bezeichnung", menu.label, "text", (value) => {
+                        menu.label = value;
+                    }),
+                    field("Name", menu.name, "text", (value) => {
+                        menu.name = value;
+                    }),
+                    field("Preis (Text)", menu.priceText, "text", (value) => {
+                        menu.priceText = value;
                     }),
                 );
+                card.append(grid);
 
-                card.append(tools);
+                if (!Array.isArray(menu.courses)) menu.courses = [];
+
+                const courses = document.createElement("div");
+                courses.className = "mt-4 space-y-4 border-l-2 border-line pl-4";
+
+                for (const [position, course] of menu.courses.entries()) {
+                    const row = document.createElement("div");
+
+                    const pair = document.createElement("div");
+                    pair.className = "grid gap-4 sm:grid-cols-[2fr_3fr]";
+                    pair.append(
+                        field("Gang", course.title, "text", (value) => {
+                            course.title = value;
+                        }),
+                        field("Beschreibung", course.description, "text", (value) => {
+                            course.description = value;
+                        }),
+                    );
+
+                    row.append(
+                        pair,
+                        rowTools(
+                            menu.courses,
+                            position,
+                            "mt-2 flex gap-4 text-xs text-ink-400",
+                        ),
+                    );
+                    courses.append(row);
+                }
+
+                card.append(courses);
+
+                const addCourse = toolButton("Gang hinzufügen", () => {
+                    menu.courses.push({ title: "", description: "" });
+                    renderSection();
+                    refreshChanges();
+                });
+                addCourse.className =
+                    "mt-3 cursor-pointer text-xs text-brick-500 hover:underline";
+                card.append(addCourse);
+
+                card.append(
+                    rowTools(
+                        file.data.menus,
+                        index,
+                        "mt-4 flex gap-4 border-t border-line pt-3 text-xs text-ink-400",
+                    ),
+                );
                 return card;
             };
 
@@ -286,19 +372,21 @@ import "../styles/global.css";
                 );
                 container.append(head);
 
-                if (!Array.isArray(file.data.dishes)) file.data.dishes = [];
-
-                for (const [index, dish] of file.data.dishes.entries()) {
-                    container.append(renderDish(file, dish, index));
+                if (isSetMenu(file)) {
+                    if (!Array.isArray(file.data.menus)) file.data.menus = [];
+                    for (const [index, menu] of file.data.menus.entries()) {
+                        container.append(renderMenu(file, menu, index));
+                    }
+                } else {
+                    if (!Array.isArray(file.data.dishes)) file.data.dishes = [];
+                    for (const [index, dish] of file.data.dishes.entries()) {
+                        container.append(renderDish(file, dish, index));
+                    }
                 }
 
-                if (!file.data.dishes.length && file.data.menus) {
-                    const hint = document.createElement("p");
-                    hint.className = "text-sm text-ink-400";
-                    hint.textContent =
-                        "Dieser Abschnitt enthält Menüs statt einzelner Gerichte und wird hier nicht bearbeitet.";
-                    container.append(hint);
-                }
+                $("add").textContent = isSetMenu(file)
+                    ? "Menü hinzufügen"
+                    : "Gericht hinzufügen";
             };
 
             const renderSections = () => {
@@ -402,8 +490,18 @@ import "../styles/global.css";
             $("add").addEventListener("click", () => {
                 const file = currentFile();
                 if (!file) return;
-                if (!Array.isArray(file.data.dishes)) file.data.dishes = [];
-                file.data.dishes.push({ name: "", description: "", price: undefined });
+                if (isSetMenu(file)) {
+                    if (!Array.isArray(file.data.menus)) file.data.menus = [];
+                    file.data.menus.push({
+                        label: "",
+                        name: "",
+                        priceText: "",
+                        courses: [],
+                    });
+                } else {
+                    if (!Array.isArray(file.data.dishes)) file.data.dishes = [];
+                    file.data.dishes.push({ name: "", description: "", price: undefined });
+                }
                 renderSection();
                 refreshChanges();
             });
