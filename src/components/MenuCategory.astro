@@ -48,7 +48,7 @@ const price = (value: number) =>
     <ul class="mt-8 space-y-7">
         {dishes.map((dish) => (
             <li>
-                <div class="flex flex-wrap items-end gap-x-3 gap-y-1">
+                <div class="flex flex-wrap items-end gap-x-3 gap-y-1 sm:flex-nowrap">
                     <h3 class="w-full min-w-0 font-display text-base leading-tight sm:w-auto sm:text-xl">
                         {dish.name}
                         {dish.tags.includes("vegetarian") && (
