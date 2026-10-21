@@ -25,7 +25,7 @@ menus:
         description: Mürbeteigkuchen aus dunkler Schokolade mit gesalzenem Karamel Überzug
   - label: Menü 3
     name: Reise nach Jerusalem
-    priceText: p. P. 41 €
+    priceText: 41 €
     courses:
       - title: 1. Gang - Tel Aviv Mezze Mix
         description: gemischte Vorspeisenplatte mit unserer Top Auswahl

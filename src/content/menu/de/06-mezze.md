@@ -1,11 +1,10 @@
 ---
 title: Mezze
 order: 6
-group: menu
 dishes:
   - name: Ziegenkäse-Salat
     description: Mit gemischtem Salat, Pinienkernen, frische Kaki und Balsamico Honig Dressing
-    price: 9.0
+    price: 9
     tags:
       - vegetarian
   - name: Black Cauliflower
@@ -25,13 +24,13 @@ dishes:
       - vegetarian
   - name: Käse-Dill Rolle
     description: Knusprige Filoteigrolle mit körnigem Frischkäse, Dill und Frühlingszwiebeln gefüllt
-    price: 9.0
+    price: 9
     tags:
       - vegetarian
   - name: Pastrami Latkes
     description: Pastrami style gebeizter Lachs auf Kartoffelrösti und Dill Creme Fraiche
-    price: 13.0
-  - name: "Leri's Signature: Eggplant Roll"
+    price: 13
+  - name: 'Leri''s Signature: Eggplant Roll'
     description: Gebratene Auberginenröllchen, gefüllt mit frischem Koriander und Knoblauch. Dazu eine cremige Rote Bete - Tahinisauce
     price: 10.5
     tags:
@@ -41,8 +40,8 @@ dishes:
     price: 14.5
   - name: Tel Aviv Mezze Mix
     description: gemischte Vorspeisenplatte mit unserer Top Auswahl
-    price: 25.0
+    price: 25
   - name: Masel Topf Mezze Mix
     description: Fast alle unsere Vorspeisen auf einer Platte, bestellbar ab 4 Personen
-    priceText: p. P. 16,0 €
+    priceText: p.p. 16,0 €
 ---
