@@ -127,3 +127,25 @@ Auf unseren Seiten werden Plugins von sozialen Medien verwendet (z.B. Facebook, 
 ### Newsletterdaten
 
 Wenn Sie den auf der Website angebotenen Newsletter beziehen möchten, benötigen wir von Ihnen eine E-Mail-Adresse sowie Informationen, welche uns die Überprüfung gestatten, dass Sie der Inhaber der angegebenen E-Mail-Adresse sind und mit dem Empfang des Newsletters einverstanden sind. Weitere Daten werden nicht bzw. nur auf freiwilliger Basis erhoben. Diese Daten verwenden wir ausschließlich für den Versand der angeforderten Informationen und geben diese nicht an Dritte weiter. Die Verarbeitung der in das Newsletteranmeldeformular eingegebenen Daten erfolgt ausschließlich auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Die erteilte Einwilligung zur Speicherung der Daten, der E-Mail-Adresse sowie deren Nutzung zum Versand des Newsletters können Sie jederzeit widerrufen, etwa über den „Austragen“-Link im Newsletter. Die Rechtmäßigkeit der bereits erfolgten Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt. Die von Ihnen zum Zwecke des Newsletter-Bezugs bei uns hinterlegten Daten werden von uns bis zu Ihrer Austragung aus dem Newsletter gespeichert und nach der Abbestellung des Newsletters gelöscht. Daten, die zu anderen Zwecken bei uns gespeichert wurden bleiben hiervon unberührt.
+
+## Analyse-Tools und Werbung
+
+### Google Analytics 4
+
+Diese Website nutzt Funktionen des Webanalysedienstes Google Analytics 4. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
+
+Google Analytics verwendet Cookies und vergleichbare Wiedererkennungstechnologien, die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die so erzeugten Informationen über Ihre Benutzung dieser Website werden an einen Server von Google übertragen und dort gespeichert. Dabei können auch Übermittlungen in die USA erfolgen; Google ist unter dem EU-US Data Privacy Framework zertifiziert. Unsere Messung ist so eingerichtet, dass Ihre IP-Adresse gekürzt verarbeitet wird. Die Mess-ID dieser Website lautet G-NTJX2KCJTT; die Speicherdauer der erhobenen Nutzungsdaten richtet sich nach den Einstellungen in unserem Google-Analytics-Konto.
+
+Die Nutzung von Google Analytics erfolgt ausschließlich auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Der Dienst wird erst geladen, nachdem Sie im Cookie-Banner der Kategorie „Statistik" zugestimmt haben. Bis dahin werden keine Daten an Google übertragen und es werden keine Analyse-Cookies gesetzt. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, indem Sie im Fußbereich der Website die Cookie-Einstellungen öffnen und die Kategorie „Statistik" abwählen.
+
+Weitere Informationen finden Sie in der Datenschutzerklärung von Google unter [policies.google.com/privacy](https://policies.google.com/privacy?hl=de) sowie in den Hinweisen zur Datennutzung unter [policies.google.com/technologies/partner-sites](https://policies.google.com/technologies/partner-sites?hl=de). Ein Browser-Add-on zur Deaktivierung von Google Analytics finden Sie unter [tools.google.com/dlpage/gaoptout](https://tools.google.com/dlpage/gaoptout?hl=de).
+
+### Meta-Pixel
+
+Diese Website nutzt den Besucheraktions-Pixel von Meta. Anbieter ist die Meta Platforms Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland.
+
+Mit dem Meta-Pixel können wir nachvollziehen, wie Besucherinnen und Besucher unsere Website nutzen, nachdem sie durch Klick auf eine Meta-Werbeanzeige hierher gelangt sind. So lässt sich die Wirksamkeit unserer Anzeigen auswerten und es lassen sich Anzeigen für passende Zielgruppen ausspielen. Die erhobenen Daten sind für uns anonym, wir können also keine Rückschlüsse auf die Identität einzelner Personen ziehen; die Daten werden jedoch von Meta gespeichert und verarbeitet und können mit dem jeweiligen Nutzerprofil verknüpft werden. Eine Übermittlung in die USA kann nicht ausgeschlossen werden; Meta ist unter dem EU-US Data Privacy Framework zertifiziert. Die Pixel-ID dieser Website lautet 1184777969696490.
+
+Die Nutzung des Meta-Pixels erfolgt ausschließlich auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Der Pixel wird erst geladen, nachdem Sie im Cookie-Banner der Kategorie „Marketing" zugestimmt haben. Ihre Einwilligung können Sie jederzeit über die Cookie-Einstellungen im Fußbereich der Website widerrufen; der Pixel wird dann spätestens beim nächsten Seitenaufruf nicht mehr geladen.
+
+Für die gemeinsame Verarbeitung von Daten mit Meta besteht eine Vereinbarung über gemeinsame Verantwortlichkeit nach Art. 26 DSGVO. Weitere Informationen zum Datenschutz bei Meta finden Sie unter [facebook.com/privacy/policy](https://www.facebook.com/privacy/policy). Ihre Einstellungen für Werbeanzeigen können Sie unter [facebook.com/settings?tab=ads](https://www.facebook.com/settings?tab=ads) anpassen.

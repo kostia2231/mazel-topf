@@ -130,3 +130,25 @@ Plugins from social media are used on our pages (e.g. Facebook, Twitter, Google+
 ### Newsletter data
 
 If you would like to receive the newsletter offered on the website, we require an email address from you as well as information that allows us to verify that you are the owner of the email address provided and that you agree to receive the newsletter. Further data is not collected, or is collected on a voluntary basis only. We use this data exclusively for sending the requested information and do not pass it on to third parties. The processing of the data entered in the newsletter registration form takes place exclusively on the basis of your consent (Art. 6 para. 1 lit. a GDPR). You can withdraw your consent to the storage of the data, the email address and its use for sending the newsletter at any time, for example via the "unsubscribe" link in the newsletter. The lawfulness of the data processing operations already carried out remains unaffected by the withdrawal. The data you have deposited with us for the purpose of receiving the newsletter will be stored by us until you unsubscribe from the newsletter and will be deleted after you cancel the newsletter. Data stored by us for other purposes remains unaffected.
+
+## 6. Analytics and advertising
+
+### Google Analytics 4
+
+This website uses functions of the web analytics service Google Analytics 4. The provider is Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland.
+
+Google Analytics uses cookies and comparable recognition technologies that allow your use of the website to be analysed. The information generated about your use of this website is transmitted to a Google server and stored there. Transfers to the USA may also take place; Google is certified under the EU-US Data Privacy Framework. Our measurement is configured so that your IP address is processed in truncated form. The measurement ID of this website is G-NTJX2KCJTT; the retention period of the usage data collected follows the settings in our Google Analytics account.
+
+Google Analytics is used exclusively on the basis of your consent (Art. 6(1)(a) GDPR, Section 25(1) TDDDG). The service is loaded only after you have agreed to the "Statistics" category in the cookie banner. Until then, no data is transmitted to Google and no analytics cookies are set. You may withdraw your consent at any time with effect for the future by opening the cookie settings in the footer of the website and deselecting the "Statistics" category.
+
+For more information, see Google's privacy policy at [policies.google.com/privacy](https://policies.google.com/privacy) and the notes on data use at [policies.google.com/technologies/partner-sites](https://policies.google.com/technologies/partner-sites). A browser add-on to deactivate Google Analytics is available at [tools.google.com/dlpage/gaoptout](https://tools.google.com/dlpage/gaoptout).
+
+### Meta Pixel
+
+This website uses the Meta visitor action pixel. The provider is Meta Platforms Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Ireland.
+
+The Meta Pixel lets us understand how visitors use our website after reaching it by clicking on a Meta advertisement. This allows the effectiveness of our ads to be evaluated and ads to be shown to suitable audiences. The data collected is anonymous to us, so we cannot draw conclusions about the identity of individual people; however, the data is stored and processed by Meta and may be linked to the respective user profile. A transfer to the USA cannot be excluded; Meta is certified under the EU-US Data Privacy Framework. The pixel ID of this website is 1184777969696490.
+
+The Meta Pixel is used exclusively on the basis of your consent (Art. 6(1)(a) GDPR, Section 25(1) TDDDG). The pixel is loaded only after you have agreed to the "Marketing" category in the cookie banner. You may withdraw your consent at any time via the cookie settings in the footer of the website; the pixel will then no longer be loaded, at the latest from your next page view.
+
+A joint controllership agreement pursuant to Art. 26 GDPR is in place for data processed jointly with Meta. For more information on data protection at Meta, see [facebook.com/privacy/policy](https://www.facebook.com/privacy/policy). You can adjust your advertising settings at [facebook.com/settings?tab=ads](https://www.facebook.com/settings?tab=ads).

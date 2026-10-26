@@ -1,0 +1,97 @@
+---
+import { analytics } from '../data/analytics';
+import { isCanonicalHost } from '../data/seo';
+
+const live = isCanonicalHost(Astro.site);
+const { googleAnalyticsId, metaPixelId } = analytics;
+
+const code = `
+var measurementId = ${JSON.stringify(googleAnalyticsId)};
+var pixelId = ${JSON.stringify(metaPixelId)};
+var storageKey = "mazel-cookie-consent";
+
+window.dataLayer = window.dataLayer || [];
+window.gtag = function () {
+  window.dataLayer.push(arguments);
+};
+
+if (measurementId) {
+  window["ga-disable-" + measurementId] = true;
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+  });
+}
+
+var loaded = {};
+
+var inject = function (src) {
+  var tag = document.createElement("script");
+  tag.async = true;
+  tag.src = src;
+  document.head.appendChild(tag);
+};
+
+var startAnalytics = function () {
+  if (loaded.analytics) return;
+  loaded.analytics = true;
+  inject("https://www.googletagmanager.com/gtag/js?id=" + measurementId);
+  gtag("js", new Date());
+  gtag("config", measurementId, { anonymize_ip: true });
+};
+
+var startPixel = function () {
+  if (loaded.pixel) return;
+  loaded.pixel = true;
+  var queue = function () {
+    queue.callMethod
+      ? queue.callMethod.apply(queue, arguments)
+      : queue.queue.push(arguments);
+  };
+  queue.push = queue;
+  queue.loaded = true;
+  queue.version = "2.0";
+  queue.queue = [];
+  window.fbq = queue;
+  window._fbq = window._fbq || queue;
+  inject("https://connect.facebook.net/en_US/fbevents.js");
+  fbq("init", pixelId);
+  fbq("track", "PageView");
+};
+
+var apply = function (consent) {
+  if (!consent) return;
+
+  if (measurementId) {
+    window["ga-disable-" + measurementId] = !consent.statistics;
+    gtag("consent", "update", {
+      analytics_storage: consent.statistics ? "granted" : "denied",
+      ad_storage: consent.marketing ? "granted" : "denied",
+      ad_user_data: consent.marketing ? "granted" : "denied",
+      ad_personalization: consent.marketing ? "granted" : "denied",
+    });
+    if (consent.statistics) startAnalytics();
+  }
+
+  if (pixelId && consent.marketing) startPixel();
+};
+
+var stored = null;
+try {
+  var raw = localStorage.getItem(storageKey);
+  stored = raw ? JSON.parse(raw) : null;
+} catch (error) {
+  stored = null;
+}
+
+apply(stored);
+
+addEventListener("mazel:consent", function (event) {
+  apply(event.detail);
+});
+`;
+---
+
+{live && (googleAnalyticsId || metaPixelId) && <script is:inline set:html={code} />}
