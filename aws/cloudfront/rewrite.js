@@ -27,6 +27,14 @@ function handler(event) {
         };
     }
 
+    if (uri === "/speisekarte.pdf") {
+        return {
+            statusCode: 301,
+            statusDescription: "Moved Permanently",
+            headers: { location: { value: "/speisekarte" } },
+        };
+    }
+
     if (uri.length > 1 && uri.endsWith("/")) {
         return {
             statusCode: 301,
