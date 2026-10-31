@@ -3,11 +3,11 @@ import { orderOnlineUrl, reservationUrl } from "../data/restaurant";
 
 export type NavItem =
     | { route: RouteKey; label: string }
-    | { url: string; label: string; zenchef?: true };
+    | { url: string; label: string };
 
 export const isExternal = (
     item: NavItem,
-): item is { url: string; label: string; zenchef?: true } => "url" in item;
+): item is { url: string; label: string } => "url" in item;
 
 interface UiText {
     htmlLang: string;
@@ -156,7 +156,7 @@ export const ui: Record<Language, UiText> = {
         ],
         drawerOrderOnline: { url: orderOnlineUrl, label: "Bestellen" },
         footerLinks: [
-            { url: reservationUrl, label: "Tisch reservieren", zenchef: true },
+            { url: reservationUrl("de"), label: "Tisch reservieren" },
             { url: orderOnlineUrl, label: "Bestellen" },
             { route: "catering", label: "Catering" },
             { route: "contact", label: "Kontakt" },
@@ -171,7 +171,7 @@ export const ui: Record<Language, UiText> = {
             openMenu: "Menü öffnen",
             closeMenu: "Menü schließen",
             toHome: "Zur Startseite",
-            reservation: "Reservation online",
+            reservation: "Tisch reservieren",
             switchLanguage: "Sprache wechseln",
             extras: "Weitere Angebote",
         },
@@ -339,7 +339,7 @@ export const ui: Record<Language, UiText> = {
         ],
         drawerOrderOnline: { url: orderOnlineUrl, label: "Order online" },
         footerLinks: [
-            { url: reservationUrl, label: "Book a table", zenchef: true },
+            { url: reservationUrl("en"), label: "Book a table" },
             { url: orderOnlineUrl, label: "Order online" },
             { route: "catering", label: "Catering" },
             { route: "contact", label: "Contact" },

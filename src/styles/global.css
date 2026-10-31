@@ -105,6 +105,10 @@ body {
   background-repeat: repeat-x;
 }
 
+#cookie-banner:not([hidden]) ~ [data-reserve-widget] {
+  display: none;
+}
+
 @utility leader-run {
   position: absolute;
   inset-inline: 0;

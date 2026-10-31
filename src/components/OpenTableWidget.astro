@@ -1,0 +1,28 @@
+---
+import { openTableRestaurantId, openTableLocale } from "../data/restaurant";
+import { ui } from "../i18n/ui";
+import type { Language } from "../i18n/config";
+
+interface Props {
+    language: Language;
+}
+
+const { language } = Astro.props;
+
+const loader =
+    "https://www.opentable.de/widget/reservation/loader" +
+    `?rid=${openTableRestaurantId}` +
+    "&type=standard&theme=standard&color=8&dark=false&iframe=true&domain=de" +
+    `&lang=${openTableLocale(language)}` +
+    "&newtab=true&ot_source=Restaurant%20website&font=georgia&ot_logo=standard" +
+    "&primary_color=ba1513&primary_font_color=ffffff&button_color=212529" +
+    "&button_font_color=ffffff&logo_pid=97822883&background_pid=97822830&cfe=true";
+---
+
+<div
+    data-reserve-widget
+    aria-label={ui[language].header.reservation}
+    class="fixed bottom-4 left-1/2 z-30 max-w-[calc(100vw-2rem)] -translate-x-1/2 sm:bottom-6 sm:left-auto sm:right-6 sm:translate-x-0"
+>
+    <script is:inline type="text/javascript" defer src={loader}></script>
+</div>

@@ -14,7 +14,7 @@ import { iconPaths } from "../data/social-icons";
 import { restaurant } from "../data/restaurant";
 import Button from "./Button.astro";
 import Calendar from "./icons/Calendar.astro";
-import ExternalLink from "./icons/ExternalLink.astro";
+import Wolt from "./icons/Wolt.astro";
 import SocialLinks from "./SocialLinks.astro";
 
 interface Props {
@@ -103,7 +103,7 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
                                     rel="noopener"
                                     class="caps relative flex items-center gap-2 py-2 text-sm text-navy-900 transition-colors before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-0.5 before:origin-top before:scale-y-0 before:bg-brick-500 before:transition-transform before:duration-300 before:ease-out hover:text-brick-500 hover:before:scale-y-100 motion-reduce:before:transition-none"
                                 >
-                                    <ExternalLink class="size-3.5 text-brick-500" />
+                                    <Wolt class="h-3 w-auto text-brick-500" />
                                     {item.label}
                                 </a>
                             </li>
@@ -174,16 +174,18 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
             </nav>
             <div class="ml-auto flex shrink-0 items-center pr-6">
                 <a
-                    href={reservationUrl}
-                    data-zenchef
+                    href={reservationUrl(language)}
+                    target="_blank"
+                    rel="noopener"
                     class="flex size-9 items-center justify-center text-brick-500 sm:hidden"
                     aria-label={t.header.reservation}
                 >
                     <Calendar class="size-8" />
                 </a>
                 <Button
-                    href={reservationUrl}
-                    data-zenchef
+                    href={reservationUrl(language)}
+                    target="_blank"
+                    rel="noopener"
                     variant="none"
                     class="hidden bg-brick-500 px-5! py-4! text-white transition-colors hover:bg-brick-600 sm:inline-block"
                 >
@@ -266,7 +268,7 @@ const wordmarkMask = `mask-image:url(${logo.src});-webkit-mask-image:url(${logo.
             rel="noopener"
             class="caps mt-9 flex items-center gap-2.5 text-sm text-brick-500"
         >
-            <ExternalLink class="size-3.5" />
+            <Wolt class="h-3 w-auto" />
             {t.drawerOrderOnline.label}
         </a>
 

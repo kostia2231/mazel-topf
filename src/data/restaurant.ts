@@ -1,3 +1,5 @@
+import type { Language } from '../i18n/config';
+
 export const restaurant = {
   name: 'Masel Topf',
   wordmark: 'masel topf',
@@ -13,9 +15,14 @@ export const restaurant = {
 export const orderOnlineUrl =
   'https://wolt.com/de/deu/berlin/restaurant/ma-sel-topf';
 
-export const zenchefRestaurantId = '380952';
+export const openTableRestaurantId = '113289';
 
-export const reservationUrl = `https://bookings.zenchef.com/results?rid=${zenchefRestaurantId}`;
+export const openTableLocale = (language: Language) =>
+  language === 'de' ? 'de-DE' : 'en-GB';
+
+export const reservationUrl = (language: Language) =>
+  `https://www.opentable.de/restref/client/?rid=${openTableRestaurantId}` +
+  `&lang=${openTableLocale(language)}`;
 
 export const cuisine = 'Israeli';
 export const priceRange = '€€';

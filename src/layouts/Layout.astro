@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
 import CookieBanner from '../components/CookieBanner.astro';
-import ZenchefWidget from '../components/ZenchefWidget.astro';
+import OpenTableWidget from '../components/OpenTableWidget.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { restaurant } from '../data/restaurant';
 import { isCanonicalHost } from '../data/seo';
@@ -92,7 +92,7 @@ const canonical = absoluteUrl(language);
     <Footer language={language} />
     <CookieBanner language={language} />
     <Analytics />
-    <ZenchefWidget language={language} />
+    <OpenTableWidget language={language} />
   </body>
 </html>
 
