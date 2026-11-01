@@ -145,7 +145,7 @@ const de: Content = {
         hero: {
             title: "Ein Geschmack,\nden Sie nicht vergessen werden",
             subline: "Wo jedes Gericht eine Geschichte erzählt.",
-            cta: "Alle Speisekarten anzeigen",
+            cta: "Speisekarte ansehen",
         },
         about: {
             eyebrow: "Masel Topf – zeitgenössische israelische Küche.",
@@ -167,7 +167,7 @@ const de: Content = {
             text:
                 "Bei Masel Topf finden Sie für jeden Anlass das passende Gericht. Ob große Firmentagung " +
                 "oder Firmenevent, Familienessen oder Date, wir bieten Ihnen immer etwas Unvergessliches.",
-            cta: "Alle Speisekarten anzeigen",
+            cta: "Speisekarte ansehen",
             slogan: [
                 "Wir bieten Ihnen ein kulinarisches Erlebnis der Extraklasse.",
                 "Unser Ziel ist es, exklusive und zugleich ungezwungene kulinarische Erlebnisse zu schaffen.",
@@ -350,7 +350,7 @@ const en: Content = {
         hero: {
             title: "A taste\nyou will not forget",
             subline: "Where every dish tells a story.",
-            cta: "View all menus",
+            cta: "View the menu",
         },
         about: {
             eyebrow: "Masel Topf – contemporary Israeli cuisine.",
@@ -373,7 +373,7 @@ const en: Content = {
             text:
                 "At Masel Topf there is a dish for every occasion. A large company meeting or a " +
                 "corporate event, a family dinner or a date – we always have something memorable for you.",
-            cta: "View all menus",
+            cta: "View the menu",
             slogan: [
                 "We offer you a culinary experience of the highest order.",
                 "Our aim is to create culinary experiences that are exclusive and relaxed at the same time.",

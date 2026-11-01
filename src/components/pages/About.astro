@@ -75,7 +75,7 @@ const page = content[language].aboutPage;
                     <p>{paragraph}</p>
                 ))}
             </div>
-            <Button href={reservationUrl} data-zenchef class="mt-10">
+            <Button href={reservationUrl(language)} target="_blank" rel="noopener" class="mt-10">
                 {page.kitchen.cta}
             </Button>
         </div>

@@ -20,7 +20,7 @@ const block = content[language].closingBlock;
         <p class="mx-auto mt-6 max-w-3xl text-sm leading-relaxed text-ink-600">
             {block.text}
         </p>
-        <Button href={reservationUrl} data-zenchef class="mt-10">
+        <Button href={reservationUrl(language)} target="_blank" rel="noopener" class="mt-10">
             {block.cta}
         </Button>
     </div>

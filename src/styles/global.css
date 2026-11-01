@@ -17,6 +17,7 @@
   --color-navy-900: #142027;
 
   --color-mist: #cad1da;
+  --color-wolt: #00c2e8;
 
   --color-line: var(--color-mist);
   --color-line-dark: var(--color-ink-400);
@@ -103,6 +104,10 @@ body {
   );
   background-size: var(--dot-gap) var(--dot-size);
   background-repeat: repeat-x;
+}
+
+#cookie-banner:not([hidden]) ~ [data-reserve-widget] {
+  display: none;
 }
 
 @utility leader-run {
