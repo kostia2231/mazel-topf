@@ -112,10 +112,16 @@ body {
 
 @media (width < 40rem) {
   [data-reserve-widget]:not([data-open]) [data-reserve-panel] {
-    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 
-  [data-reserve-widget][data-open] [data-reserve-toggle] {
+  [data-reserve-widget][data-open] [data-reserve-toggle],
+  [data-reserve-widget]:not([data-reserve-ready]) [data-reserve-toggle] {
     display: none;
   }
 }

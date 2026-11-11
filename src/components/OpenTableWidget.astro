@@ -23,6 +23,21 @@ const loader =
 const boot = `
 (() => {
   const mount = document.currentScript.parentElement;
+  const root = mount.closest("[data-reserve-widget]");
+
+  const watch = () => {
+    const started = Date.now();
+    const look = () => {
+      if (mount.querySelector("iframe")) {
+        if (root) root.setAttribute("data-reserve-ready", "");
+        return;
+      }
+      if (Date.now() - started > 12000) return;
+      setTimeout(look, 150);
+    };
+    look();
+  };
+
   const start = () => {
     if (mount.querySelector("script[data-opentable]")) return;
     const tag = document.createElement("script");
@@ -30,8 +45,10 @@ const boot = `
     tag.async = true;
     tag.dataset.opentable = "";
     tag.src = ${JSON.stringify(loader)};
+    tag.addEventListener("load", watch, { once: true });
     mount.appendChild(tag);
   };
+
   if (document.readyState === "complete") start();
   else addEventListener("load", start, { once: true });
 })();
