@@ -1,6 +1,8 @@
 ---
 import {
+    coordinates,
     cuisine,
+    mapsUrl,
     openingHours,
     phoneNumber,
     priceRange,
@@ -37,6 +39,12 @@ const schema = {
     },
     telephone: phoneNumber,
     email: restaurant.email,
+    geo: {
+        "@type": "GeoCoordinates",
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+    },
+    hasMap: mapsUrl,
     openingHoursSpecification: openingHours.map((slot) => ({
         "@type": "OpeningHoursSpecification",
         dayOfWeek: slot.days,

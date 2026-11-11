@@ -48,6 +48,11 @@ export const phoneNumber = restaurant.phone.replace('(0)', '').replace(/[^\d+]/g
 export const phoneLink = `tel:${phoneNumber}`;
 export const mailLink = `mailto:${restaurant.email}`;
 
+export const coordinates = {
+  latitude: 52.534813,
+  longitude: 13.419563,
+};
+
 export const mapsUrl =
   'https://www.google.com/maps/search/?api=1&query=Masel+Topf+Rykestra%C3%9Fe+2+Berlin';
 
