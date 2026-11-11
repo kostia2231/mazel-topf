@@ -18,6 +18,23 @@ const loader =
     "&newtab=true&ot_source=Restaurant%20website&font=georgia&ot_logo=standard" +
     "&primary_color=ba1513&primary_font_color=ffffff&button_color=212529" +
     "&button_font_color=ffffff&logo_pid=97822883&background_pid=97822830&cfe=true";
+
+const boot = `
+(() => {
+  const mount = document.currentScript.parentElement;
+  const start = () => {
+    if (mount.querySelector("script[data-opentable]")) return;
+    const tag = document.createElement("script");
+    tag.type = "text/javascript";
+    tag.async = true;
+    tag.dataset.opentable = "";
+    tag.src = ${JSON.stringify(loader)};
+    mount.appendChild(tag);
+  };
+  if (document.readyState === "complete") start();
+  else addEventListener("load", start, { once: true });
+})();
+`;
 ---
 
 <div
@@ -28,5 +45,5 @@ const loader =
         hiddenOnPhone && "max-sm:hidden",
     ]}
 >
-    <script is:inline type="text/javascript" defer src={loader}></script>
+    <script is:inline set:html={boot} />
 </div>

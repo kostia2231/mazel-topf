@@ -72,6 +72,11 @@ const canonical = absoluteUrl(language);
 
     <script is:inline>
       document.documentElement.classList.add("reveal-ready");
+      setTimeout(function () {
+        if (!document.documentElement.dataset.revealArmed) {
+          document.documentElement.classList.remove("reveal-ready");
+        }
+      }, 3000);
     </script>
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -97,6 +102,8 @@ const canonical = absoluteUrl(language);
 </html>
 
 <script>
+  document.documentElement.dataset.revealArmed = "1";
+
   const items = [...document.querySelectorAll<HTMLElement>("[data-reveal]")];
 
   if (!("IntersectionObserver" in window)) {
