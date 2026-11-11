@@ -24,6 +24,7 @@ interface UiText {
         closeMenu: string;
         toHome: string;
         reservation: string;
+        hideReservation: string;
         switchLanguage: string;
         extras: string;
     };
@@ -172,6 +173,7 @@ export const ui: Record<Language, UiText> = {
             closeMenu: "Menü schließen",
             toHome: "Zur Startseite",
             reservation: "Tisch reservieren",
+            hideReservation: "Reservierung ausblenden",
             switchLanguage: "Sprache wechseln",
             extras: "Weitere Angebote",
         },
@@ -355,6 +357,7 @@ export const ui: Record<Language, UiText> = {
             closeMenu: "Close menu",
             toHome: "Go to homepage",
             reservation: "Reservation online",
+            hideReservation: "Hide reservation",
             switchLanguage: "Change language",
             extras: "More offers",
         },

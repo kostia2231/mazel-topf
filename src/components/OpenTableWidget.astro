@@ -1,6 +1,7 @@
 ---
 import { openTableRestaurantId, openTableLocale } from "../data/restaurant";
 import { ui } from "../i18n/ui";
+import Calendar from "./icons/Calendar.astro";
 import type { Language } from "../i18n/config";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { language, hiddenOnPhone = false } = Astro.props;
+const t = ui[language].header;
 
 const loader =
     "https://www.opentable.de/widget/reservation/loader" +
@@ -39,11 +41,58 @@ const boot = `
 
 <div
     data-reserve-widget
-    aria-label={ui[language].header.reservation}
     class:list={[
         "fixed bottom-4 left-1/2 z-30 max-w-[calc(100vw-2rem)] -translate-x-1/2 sm:bottom-6 sm:left-auto sm:right-6 sm:translate-x-0",
         hiddenOnPhone && "max-sm:hidden",
     ]}
 >
-    <script is:inline set:html={boot} />
+    <button
+        type="button"
+        data-reserve-toggle
+        aria-expanded="false"
+        aria-controls="reserve-panel"
+        class="caps flex cursor-pointer items-center gap-2 bg-brick-500 px-5 py-3.5 text-xs text-white shadow-lg transition-colors hover:bg-brick-600 sm:hidden"
+    >
+        <Calendar class="size-4" />
+        {t.reservation}
+    </button>
+
+    <div id="reserve-panel" data-reserve-panel class="relative">
+        <button
+            type="button"
+            data-reserve-close
+            aria-label={t.hideReservation}
+            class="absolute -top-3 -right-3 z-10 flex size-8 cursor-pointer items-center justify-center rounded-full bg-ink-900 text-white shadow-lg sm:hidden"
+        >
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                class="size-4"
+                aria-hidden="true"
+            >
+                <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+        </button>
+        <script is:inline set:html={boot} />
+    </div>
 </div>
+
+<script>
+    const widget = document.querySelector<HTMLElement>("[data-reserve-widget]");
+
+    if (widget) {
+        const toggle = widget.querySelector<HTMLButtonElement>("[data-reserve-toggle]");
+        const close = widget.querySelector<HTMLButtonElement>("[data-reserve-close]");
+
+        const setOpen = (open: boolean) => {
+            widget.toggleAttribute("data-open", open);
+            toggle?.setAttribute("aria-expanded", String(open));
+        };
+
+        toggle?.addEventListener("click", () => setOpen(true));
+        close?.addEventListener("click", () => setOpen(false));
+    }
+</script>

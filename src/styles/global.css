@@ -110,6 +110,16 @@ body {
   display: none;
 }
 
+@media (width < 40rem) {
+  [data-reserve-widget]:not([data-open]) [data-reserve-panel] {
+    display: none;
+  }
+
+  [data-reserve-widget][data-open] [data-reserve-toggle] {
+    display: none;
+  }
+}
+
 @utility leader-run {
   position: absolute;
   inset-inline: 0;
