@@ -1,7 +1,6 @@
 ---
 import { openTableRestaurantId, openTableLocale } from "../data/restaurant";
 import { ui } from "../i18n/ui";
-import Calendar from "./icons/Calendar.astro";
 import type { Language } from "../i18n/config";
 
 interface Props {
@@ -51,9 +50,8 @@ const boot = `
         data-reserve-toggle
         aria-expanded="false"
         aria-controls="reserve-panel"
-        class="caps flex cursor-pointer items-center gap-2 bg-brick-500 px-5 py-3.5 text-xs text-white shadow-lg transition-colors hover:bg-brick-600 sm:hidden"
+        class="caps cursor-pointer bg-brick-500 px-5 py-3.5 text-xs text-white shadow-lg transition-colors hover:bg-brick-600 sm:hidden"
     >
-        <Calendar class="size-4" />
         {t.reservation}
     </button>
 
