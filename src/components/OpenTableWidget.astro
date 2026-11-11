@@ -5,9 +5,10 @@ import type { Language } from "../i18n/config";
 
 interface Props {
     language: Language;
+    hiddenOnPhone?: boolean;
 }
 
-const { language } = Astro.props;
+const { language, hiddenOnPhone = false } = Astro.props;
 
 const loader =
     "https://www.opentable.de/widget/reservation/loader" +
@@ -22,7 +23,10 @@ const loader =
 <div
     data-reserve-widget
     aria-label={ui[language].header.reservation}
-    class="fixed bottom-4 left-1/2 z-30 max-w-[calc(100vw-2rem)] -translate-x-1/2 sm:bottom-6 sm:left-auto sm:right-6 sm:translate-x-0"
+    class:list={[
+        "fixed bottom-4 left-1/2 z-30 max-w-[calc(100vw-2rem)] -translate-x-1/2 sm:bottom-6 sm:left-auto sm:right-6 sm:translate-x-0",
+        hiddenOnPhone && "max-sm:hidden",
+    ]}
 >
     <script is:inline type="text/javascript" defer src={loader}></script>
 </div>

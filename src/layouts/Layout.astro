@@ -92,7 +92,7 @@ const canonical = absoluteUrl(language);
     <Footer language={language} />
     <CookieBanner language={language} />
     <Analytics />
-    <OpenTableWidget language={language} />
+    <OpenTableWidget language={language} hiddenOnPhone={page === 'menu'} />
   </body>
 </html>
 
