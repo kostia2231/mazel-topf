@@ -4,15 +4,20 @@ import {
     openingHours,
     phoneNumber,
     priceRange,
+    reservationUrl,
     restaurant,
+    socialLinks,
 } from "../data/restaurant";
-import { path, type Language } from "../i18n/config";
+import { ui } from "../i18n/ui";
+import { path, type Language, type RouteKey } from "../i18n/config";
 
 interface Props {
     language: Language;
+    page: RouteKey;
+    title: string;
 }
 
-const { language } = Astro.props;
+const { language, page, title } = Astro.props;
 
 const absolute = (pathname: string) =>
     Astro.site ? new URL(pathname, Astro.site).href : undefined;
@@ -38,12 +43,47 @@ const schema = {
         opens: slot.opens,
         closes: slot.closes,
     })),
+    sameAs: socialLinks
+        .filter((link) => link.icon !== "pin")
+        .map((link) => link.href),
+    acceptsReservations: true,
+    potentialAction: {
+        "@type": "ReserveAction",
+        target: {
+            "@type": "EntryPoint",
+            urlTemplate: reservationUrl(language),
+            inLanguage: language,
+        },
+        result: { "@type": "FoodEstablishmentReservation", name: title },
+    },
     ...(Astro.site && {
         url: absolute(path("home", language)),
         hasMenu: absolute(path("menu", language)),
         image: absolute("/og.jpg"),
     }),
 };
+
+const breadcrumbs =
+    page === "home" || !Astro.site
+        ? null
+        : {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                  {
+                      "@type": "ListItem",
+                      position: 1,
+                      name: ui[language].banner.home,
+                      item: absolute(path("home", language)),
+                  },
+                  {
+                      "@type": "ListItem",
+                      position: 2,
+                      name: title,
+                      item: absolute(path(page, language)),
+                  },
+              ],
+          };
 ---
 
 <script
@@ -51,3 +91,12 @@ const schema = {
     set:html={JSON.stringify(schema)}
     is:inline
 />
+{
+    breadcrumbs && (
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(breadcrumbs)}
+            is:inline
+        />
+    )
+}
